@@ -1,0 +1,4 @@
+<p>Norādi lokāciju šim objektam kartē, pārbīdot to vajadzīgajā vietā.</p>
+<div class="btn_input green">
+  <input type="button" name="finish" value="Pabeigt">
+</div>

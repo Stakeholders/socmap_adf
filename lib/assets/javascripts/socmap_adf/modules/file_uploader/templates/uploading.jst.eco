@@ -1,0 +1,3 @@
+<span class="file-status loading" id="file-uploading-file-<%= @id %>">
+	<%= @name %>
+</span>

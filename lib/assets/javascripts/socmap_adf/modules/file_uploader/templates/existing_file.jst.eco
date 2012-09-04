@@ -1,0 +1,10 @@
+<li>
+  <span class="file-status">
+    <span class="qq-upload-file"></span>
+    <span class="qq-upload-spinner">Loading...</span>
+    <span class="qq-upload-size"></span>
+    <strong class="qq-upload-failed-text" style="display: none;">Neizdevās pievienot</strong> 
+    <span class="qq-upload-cancel"></span>
+    <span>(<a href="#" style="display:inline;">dzēst</a>)</span>
+  </span>
+</li>

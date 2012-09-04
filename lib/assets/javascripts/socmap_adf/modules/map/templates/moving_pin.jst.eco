@@ -1,0 +1,11 @@
+<div style="position:relative;">
+<% if @label: %>
+<div class="content <%= @color %>">
+  <div class="label_block">
+    <%= @label %>
+  </div>
+  <div class="background"></div>
+</div>
+<% end %>
+<div class="new_marker"><img src="<%= @pin %>" /></div>
+</div>

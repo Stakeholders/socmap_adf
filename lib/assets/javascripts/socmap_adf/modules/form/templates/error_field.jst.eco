@@ -1,0 +1,7 @@
+<li style="display: none;" class="error_placeholder">
+    <div class="tab_wrap_all error">
+        <div class="field_wrap_all clear">
+            <p class="error error_message">Kļūda!</p>
+        </div>
+    </div>
+</li>

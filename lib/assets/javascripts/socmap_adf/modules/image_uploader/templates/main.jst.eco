@@ -1,0 +1,10 @@
+<div class="file_upload_wrap clear">
+    <a href="#" class="btn_close">X</a>
+    <div class="button_upload_pic qq-upload-button qq-upload-drop-area">
+        <img class="uploaded_picture" width="auto" width="122" height="82" style="display: none;" src="" alt="Picture" />
+        <img class="loading button_upload_pic" width="122" height="82" style="display: none;" src="/assets/loading.gif" alt="Loading" />
+        <img class="image_holder" src="/assets/bg_pic_add.png" height="82" style="display: block;" width="122" alt="Holder" />
+    </div>
+    <p>Tu vari augšuplādēt līdz <strong>2MB</strong> lielus attēlus <strong>.jpg</strong>, <strong>.jpeg</strong>, <strong>.gif</strong> un <strong>.png</strong> formātos.</p>
+    <ul class="qq-upload-list"></ul>
+</div>

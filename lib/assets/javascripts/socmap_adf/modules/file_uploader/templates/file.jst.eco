@@ -1,0 +1,3 @@
+<span class="file-status true" id="file-uploaded-file-<%= @id %>">
+	<%= @name %> (<a href="#" class="remove-file" content-id="<%= @id %>" style="display:inline;">dzēst</a>)
+</span>
