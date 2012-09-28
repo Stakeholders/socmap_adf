@@ -50,6 +50,9 @@ class ADF.Map.Views.Main extends ADF.MVC.Views.Base
 
   setZoom: (zoom) ->
     @getGMap().setZoom(zoom)
+    
+  setMapTypeId: (mapTypeId) ->
+    @model.setMapTypeId(mapTypeId)
 
   setCenterWithOffset: (position, offsetx, offsety) ->
     @model.setCenter(position)

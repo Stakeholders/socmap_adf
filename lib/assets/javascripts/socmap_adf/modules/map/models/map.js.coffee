@@ -30,7 +30,12 @@ class ADF.Map.Models.Map extends Backbone.Model
   initGMap: (mapElement) ->
     @map = new google.maps.Map(document.getElementById(mapElement), @attributes)
     @markerClusterer = new ADF.Cluster.Views.MarkerClusterer(@map, null, @clusterOptions)
+    @loadOSM() if @get("mapTypeId") == "OSM"
     return @map
+    
+  setMapTypeId: (mapTypeId) =>
+    @loadOSM() if mapTypeId == "OSM"
+    @map.setMapTypeId(mapTypeId)
 
   getGMap: () ->
     return @map
@@ -61,3 +66,13 @@ class ADF.Map.Models.Map extends Backbone.Model
 
   clusterOverlay: (overlay) ->
     @markerClusterer.addMarker(overlay) if @markerClusterer
+    
+  loadOSM: () ->
+    @map.mapTypes.set("OSM", new google.maps.ImageMapType(
+        getTileUrl: (coord, zoom) =>
+            return "http://tile.openstreetmap.org/" + zoom + "/" + coord.x + "/" + coord.y + ".png"
+        tileSize: new google.maps.Size(256, 256)
+        name: "OpenStreetMap"
+        maxZoom: 18
+    ))
+    
