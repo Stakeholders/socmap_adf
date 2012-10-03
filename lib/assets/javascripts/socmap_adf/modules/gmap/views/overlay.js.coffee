@@ -172,7 +172,7 @@ class ADF.GMap.Views.Overlay extends google.maps.OverlayView
       @pane.appendChild(@div)
     else
       $(@body).append(@div)
-      @view.onMarkerAdded(@view.point)
+    @view.onMarkerAdded(@view.point)
 
   draw: () ->
     overlayProjection = @getProjection()
