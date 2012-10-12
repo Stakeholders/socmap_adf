@@ -1,6 +1,8 @@
 class ADF.Minimap.Models.Minimap extends Backbone.Model
 
   overlays: []
+  
+  mapElement: null
 
   defaults:
     center: new google.maps.LatLng(57,25)
@@ -15,11 +17,15 @@ class ADF.Minimap.Models.Minimap extends Backbone.Model
     streetViewControl: false
 
   initGMap: (mapElement) ->
-    @map = new google.maps.Map(document.getElementById(mapElement), @attributes)
+    @mapElement = mapElement
+    @map = new google.maps.Map(document.getElementById(@mapElement), @attributes)
     return @map
 
   getGMap: () ->
     return @map
+    
+  getMapElement: () ->
+    return $("##{@mapElement}")
 
   addOverlay: (overlay) ->
     @overlays.push(overlay)

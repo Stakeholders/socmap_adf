@@ -5,6 +5,7 @@ class ADF.Map.Models.Map extends Backbone.Model
 
   maxZoomLevelForClustering: 21
   maxZoomOnClick: 18
+  mapElement: null
 
   defaults:
     center: new google.maps.LatLng(57,25)
@@ -28,7 +29,8 @@ class ADF.Map.Models.Map extends Backbone.Model
     @clusterOptions = $.extend(@clusterDefaults, clusterOptions)
     
   initGMap: (mapElement) ->
-    @map = new google.maps.Map(document.getElementById(mapElement), @attributes)
+    @mapElement = mapElement
+    @map = new google.maps.Map(document.getElementById(@mapElement), @attributes)
     @markerClusterer = new ADF.Cluster.Views.MarkerClusterer(@map, null, @clusterOptions)
     @loadOSM() if @get("mapTypeId") == "OSM"
     return @map
@@ -39,6 +41,9 @@ class ADF.Map.Models.Map extends Backbone.Model
 
   getGMap: () ->
     return @map
+    
+  getMapElement: () ->
+    return $("##{@mapElement}")
 
   addOverlay: (overlay, clustering = false) ->
     @overlays.push(overlay)

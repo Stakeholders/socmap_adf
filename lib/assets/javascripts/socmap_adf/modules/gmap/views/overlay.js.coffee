@@ -4,6 +4,7 @@ class ADF.GMap.Views.Overlay extends google.maps.OverlayView
   topPoint: null
   zindex: 1
   body: "body"
+  divPixel: null
 
   constructor: (map, view) ->
     @map = map
@@ -164,6 +165,9 @@ class ADF.GMap.Views.Overlay extends google.maps.OverlayView
   getPosition: () ->
     @view.point
     
+  getDivPixel: () ->
+    @divPixel
+    
   # = From OverlayView 
   onAdd: ->
     @div = @view.render().el
@@ -178,16 +182,16 @@ class ADF.GMap.Views.Overlay extends google.maps.OverlayView
     overlayProjection = @getProjection()
     if (overlayProjection != null && overlayProjection != undefined && @view.point)
       if @view.asLabel
-        divPixel = overlayProjection.fromLatLngToDivPixel(@view.point)
+        @divPixel = overlayProjection.fromLatLngToDivPixel(@view.point)
       else
-        divPixel = overlayProjection.fromLatLngToContainerPixel(@view.point)
+        @divPixel = overlayProjection.fromLatLngToContainerPixel(@view.point)
       
-      @left = divPixel.x + @view.left - (@view.getWidth() / 2)
+      @left = @divPixel.x + @view.left - (@view.getWidth() / 2)
       
       if @view.overlayPositionVertical == "top"
-        @top = divPixel.y + @view.top - @view.getHeight()
+        @top = @divPixel.y + @view.top - @view.getHeight()
       else
-        @top = divPixel.y + @view.top
+        @top = @divPixel.y + @view.top
 
       if @top < 0
         point = new google.maps.Point(@left, (@top / 2) + ($(window).height() / 2))

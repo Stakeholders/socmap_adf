@@ -64,7 +64,6 @@ class ADF.GMap.Views.OverlayView extends ADF.MVC.Views.Base
   redraw: () ->
     @overlay.draw()
 
-
   isClustering: () ->
     @clustering
 
