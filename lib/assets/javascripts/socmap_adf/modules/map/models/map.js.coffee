@@ -69,6 +69,13 @@ class ADF.Map.Models.Map extends Backbone.Model
     @overlays = []
     @markerClusterer.clearMarkers()
 
+  getOverlays: () ->
+    @overlays
+
+  hideAllOverlays: () ->
+    for overlay in @overlays
+      overlay.hide()
+
   clusterOverlay: (overlay) ->
     @markerClusterer.addMarker(overlay) if @markerClusterer
     

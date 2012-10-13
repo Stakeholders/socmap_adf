@@ -2,10 +2,10 @@ class ADF.Overlay.Views.FlashOverlay extends ADF.GMap.Views.OverlayView
   
   opened: false
   hoverable: true
-  nw: [180, 580]
-  sw: [-50, 580]
-  ne: [180, 380]
-  se: [-50, 380]
+  nw: [180, 470]
+  sw: [-50, 470]
+  ne: [180, 250]
+  se: [-50, 250]
   
   constructor: (options) ->
     super(options)
@@ -16,17 +16,21 @@ class ADF.Overlay.Views.FlashOverlay extends ADF.GMap.Views.OverlayView
     @openOverlayOnHover()
     
   onMarkerMouseOut: () =>
-    @opened = false
-    setTimeout(@hideOverlayAfterTime, 1000)
-  
+    @hideOverlayAfterTime()
+
   openOverlayOnHover: () =>
+    @map.hideAllOverlays()
     @opened = true
     @calculateTopAndLeft()
     @show()
     
-  hideOverlayAfterTime: () =>
+  hideOverlayIfNeeded: () =>
     @hide() if !@opened
-    
+
+  hideOverlayAfterTime: () =>
+    @opened = false
+    setTimeout(@hideOverlayIfNeeded, 1000)
+
   onRenderCompleted: () =>
     $(@el).hover(@openOverlayOnHover, @hideOverlayAfterTime)
     

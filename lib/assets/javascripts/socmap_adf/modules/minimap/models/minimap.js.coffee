@@ -30,6 +30,13 @@ class ADF.Minimap.Models.Minimap extends Backbone.Model
   addOverlay: (overlay) ->
     @overlays.push(overlay)
 
+  getOverlays: () ->
+    @overlays
+
+  hideAllOverlays: () ->
+    for overlay in @overlays
+      overlay.hide()
+
   setCenter: (latLng) ->
     @map.setCenter(latLng)
 
