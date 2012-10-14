@@ -3,7 +3,6 @@ class ADF.GMap.Views.Overlay extends google.maps.OverlayView
   hidden: true
   topPoint: null
   zindex: 1
-  body: "body"
   divPixel: null
 
   constructor: (map, view) ->
@@ -15,7 +14,6 @@ class ADF.GMap.Views.Overlay extends google.maps.OverlayView
     @hoverable = @view.hoverable
     @showAfterDrag = @view.showAfterDrag
     @view.overlay = @
-    @body = @view.body if @view.body?
     @initMarker()
     @bindMapEvents()
     
@@ -175,7 +173,7 @@ class ADF.GMap.Views.Overlay extends google.maps.OverlayView
       @pane = @getPanes().overlayLayer
       @pane.appendChild(@div)
     else
-      $(@body).append(@div)
+      $(@view.getMapElement()).append(@div)
     @view.onMarkerAdded(@view.point)
 
   draw: () ->

@@ -74,6 +74,9 @@ class ADF.GMap.Views.OverlayView extends ADF.MVC.Views.Base
     @overlay = new ADF.GMap.Views.Overlay(@map.getGMap(), @)
     @map.addOverlay(@overlay)
 
+  getMapElement: () ->
+    @map.getMapElement()
+
   addOrChangeLocation: (point) ->
     @point = point
     if @overlay
