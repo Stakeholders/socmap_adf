@@ -1,9 +1,10 @@
 class ADF.Overlay.Views.FlashOverlay extends ADF.GMap.Views.OverlayView
   
   opened: false
+  clickable: false
   hoverable: true
-  top: -60
-  left: 0
+  calibration: [0, -16, -20, 0]
+  mouseout: true
   
   constructor: (options) ->
     super(options)
@@ -14,7 +15,7 @@ class ADF.Overlay.Views.FlashOverlay extends ADF.GMap.Views.OverlayView
     @openOverlayOnHover()
     
   onMarkerMouseOut: () =>
-    @hideOverlayAfterTime()
+    @hideOverlayAfterTime() if @mouseout
 
   openOverlayOnHover: () =>
     @map.hideAllOverlays()
@@ -30,7 +31,8 @@ class ADF.Overlay.Views.FlashOverlay extends ADF.GMap.Views.OverlayView
     setTimeout(@hideOverlayIfNeeded, 1000)
 
   onRenderCompleted: () =>
-    $(@el).hover(@openOverlayOnHover, @hideOverlayAfterTime)
+    if @hoverable && @mouseout
+      $(@el).hover(@openOverlayOnHover, @hideOverlayAfterTime)
     
   calculatePosition: () ->
     arr = @getPositionArray()
@@ -43,7 +45,7 @@ class ADF.Overlay.Views.FlashOverlay extends ADF.GMap.Views.OverlayView
     w = @getWidth() / 2
     h = @getHeight()
     
-    return [h, w] if divPixel.x <= halfWidth && divPixel.y < halfHeight
-    return [h, -w] if divPixel.x > halfWidth && divPixel.y < halfHeight
-    return [@top, w] if divPixel.x <= halfWidth && divPixel.y >= halfHeight
-    return [@top, -w] if divPixel.x > halfWidth && divPixel.y >= halfHeight
+    return [h + @calibration[0], w + @calibration[3]] if divPixel.x <= halfWidth && divPixel.y < halfHeight
+    return [h + @calibration[0], -w + @calibration[1]] if divPixel.x > halfWidth && divPixel.y < halfHeight
+    return [@calibration[2], w + @calibration[3]] if divPixel.x <= halfWidth && divPixel.y >= halfHeight
+    return [@calibration[2], -w + @calibration[1]] if divPixel.x > halfWidth && divPixel.y >= halfHeight

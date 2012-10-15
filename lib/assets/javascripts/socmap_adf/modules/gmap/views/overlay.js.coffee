@@ -33,16 +33,19 @@ class ADF.GMap.Views.Overlay extends google.maps.OverlayView
       @options.shadow = @view.shadow if @view.shadow
       @options.shape = @view.shape if @view.shape
     
-    @options.cursor = "hand"
+    
+    @options.cursor = "default"
+    
     if @view.draggable
       @options.cursor = "move"
     if @clickable
-      @options.cursor = "pointer"    
-
+      @options.cursor = "hand"
+      
     if @view.label != null
       @options.labelContent = @view.label
       @options.labelClass = @view.labelClass
       @options.labelAnchor = new google.maps.Point(60, 0)
+      @options.handCursor = @options.cursor
       @marker = new MarkerWithLabel @options
     else
       @marker = new google.maps.Marker @options
