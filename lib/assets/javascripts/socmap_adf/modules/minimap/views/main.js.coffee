@@ -39,6 +39,9 @@ class ADF.Minimap.Views.Main extends ADF.MVC.Views.Base
 
   getMap: () ->
     @model
+    
+  getGMap: () ->
+    @model.getGMap()
 
   setCenter: (latLng) ->
     @model.setCenter(latLng)
@@ -51,9 +54,6 @@ class ADF.Minimap.Views.Main extends ADF.MVC.Views.Base
     lat = -(offsety / max) * 100 + position.lat()
     pos = new google.maps.LatLng(lat, lng)
     @model.setCenter(pos)
-    
-  getGMap: () ->
-    @model.getGMap()
     
   fitBounds: (bounds_array, centerWithOffset) ->
     if bounds_array
