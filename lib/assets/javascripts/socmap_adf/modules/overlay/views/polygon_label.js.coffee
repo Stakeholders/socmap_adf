@@ -14,4 +14,4 @@ class ADF.Map.Views.PolygonLabel extends ADF.Overlay.Views.Overlay
     @top = 45
     @initResize()
     @redraw()
-    return this
+    @

@@ -1,3 +1,15 @@
+# 0.0.8
+
+### Features & Enhancements
+* Overlay push module is depricated now and will be removed on version 1.0.0
+* Add Overlay push logic to Overlay module
+* Flash overlay on drag hide all overlays
+
+# 0.0.6
+
+### Bug fixes
+* MiniMap getGmap error fixed.
+
 # 0.0.3
 
 ### Bug fixes

@@ -95,6 +95,9 @@ class ADF.GMap.Views.Overlay extends google.maps.OverlayView
         @show()
         @draw()
       @view.onMarkerMoved(@view.point)
+      
+    @markerDragEvent = google.maps.event.addListener @marker, 'drag', (e) =>
+      @view.onMarkerDrag()
     
     @markerClickEvent = google.maps.event.addDomListener @marker, 'click', (e) =>
       if @view.clickable 
@@ -133,6 +136,7 @@ class ADF.GMap.Views.Overlay extends google.maps.OverlayView
     google.maps.event.clearListeners(@getMarker(), "click")
     google.maps.event.clearListeners(@getMarker(), "mouseover")
     google.maps.event.clearListeners(@getMarker(), "mouseout")
+    google.maps.event.removeListener(@markerDragEvent)
       
   # = Show or Hide overlay
   show: ( animation = false ) ->

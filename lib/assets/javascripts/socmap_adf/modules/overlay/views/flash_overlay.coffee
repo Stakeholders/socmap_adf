@@ -8,7 +8,6 @@ class ADF.Overlay.Views.FlashOverlay extends ADF.GMap.Views.OverlayView
   
   constructor: (options) ->
     super(options)
-    @clickable = false
     @pushOverlay()
     
   onMarkerMouseOver: () =>
@@ -33,6 +32,9 @@ class ADF.Overlay.Views.FlashOverlay extends ADF.GMap.Views.OverlayView
   onRenderCompleted: () =>
     if @hoverable && @mouseout
       $(@el).hover(@openOverlayOnHover, @hideOverlayAfterTime)
+    
+  onMarkerDrag: () ->
+    @map.hideAllOverlays()
     
   calculatePosition: () ->
     arr = @getPositionArray()

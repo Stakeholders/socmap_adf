@@ -71,8 +71,9 @@ class ADF.GMap.Views.OverlayView extends ADF.MVC.Views.Base
     @data
 
   pushOverlay: () ->
-    @overlay = new ADF.GMap.Views.Overlay(@map.getGMap(), @)
-    @map.addOverlay(@overlay)
+    if @map && @point
+      @overlay = new ADF.GMap.Views.Overlay(@map.getGMap(), @)
+      @map.addOverlay(@overlay)
 
   getMapElement: () ->
     @map.getMapElement()
@@ -142,4 +143,5 @@ class ADF.GMap.Views.OverlayView extends ADF.MVC.Views.Base
   onMarkerMouseOut: () ->
   onOverlayShowed: () ->
   onMarkerMoved: (point) ->
+  onMarkerDrag: () ->
   unbindMap: () ->
