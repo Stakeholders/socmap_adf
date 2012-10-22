@@ -1,3 +1,8 @@
+# 0.0.9
+
+### Bug fixes
+* Push Overlay flash popup hover doesn't work bug fixed
+
 # 0.0.8
 
 ### Features & Enhancements

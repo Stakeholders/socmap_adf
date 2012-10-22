@@ -38,3 +38,4 @@ class ADF.Overlay.Views.New.FlashOverlay extends ADF.Overlay.Views.FlashOverlay
     @point = e.latLng
     @unbindMap()
     @pushOverlay()
+    $(@el).hover(@openOverlayOnHover, @hideOverlayAfterTime)
