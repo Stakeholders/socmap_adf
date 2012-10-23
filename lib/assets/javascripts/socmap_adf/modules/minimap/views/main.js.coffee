@@ -45,6 +45,9 @@ class ADF.Minimap.Views.Main extends ADF.MVC.Views.Base
 
   setCenter: (latLng) ->
     @model.setCenter(latLng)
+    
+  setMapTypeId: (mapTypeId) ->
+    @model.setMapTypeId(mapTypeId)
 
   setCenterWithOffset: (position, offsetx, offsety) ->
     @model.setCenter(position)

@@ -19,7 +19,12 @@ class ADF.Minimap.Models.Minimap extends Backbone.Model
   initGMap: (mapElement) ->
     @mapElement = mapElement
     @map = new google.maps.Map(document.getElementById(@mapElement), @attributes)
+    @loadOSM() if @get("mapTypeId") == "OSM"
     return @map
+    
+  setMapTypeId: (mapTypeId) =>
+    @loadOSM() if mapTypeId == "OSM"
+    @map.setMapTypeId(mapTypeId)
 
   getGMap: () ->
     return @map
@@ -47,3 +52,12 @@ class ADF.Minimap.Models.Minimap extends Backbone.Model
     for overlay in @overlays
       overlay.setMap(null)
     @overlays = []
+    
+  loadOSM: () ->
+    @map.mapTypes.set("OSM", new google.maps.ImageMapType(
+        getTileUrl: (coord, zoom) =>
+            return "http://tile.openstreetmap.org/" + zoom + "/" + coord.x + "/" + coord.y + ".png"
+        tileSize: new google.maps.Size(256, 256)
+        name: "OpenStreetMap"
+        maxZoom: 18
+    ))

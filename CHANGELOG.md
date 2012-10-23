@@ -1,3 +1,9 @@
+# 0.0.10
+
+### Features & Enhancements
+* MiniMap add setMapTypeId with OSM support
+
+
 # 0.0.9
 
 ### Bug fixes
