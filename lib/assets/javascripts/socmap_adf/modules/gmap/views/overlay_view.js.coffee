@@ -15,6 +15,7 @@ class ADF.GMap.Views.OverlayView extends ADF.MVC.Views.Base
   customMarker: null
   zindex: 1
   clickable: true
+  openOnClick: true
   asLabel: false
   showAfterDrag: false
   clustering: false

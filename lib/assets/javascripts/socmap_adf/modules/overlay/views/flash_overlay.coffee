@@ -5,6 +5,7 @@ class ADF.Overlay.Views.FlashOverlay extends ADF.GMap.Views.OverlayView
   hoverable: true
   calibration: [0, -16, -20, 0]
   mouseout: true
+  openOnClick: false
   
   constructor: (options) ->
     super(options)

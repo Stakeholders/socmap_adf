@@ -5,12 +5,12 @@ class ADF.ImageUploader.Views.Main extends ADF.MVC.Views.Base
   events:
     "click .btn_close" : "onCloseClicked"
 
-
   initialize: () ->
     _.bindAll(this, 'render')
     @onComplete = @options.onComplete if @options.onComplete
-    @onCancel = @options.onCancel if @options.onComplete
+    @onCancel = @options.onCancel if @options.onCancel
     @image = @options.image if @options.image
+    @template = @options.template if @options.template
 
   render: () ->
     options =
@@ -52,15 +52,13 @@ class ADF.ImageUploader.Views.Main extends ADF.MVC.Views.Base
     @image = responseJSON.uploader_url
     @showImage(@image)
     @$(".btn_close").show()
-    if @onComplete
-      @onComplete(responseJSON)
+    @onComplete(responseJSON) if @onComplete
 
   onCloseClicked: () ->
     @$(".uploaded_picture").hide()
     @$(".btn_close").hide()
     @$(".image_holder").show()
-    if @onCancel
-      @onCancel()
+    @onCancel() if @onCancel
     return false
 
   showImage: (image_url) ->

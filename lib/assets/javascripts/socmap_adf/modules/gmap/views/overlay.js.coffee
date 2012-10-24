@@ -102,7 +102,7 @@ class ADF.GMap.Views.Overlay extends google.maps.OverlayView
     @markerClickEvent = google.maps.event.addDomListener @marker, 'click', (e) =>
       if @view.clickable 
         @view.beforeMarkerClicked()
-        if @hidden
+        if @hidden && @view.openOnClick
           @show()  
           @draw()
 

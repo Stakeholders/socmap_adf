@@ -67,5 +67,9 @@ class ADF.Minimap.Views.Main extends ADF.MVC.Views.Base
       @model.getGMap().setZoom(@model.getGMap().getZoom() - 1)
       @setCenterWithOffset(@model.getGMap().getCenter(), 0, -300) if centerWithOffset
     
+  addContextMenu: () ->
+    @contextMenu = new ADF.GMap.Views.ContextMenu({element: $("##{@map_id}"), gElement : @getGMap()})
+    @contextMenu.render()
+        
   # Callback methods
   onRenderCompleted: () ->
