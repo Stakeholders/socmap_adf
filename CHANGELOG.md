@@ -1,3 +1,8 @@
+# 0.0.11
+
+### Features & Enhancements
+* PolygonView Callback methods now can define in initialization or child class
+
 # 0.0.10
 
 ### Features & Enhancements

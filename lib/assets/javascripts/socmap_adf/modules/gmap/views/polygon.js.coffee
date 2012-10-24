@@ -3,10 +3,10 @@ class ADF.GMap.Views.Polygon extends ADF.MVC.Views.Base
   initialize: () ->
     @mapView = @options.mapView
     @zone = @options.model
-    @onShapeClickedCallback = @options.onShapeClicked
-    @onPolygonDrawCompleted = @options.onPolygonDrawCompleted
-    @onPolygonDrawStarted = @options.onPolygonDrawStarted
-    @pathChanged = if typeof @options.pathChanged == 'function' then @options.pathChanged
+    @onShapeClicked = @options.onShapeClicked if typeof @options.onShapeClicked == 'function'
+    @onPolygonDrawCompleted =  @options.onPolygonDrawCompleted if typeof @options.onPolygonDrawCompleted == 'function'
+    @onPolygonDrawStarted = @options.onPolygonDrawStarted if typeof @options.onPolygonDrawStarted == 'function'
+    @pathChanged = @options.pathChanged if typeof @options.pathChanged == 'function'
     @initialized = false
         
   initZone: (allowDraw) -> 
@@ -16,7 +16,7 @@ class ADF.GMap.Views.Polygon extends ADF.MVC.Views.Base
       @startDrawing()
     else 
       @zone.setPolygonMap( @map )
-      @onPolygonDrawCompleted() if @onPolygonDrawCompleted? && allowDraw
+      @onPolygonDrawCompleted() if allowDraw
       @setPolygonHandlers() 
     @mapView.getMap().addOverlay(@)
   
@@ -44,16 +44,15 @@ class ADF.GMap.Views.Polygon extends ADF.MVC.Views.Base
       @labelView.label = label
       @labelView.render()
     
-  startDrawing: ->
+  startDrawing: =>
     return if @zone.readOnly
     @drawingManager = new google.maps.drawing.DrawingManager
       drawingMode: google.maps.drawing.OverlayType.POLYGON
       polygonOptions: @zone.mapObject.polygon_options_defaults
       map: @map
       drawingControl: false
-      
-    @onPolygonStartDrawing()
-    @onPolygonDrawStarted() if @onPolygonDrawStarted?
+
+    @onPolygonDrawStarted()
     google.maps.event.addListener @drawingManager, 'polygoncomplete', @polygonCompleteHandler
  
   # stopDrawing: ->
@@ -81,8 +80,7 @@ class ADF.GMap.Views.Polygon extends ADF.MVC.Views.Base
   polygonCompleteHandler: ( newShape ) =>
     @zone.setPolygon( newShape )
     @setPolygonHandlers()
-    @onPolygonDrawComplete()
-    @onPolygonDrawCompleted() if @onPolygonDrawCompleted?
+    @onPolygonDrawCompleted()
 
   setPolygonHandlers: () ->
     google.maps.event.addListener @zone.getPolygon(), 'click', @newShapeClickHandler
@@ -98,10 +96,9 @@ class ADF.GMap.Views.Polygon extends ADF.MVC.Views.Base
   newShapeClickHandler: ( e )  =>   
     @zone.setEditable()
     @onShapeClicked()
-    @onShapeClickedCallback() if @onShapeClickedCallback?
                     
   # Callback Methods
-  onPolygonDrawComplete: ->   
-  onPolygonStartDrawing: ->
-  onShapeClicked: ->
+  onPolygonDrawCompleted: =>   
+  onPolygonDrawStarted: =>
+  onShapeClicked: =>
   pathChanged: =>
