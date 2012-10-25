@@ -108,7 +108,7 @@ class ADF.GMap.Views.Polygon extends ADF.MVC.Views.Base
     @labelView.hide() if @isEditable() && @labelView && @labelView.opened
       
   setPolygonHandlers: () ->
-    google.maps.event.addListener @zone.getPolygon(), 'click', @newShapeClickHandler
+    google.maps.event.addListener @zone.getPolygon(), 'click', @newShapeClickHandler if @isEditable()
     google.maps.event.addListener @zone.getPolygon(), 'mouseout', @onMouseOut
     google.maps.event.addListener @zone.getPolygon(), 'mouseover', @onMouseOver
     google.maps.event.addListener @zone.getPolygon(), 'mousemove', @onMouseMove

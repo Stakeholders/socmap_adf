@@ -1,6 +1,7 @@
 # 0.0.11
 
 ### Features & Enhancements
+* ContextMenu on Map and map objects (overlays and zone)
 * PolygonView Callback methods now can define in initialization or child class
 * Polygon label enhanced with flash overlay
 
