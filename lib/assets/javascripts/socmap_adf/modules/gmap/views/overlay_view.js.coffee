@@ -134,6 +134,11 @@ class ADF.GMap.Views.OverlayView extends ADF.MVC.Views.Base
 
   setMarker: (marker) ->
     @marker = marker
+    
+  addContextMenu: () ->
+    if @marker
+      @contextMenu = new ADF.GMap.Views.ContextMenu({gElement : @marker, mapModel: @map})
+      @contextMenu.render()
 
   # Callback methods
   onRenderCompleted: () ->

@@ -79,7 +79,7 @@ class ADF.Map.Views.Main extends ADF.MVC.Views.Base
       @setCenterWithOffset(@model.getGMap().getCenter(), 0, -300) if centerWithOffset
     
   addContextMenu: () ->
-    @contextMenu = new ADF.GMap.Views.ContextMenu({element: $("##{@map_id}")})
+    @contextMenu = new ADF.GMap.Views.ContextMenu({gElement : @getGMap(), mapModel: @model})
     @contextMenu.render()
     
   # Callback methods
