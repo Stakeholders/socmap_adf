@@ -1,7 +1,7 @@
 class ADF.GMap.Views.ContextMenu extends ADF.MVC.Views.Base
 
   itemTemplate: JST['socmap_adf/modules/gmap/templates/context_menu_item']
-  position: null
+  position: {x:null, y:null}
   latLng: null
   
   constructor: (options) ->
@@ -29,7 +29,7 @@ class ADF.GMap.Views.ContextMenu extends ADF.MVC.Views.Base
   onRightClicked: (e) =>
     @eventBus.trigger "adf.hideContextMenu"
     @hide()
-    @position = e.pixel
+    @position = if e.pixel then e.pixel else {x:e.b.x-420, y:e.b.y-20 }
     @latLng = e.latLng
     @show()
     

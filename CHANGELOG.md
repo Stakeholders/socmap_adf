@@ -2,6 +2,7 @@
 
 ### Features & Enhancements
 * PolygonView Callback methods now can define in initialization or child class
+* Polygon label enhanced with flash overlay
 
 # 0.0.10
 
