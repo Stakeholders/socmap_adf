@@ -30,8 +30,14 @@ class ADF.GMap.Views.Polygon extends ADF.MVC.Views.Base
   
   isClustering: () ->
     false
-      
-  setLabel: () ->
+  
+  setContent: ( content ) ->
+    @content = content
+    @labelView.setContent( content )
+    @labelView.render()
+    
+  setLabel: ( label = null) ->
+    @label = label if label
     bounds = new google.maps.LatLngBounds()
 
     i = 0
@@ -52,9 +58,11 @@ class ADF.GMap.Views.Polygon extends ADF.MVC.Views.Base
         template: @zonePopupTemplate
     else
       @labelView.overlay.setPosition(point)
-      @labelView.label = @label
-      @labelView.content = @content
-    
+      @labelView.setLabel @label
+      
+  setColors: (fillColor, strokeColor) ->
+    @zone.setColors(fillColor, strokeColor)
+     
   startDrawing: =>
     return if @zone.readOnly
     @drawingManager = new google.maps.drawing.DrawingManager

@@ -11,6 +11,9 @@ class ADF.Map.Views.PolygonLabel extends ADF.Overlay.Views.FlashOverlay
     @content = @options.content
     @template = @options.template if @options.template
     @customMarker = new ADF.Zone.Views.LabelMarker()
+    
+  setContent: (content) ->
+    @content = content
   
   render: ->
     $(@el).html( @template() )
