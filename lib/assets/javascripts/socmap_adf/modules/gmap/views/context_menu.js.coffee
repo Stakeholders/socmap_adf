@@ -29,7 +29,11 @@ class ADF.GMap.Views.ContextMenu extends ADF.MVC.Views.Base
   onRightClicked: (e) =>
     @eventBus.trigger "adf.hideContextMenu"
     @hide()
-    @position = if e.pixel then e.pixel else {x:e.b.x-420, y:e.b.y-20 }
+    overlay = new google.maps.OverlayView()
+    overlay.draw = () ->
+    overlay.setMap(@map.getGMap())
+    point = overlay.getProjection().fromLatLngToDivPixel(e.latLng)
+    @position = point
     @latLng = e.latLng
     @show()
     
