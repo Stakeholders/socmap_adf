@@ -9,6 +9,9 @@ class ADF.GMap.Views.ContextMenu extends ADF.MVC.Views.Base
     @gElement = options.gElement
     @map = options.mapModel
     @eventBus.on "adf.hideContextMenu", @hide
+    @overlay = new google.maps.OverlayView()
+    @overlay.draw = () ->
+    @overlay.setMap(@map.getGMap())
     
   render: () ->
     newElement = @make("div", {"class": "map_context_menu", "style" : "display:none;position:absolute;z-index:10;"} )
@@ -29,10 +32,8 @@ class ADF.GMap.Views.ContextMenu extends ADF.MVC.Views.Base
   onRightClicked: (e) =>
     @eventBus.trigger "adf.hideContextMenu"
     @hide()
-    overlay = new google.maps.OverlayView()
-    overlay.draw = () ->
-    overlay.setMap(@map.getGMap())
-    point = overlay.getProjection().fromLatLngToDivPixel(e.latLng)
+
+    point = @overlay.getProjection().fromLatLngToContainerPixel(e.latLng)
     @position = point
     @latLng = e.latLng
     @show()
