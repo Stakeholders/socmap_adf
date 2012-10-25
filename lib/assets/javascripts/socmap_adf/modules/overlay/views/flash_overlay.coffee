@@ -10,6 +10,8 @@ class ADF.Overlay.Views.FlashOverlay extends ADF.GMap.Views.OverlayView
   constructor: (options) ->
     super(options)
     @pushOverlay()
+    @eventBus.on "ADF.GMap.Views.ContextMenu.isShowed", @setUnHoverable
+    @eventBus.on "ADF.GMap.Views.ContextMenu.isHidden", @setHoverable
     
   onMarkerMouseOver: () =>
     @openOverlayOnHover()
@@ -40,6 +42,13 @@ class ADF.Overlay.Views.FlashOverlay extends ADF.GMap.Views.OverlayView
   calculatePosition: () ->
     arr = @getPositionArray()
     @setPosition(arr[0], arr[1])
+    
+  setUnHoverable: () =>
+    @hoverable = false
+    @hide()
+    
+  setHoverable: () =>
+    @hoverable = true
     
   getPositionArray: () ->
     halfWidth = @map.getMapElement().width() / 2
