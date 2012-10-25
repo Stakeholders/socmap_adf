@@ -84,8 +84,13 @@ class ADF.GMap.Views.Polygon extends ADF.MVC.Views.Base
   setMap: (map) ->
     @zone.setPolygonMap(map)
   
+  # Depricated
   removeFromMap: () ->
     @zone.removeFromMap()
+    @labelView.remove() if @labelView
+    
+  remove: () ->
+    @zone.getPolygon().setMap(null)
     @labelView.remove() if @labelView
   
   polygonCompleteHandler: ( newShape ) =>
