@@ -22,6 +22,7 @@ class ADF.Map.Views.PolygonLabel extends ADF.Overlay.Views.FlashOverlay
     
   onRenderCompleted: () ->
     @$(".content").html(@content)
+    $(@el).hover(@openOverlayOnHover, @hideOverlayAfterTime)
     
   onOverlayShowed: () =>
     @_setScrollable()

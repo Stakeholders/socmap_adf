@@ -24,12 +24,11 @@ class ADF.GMap.Views.Polygon extends ADF.MVC.Views.Base
       @onPolygonDrawCompleted() if allowDraw
       @setPolygonHandlers() 
     @mapView.getMap().addOverlay(@)
-    @onZoneInitialized()
     @setLabel() if @label
+    @onZoneInitialized()
   
   isClustering: () ->
     false
-  
       
   setLabel: () ->
     bounds = new google.maps.LatLngBounds()
@@ -124,7 +123,11 @@ class ADF.GMap.Views.Polygon extends ADF.MVC.Views.Base
   newShapeClickHandler: ( e )  =>   
     @zone.setEditable()
     @onShapeClicked()
-             
+  
+  addContextMenu: () ->
+    @contextMenu = new ADF.GMap.Views.ContextMenu({gElement : @zone.getPolygon(), mapModel: @mapView.getMap()})
+    @contextMenu.render()
+                   
   # Callback Methods
   onPolygonDrawCompleted: =>   
   onPolygonDrawStarted: =>
