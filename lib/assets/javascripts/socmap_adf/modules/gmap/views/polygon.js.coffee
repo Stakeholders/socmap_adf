@@ -23,6 +23,7 @@ class ADF.GMap.Views.Polygon extends ADF.MVC.Views.Base
       @zone.setPolygonMap( @map )
       @onPolygonDrawCompleted() if allowDraw
       @setPolygonHandlers() 
+      
     @mapView.getMap().addOverlay(@)
     @setLabel() if @label
     @onZoneInitialized()
@@ -53,7 +54,6 @@ class ADF.GMap.Views.Polygon extends ADF.MVC.Views.Base
       @labelView.overlay.setPosition(point)
       @labelView.label = @label
       @labelView.content = @content
-      @labelView.render()
     
   startDrawing: =>
     return if @zone.readOnly
