@@ -55,6 +55,13 @@ class ADF.Zone.Models.Polygon extends Backbone.Model
   createPolygonFromPoints: ( options ) ->
     @GPolygon.setOptions options
     @setEditable()
+  
+  setColors: (fillColor, strokeColor) ->
+    @GPolygon.setOptions({fillColor: fillColor, strokeColor: strokeColor})
+    @polygon_options_defaults["strokeColor"] = strokeColor 
+    @polygon_options_defaults["fillColor"] = fillColor
+    @polygon_options_readonly["strokeColor"] = strokeColor
+    @polygon_options_readonly["fillColor"] = fillColor
     
   getCoordinates: ->
     points = [] 
