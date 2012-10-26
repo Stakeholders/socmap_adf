@@ -15,11 +15,13 @@ class ADF.GMap.Views.OverlayView extends ADF.MVC.Views.Base
   customMarker: null
   zindex: 1
   clickable: true
+  hoverable: false
   openOnClick: true
   asLabel: false
   showAfterDrag: false
   clustering: false
   data: 1
+  idleOn: false
 
   constructor: (options) ->
     super(options)
@@ -139,7 +141,13 @@ class ADF.GMap.Views.OverlayView extends ADF.MVC.Views.Base
     if @marker
       @contextMenu = new ADF.GMap.Views.ContextMenu({gElement : @marker, mapModel: @map})
       @contextMenu.render()
-
+      
+  setIdleOn: () =>
+    @idleOn = true
+    
+  setIdleOff: () =>
+    @idleOn = false
+    
   # Callback methods
   onRenderCompleted: () ->
   onMarkerAdded: () ->

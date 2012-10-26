@@ -1,7 +1,6 @@
 class ADF.Overlay.Views.FlashOverlay extends ADF.GMap.Views.OverlayView
   
   opened: false
-  inactiveHover: false
   clickable: false
   hoverable: true
   calibration: [0, -16, -20, 0]
@@ -11,8 +10,8 @@ class ADF.Overlay.Views.FlashOverlay extends ADF.GMap.Views.OverlayView
   constructor: (options) ->
     super(options)
     @pushOverlay()
-    @eventBus.on "ADF.GMap.Views.ContextMenu.isShowed", @setInactiveHover
-    @eventBus.on "ADF.GMap.Views.ContextMenu.isHidden", @setActiveHover
+    @eventBus.on "ADF.GMap.Views.ContextMenu.isShowed", @hideAndSetIdleOn
+    @eventBus.on "ADF.GMap.Views.ContextMenu.isHidden", @setIdleOff
     
   onMarkerMouseOver: () =>
     @openOverlayOnHover()
@@ -21,7 +20,7 @@ class ADF.Overlay.Views.FlashOverlay extends ADF.GMap.Views.OverlayView
     @hideOverlayAfterTime() if @mouseout
 
   openOverlayOnHover: () =>
-    if !@inactiveHover
+    if !@idleOn
       @map.hideAllOverlays()
       @opened = true
       @calculatePosition()
@@ -49,14 +48,12 @@ class ADF.Overlay.Views.FlashOverlay extends ADF.GMap.Views.OverlayView
     @hoverable = false
     @hide()
     
+  hideAndSetIdleOn: () =>
+    @hide()
+    @setIdleOn()
+    
   setHoverable: () =>
     @hoverable = true
-    
-  setActiveHover: () =>
-    @inactiveHover = false
-    
-  setInactiveHover: () =>
-    @inactiveHover = true
     
   getPositionArray: () ->
     halfWidth = @map.getMapElement().width() / 2

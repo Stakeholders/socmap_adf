@@ -35,6 +35,7 @@ class ADF.GMap.Views.Overlay extends google.maps.OverlayView
     
     
     @options.cursor = "default"
+    @options.clickable = false
     
     if @view.draggable
       @options.cursor = "move"

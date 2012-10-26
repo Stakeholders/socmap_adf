@@ -155,17 +155,21 @@ class ADF.GMap.Views.Polygon extends ADF.MVC.Views.Base
   setPolygonMap: ( map ) ->
     @polygon.setPolygonMap( map )
 
-  setEditable: ( readOnly ) ->
-    @polygon.setEditable( readOnly )
+  setEditable: ( editable ) ->
+    @polygon.setEditable( editable )
 
-  setUnEditable: ( readOnly ) ->
-    @polygon.setUnEditable( readOnly )
+  setUnEditable: ( editable ) ->
+    @polygon.setUnEditable( editable )
 
   setClickable: ( clickable ) ->
     @polygon.getPolygon().setOptions({clickable: clickable})
 
   isEditable: () ->
     @polygon.getPolygon().getEditable()
+    
+  setIdleOn: () =>
+    
+  setIdleOff: () =>
                    
 # CALLBACKS
   onPolygonDrawCompleted: =>   
