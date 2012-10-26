@@ -115,7 +115,7 @@ class ADF.GMap.Views.Polygon extends ADF.MVC.Views.Base
     @labelView.hideOverlayAfterTime() if @labelView
       
   onMouseOver: (e) =>
-    @labelView.openOverlayOnHover() if @labelView && !@isEditable() && @content
+    @labelView.openOverlayOnHover() if @labelView && !@isEditable() && @content && @content.length > 0
   
   onMouseMove: (e) =>
     @labelView.hide() if @isEditable() && @labelView && @labelView.opened
