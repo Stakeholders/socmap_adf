@@ -5,13 +5,15 @@ class ADF.Map.Views.PolygonLabel extends ADF.Overlay.Views.FlashOverlay
   mouseout: false
   hoverable: false
   
+  
   initialize: () ->
     super()
     @label = @options.label
     @content = @options.content
     @template = @options.template if @options.template
     @customMarker = new ADF.Zone.Views.LabelMarker()
-    
+    @labelClass = "marker_label hover" if @content 
+     
   setContent: (content) ->
     @content = content
   
@@ -26,7 +28,11 @@ class ADF.Map.Views.PolygonLabel extends ADF.Overlay.Views.FlashOverlay
   onRenderCompleted: () ->
     @$(".content").html(@content)
     $(@el).hover(@openOverlayOnHover, @hideOverlayAfterTime)
-    
+    if @content && @marker.label?
+      @marker.set("labelClass", "marker_label hover")
+    else if @marker.label
+      @marker.set("labelClass", "marker_label")
+      
   onOverlayShowed: () =>
     @_setScrollable()
 
