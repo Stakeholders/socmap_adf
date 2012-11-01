@@ -17,15 +17,16 @@ class ADF.GMap.Views.ContextMenu extends ADF.MVC.Views.Base
     newElement = @make("div", {"class": "map_context_menu", "style" : "display:none;position:absolute;z-index:10;"} )
     @setElement( newElement )
     @map.getMapElement().append($(@el))
-    google.maps.event.addListener @gElement, 'rightclick', @onRightClicked    
+    @rightClickEvent = google.maps.event.addListener @gElement, 'rightclick', @onRightClicked    
     @map.getMapElement().bind "mouseleave", @onMapMouseout
     $("body").bind "click", @onBodyClicked
     @
     
   unBind: () ->
-    google.maps.event.removeDomListener @gElement, 'rightclick', @onRightClicked
+    google.maps.event.removeListener(@rightClickEvent) if @rightClickEvent
     @map.getMapElement().unbind "mouseleave", @onMapMouseout
     $("body").unbind "click", @onBodyClicked
+    @remove()
     
   show: () ->
     $(@el).css({"top" : @position.y + 1, "left": @position.x + 1})
