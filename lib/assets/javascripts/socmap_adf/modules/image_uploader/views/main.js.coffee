@@ -23,7 +23,7 @@ class ADF.ImageUploader.Views.Main extends ADF.MVC.Views.Base
       onProgress: @onProgress
       template: @template()
       sizeLimit: 2024000
-      messages:
+      messages_lv:
         typeError: "Failam {file} ir nepareizs formāts. Tikai {extensions} formāti ir atļauti."
         sizeError: "Fails {file} ir pārāk liels. Faila maksimālais lielums {sizeLimit}."
         minSizeError: "Faila {file} izmērs ir par mazu, minimums {minSizeLimit}."

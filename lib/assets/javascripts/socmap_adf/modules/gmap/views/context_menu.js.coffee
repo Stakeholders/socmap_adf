@@ -17,10 +17,15 @@ class ADF.GMap.Views.ContextMenu extends ADF.MVC.Views.Base
     newElement = @make("div", {"class": "map_context_menu", "style" : "display:none;position:absolute;z-index:10;"} )
     @setElement( newElement )
     @map.getMapElement().append($(@el))
-    google.maps.event.addDomListener @gElement, 'rightclick', @onRightClicked
+    google.maps.event.addListener @gElement, 'rightclick', @onRightClicked    
     @map.getMapElement().bind "mouseleave", @onMapMouseout
     $("body").bind "click", @onBodyClicked
     @
+    
+  unBind: () ->
+    google.maps.event.removeDomListener @gElement, 'rightclick', @onRightClicked
+    @map.getMapElement().unbind "mouseleave", @onMapMouseout
+    $("body").unbind "click", @onBodyClicked
     
   show: () ->
     $(@el).css({"top" : @position.y, "left": @position.x})
@@ -30,11 +35,10 @@ class ADF.GMap.Views.ContextMenu extends ADF.MVC.Views.Base
   hide: () =>
     $(@el).hide()
     @eventBus.trigger "ADF.GMap.Views.ContextMenu.isHidden"
-    
+
   onRightClicked: (e) =>
     @eventBus.trigger "ADF.GMap.Views.ContextMenu.hide"
     @hide()
-
     point = @overlay.getProjection().fromLatLngToContainerPixel(e.latLng)
     @position = point
     @latLng = e.latLng

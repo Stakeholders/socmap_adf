@@ -13,6 +13,7 @@ class ADF.GMap.Views.Polygon extends ADF.MVC.Views.Base
     @content = @options.content if @options.content?
     @withLabel = @options.withLabel if @options.withLabel?
     @_initCallbacksFromOptions()
+    @eventBus.on "setUneditable", @clearSelection
 
   initZone: (allowDraw) -> 
     @initialized = true
@@ -55,9 +56,10 @@ class ADF.GMap.Views.Polygon extends ADF.MVC.Views.Base
   remove: () ->
     @polygon.getPolygon().setMap(null)
     @labelView.remove() if @labelView
+    @contextMenu.unBind() if @contextMenu
   
   addContextMenu: () ->
-    @contextMenu = new ADF.GMap.Views.ContextMenu({gElement : @polygon.getPolygon(), mapModel: @mapView.getMap()})
+    @contextMenu = new ADF.GMap.Views.ContextMenu({gElement: @polygon.getPolygon(), mapModel: @mapView.getMap()})
     @contextMenu.render()
 
 # HELPERS
@@ -102,6 +104,8 @@ class ADF.GMap.Views.Polygon extends ADF.MVC.Views.Base
 # HANDLERS
   setPolygonHandlers: () ->
     google.maps.event.addListener @polygon.getPolygon(), 'click', @newShapeClickHandler if @isEditable()
+    google.maps.event.addListener @polygon.getPolygon(), 'rightclick', @newShapeClickHandler if @isEditable()
+    
     google.maps.event.addListener @polygon.getPolygon(), 'mouseout', @onMouseOut
     google.maps.event.addListener @polygon.getPolygon(), 'mouseover', @onMouseOver
     google.maps.event.addListener @polygon.getPolygon(), 'mousemove', @onMouseMove
@@ -120,7 +124,8 @@ class ADF.GMap.Views.Polygon extends ADF.MVC.Views.Base
   onMouseMove: (e) =>
     @labelView.hide() if @isEditable() && @labelView && @labelView.opened
 
-  newShapeClickHandler: ( e )  =>   
+  newShapeClickHandler: ( e )  =>
+    @eventBus.trigger "setUneditable"
     @setEditable()
     @onShapeClicked()
 
