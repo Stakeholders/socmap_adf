@@ -28,7 +28,7 @@ class ADF.GMap.Views.ContextMenu extends ADF.MVC.Views.Base
     $("body").unbind "click", @onBodyClicked
     
   show: () ->
-    $(@el).css({"top" : @position.y, "left": @position.x})
+    $(@el).css({"top" : @position.y + 1, "left": @position.x + 1})
     $(@el).show()
     @eventBus.trigger "ADF.GMap.Views.ContextMenu.isShowed"
     
