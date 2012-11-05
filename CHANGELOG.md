@@ -1,3 +1,7 @@
+# 2.0.0
+Create branch for 2.0.0 version and start refactoring 1.0.0
+
+
 # 1.0.0
 
 ### Features & Enhancements
