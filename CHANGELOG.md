@@ -1,3 +1,14 @@
+# 1.0.0
+
+### Features & Enhancements
+* Tested on 4 production applications
+* ContextMenu update
+* Image upload updated to work in IE
+
+### Bug fixes
+* ContextMenu bug fixes with callbacks
+* Alerts removed
+
 # 0.0.11
 
 ### Features & Enhancements
