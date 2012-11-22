@@ -34,12 +34,6 @@ class ADF.FileUploader.Views.Main extends ADF.MVC.Views.Base
       onSubmit: @onSubmit
       template: @template()
       sizeLimit: @sizeLimit
-      messages:
-        typeError: "Failam {file} ir nepareizs formāts. Tikai {extensions} formāti ir atļauti."
-        sizeError: "Fails {file} ir pārāk liels. Faila maksimālais lielums {sizeLimit}."
-        minSizeError: "Faila {file} izmērs ir par mazu, minimums {minSizeLimit}."
-        emptyError: "Fails {file} ir tukšs."
-        onLeave: "Fails nav pabeidzis augšuplādi. Vai tiešām vēlaties pamest aplikāciju?"
       
     if !@uploader
       @uploader = new qq.FileUploader options
