@@ -1,5 +1,5 @@
 <div class="file_upload_wrap" style="overflow: hidden;">
-<div class="qq-upload-button qq-upload-drop-area upload_button"><span class="button_title">Pievienot</span></div>
+<div class="qq-upload-button qq-upload-drop-area upload_button"><span class="button_title">Upload</span></div>
 <span class="file_upload_message"></span>
 </div>
 <ul class="qq-upload-list" style="display: none;"></ul>
