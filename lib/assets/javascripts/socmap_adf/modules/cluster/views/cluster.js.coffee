@@ -10,7 +10,7 @@ class ADF.Cluster.Views.Cluster
     @markers_ = []
     @bounds_ = null
     if @markerClusterer_.getClusterShowType() == "chart"
-      @clusterIcon_ = new ADF.Cluster.Views.ChartIcon(this, markerClusterer.getStyles(), markerClusterer.getGridSize())
+      @clusterIcon_ = new ADF.Cluster.Views.ChartIcon(this, markerClusterer.getStyles(), markerClusterer.getGridSize(), markerClusterer.getFillColors())
     else
       @clusterIcon_ = new ADF.Cluster.Views.DefaultIcon(this, markerClusterer.getStyles(), markerClusterer.getGridSize())
 

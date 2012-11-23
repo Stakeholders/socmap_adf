@@ -10,6 +10,7 @@ class ADF.Cluster.Views.Chart extends ADF.MVC.Views.Base
   upLimit: 50
   currentSize: 120
   objectName: ""
+  fillColors: ["#ff6700", "#0094ff", "#529900"]
   events:
     "mouseenter .chart_wrap": "onChartMouseOver"
     "mouseleave .chart_wrap": "onChartMouseOut"
@@ -19,6 +20,7 @@ class ADF.Cluster.Views.Chart extends ADF.MVC.Views.Base
     @reports_count = @options.sum
     @setSize()
     @objectName = @options.objectName if @options.objectName
+    @fillColors = @options.fillColors if @options.fillColors
     $.elycharts.templates['pie_basic_1'] =
       type: "pie"
       defaultSeries:
@@ -79,9 +81,9 @@ class ADF.Cluster.Views.Chart extends ADF.MVC.Views.Base
         serie1: @data
       defaultSeries:
         values: [
-          {plotProps: { fill: "#ff6700" }},
-          {plotProps: { fill: "#0094ff" }},
-          {plotProps: { fill: "#529900" }}
+          {plotProps: { fill: @fillColors[0] }},
+          {plotProps: { fill: @fillColors[1] }},
+          {plotProps: { fill: @fillColors[2] }}
         ]
     
   setPosition: (position, draw = false) ->

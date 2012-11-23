@@ -88,3 +88,5 @@ class ADF.Map.Models.Map extends Backbone.Model
         maxZoom: 18
     ))
     
+  setClusterFillColors: (fillColors) =>
+    @markerClusterer.setFillColors(fillColors) if @markerClusterer
