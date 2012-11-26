@@ -57,7 +57,7 @@ class ADF.Form.Models.Validator
     reg.test @model.get(@attribute).toString()
 
   checkRegexp:() ->  
-    return true if @model.get(@attribute).toString().length == 0
+    return false if not @model.get(@attribute)? || @model.get(@attribute).toString().length == 0
     if @settings.regexp.test @model.get(@attribute).toString() then false else true
   
   isValid: () ->
