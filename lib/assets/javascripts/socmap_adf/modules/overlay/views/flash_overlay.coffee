@@ -5,6 +5,7 @@ class ADF.Overlay.Views.FlashOverlay extends ADF.GMap.Views.OverlayView
   calibration: [0, -16, -20, 0]
   mouseout: true
   openOnClick: false
+  hideAfter: 50
   
   constructor: (options) ->
     super(options)
@@ -30,7 +31,7 @@ class ADF.Overlay.Views.FlashOverlay extends ADF.GMap.Views.OverlayView
 
   hideOverlayAfterTime: () =>
     @opened = false
-    setTimeout(@hideOverlayIfNeeded, 1000)
+    setTimeout(@hideOverlayIfNeeded, @hideAfter)
 
   onRenderCompleted: () =>
     if @hoverable && @mouseout

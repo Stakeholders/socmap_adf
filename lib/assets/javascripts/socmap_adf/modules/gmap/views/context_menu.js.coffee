@@ -3,6 +3,9 @@ class ADF.GMap.Views.ContextMenu extends ADF.MVC.Views.Base
   itemTemplate: JST['socmap_adf/modules/gmap/templates/context_menu_item']
   position: {x:null, y:null}
   latLng: null
+  padding: 1
+  paddingBoundryX: 10
+  paddingBoundryY: 30
   
   constructor: (options) ->
     super(options)
@@ -28,10 +31,26 @@ class ADF.GMap.Views.ContextMenu extends ADF.MVC.Views.Base
     $("body").unbind "click", @onBodyClicked
     @remove()
     
-  show: () ->
-    $(@el).css({"top" : @position.y + 1, "left": @position.x + 1})
+  show: () =>
+    @calculatePosition()
     $(@el).show()
     @eventBus.trigger "ADF.GMap.Views.ContextMenu.isShowed"
+    
+  calculatePosition: () ->
+    mW = @map.getMapElement().width()
+    mH = @map.getMapElement().height()
+    elW = $(@el).width()
+    elH = $(@el).height()
+    if ((mW - (@position.x + elW + @paddingBoundryX)) > 0)
+      posX = @position.x + @padding
+    else
+      posX = @position.x - elW - @padding
+    
+    if ((mH - (@position.y + elH + @paddingBoundryY)) > 0)
+      posY = @position.y + @padding
+    else
+      posY = @position.y - elH - @padding
+    $(@el).css({"top" : posY, "left": posX})
     
   hide: () =>
     $(@el).hide()
