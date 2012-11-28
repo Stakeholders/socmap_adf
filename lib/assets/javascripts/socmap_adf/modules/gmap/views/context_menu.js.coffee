@@ -6,6 +6,7 @@ class ADF.GMap.Views.ContextMenu extends ADF.MVC.Views.Base
   padding: 1
   paddingBoundryX: 10
   paddingBoundryY: 30
+  menuItems: {}
   
   constructor: (options) ->
     super(options)
@@ -70,9 +71,13 @@ class ADF.GMap.Views.ContextMenu extends ADF.MVC.Views.Base
   onMapMouseout: (e) =>
     @hide()
     
+  getItem: (title) ->
+    @menuItems[title]
+
   bindItem: (title, callback) =>
     item = @itemTemplate({title : title})
     $(@el).append($(item))
+    @menuItems[title] = $(@el).find(".menu_element").last()
     $(@el).find(".menu_element").last().bind "click", () =>
       callback(@latLng)
     @
