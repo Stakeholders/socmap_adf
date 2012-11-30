@@ -20,6 +20,7 @@ class ADF.GMap.Views.ContextMenu extends ADF.MVC.Views.Base
   render: () ->
     newElement = @make("div", {"class": "map_context_menu", "style" : "display:none;position:absolute;z-index:10;"} )
     @setElement( newElement )
+    @$el.append('<div class="context_menu_background"></div>')
     @map.getMapElement().append($(@el))
     @rightClickEvent = google.maps.event.addListener @gElement, 'rightclick', @onRightClicked    
     @map.getMapElement().bind "mouseleave", @onMapMouseout
