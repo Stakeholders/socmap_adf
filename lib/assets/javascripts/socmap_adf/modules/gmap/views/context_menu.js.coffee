@@ -24,7 +24,6 @@ class ADF.GMap.Views.ContextMenu extends ADF.MVC.Views.Base
     @map.getMapElement().append($(@el))
     @rightClickEvent = google.maps.event.addListener @gElement, 'rightclick', @onRightClicked    
     @map.getMapElement().bind "mouseleave", @onMapMouseout
-    $("body").bind "click", @onBodyClicked
     @
     
   unBind: () ->
@@ -35,6 +34,7 @@ class ADF.GMap.Views.ContextMenu extends ADF.MVC.Views.Base
     @remove()
     
   show: () =>
+    $("body").bind "click", @onBodyClicked
     @calculatePosition()
     $(@el).show()
     @eventBus.trigger "ADF.GMap.Views.ContextMenu.isShowed"
@@ -71,7 +71,9 @@ class ADF.GMap.Views.ContextMenu extends ADF.MVC.Views.Base
     
   onBodyClicked: (e) =>
     return if e.ctrlKey
-    @hide()
+    unless $(e.target).is($(@el)) || $($(e.target).parents(".map_context_menu")).is($(@el))
+      @hide()
+      $("body").unbind "click", @onBodyClicked
     
   onMapMouseout: (e) =>
     @hide()
@@ -84,7 +86,8 @@ class ADF.GMap.Views.ContextMenu extends ADF.MVC.Views.Base
     $(@el).append($(item))
     @menuItems[title] = $(@el).find(".menu_element").last()
     $(@el).find(".menu_element").last().bind "click", () =>
-      callback(@latLng)
+      if callback(@latLng) != false
+        @hide()
     @
     
   bind: (title, callback) =>
