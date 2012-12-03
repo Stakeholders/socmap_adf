@@ -67,6 +67,7 @@ class ADF.GMap.Views.ContextMenu extends ADF.MVC.Views.Base
     @show()
     
   onBodyClicked: (e) =>
+    return if e.ctrlKey
     @hide()
     
   onMapMouseout: (e) =>
