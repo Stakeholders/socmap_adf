@@ -1,1 +1,1 @@
-<div class="menu_element"><%= @title %></div>
+<button class="menu_element"><%= @title %></button>

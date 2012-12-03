@@ -30,12 +30,15 @@ class ADF.GMap.Views.ContextMenu extends ADF.MVC.Views.Base
     google.maps.event.removeListener(@rightClickEvent) if @rightClickEvent
     @map.getMapElement().unbind "mouseleave", @onMapMouseout
     $("body").unbind "click", @onBodyClicked
+    $(@el).remove()
     @remove()
     
   show: () =>
     @calculatePosition()
     $(@el).show()
     @eventBus.trigger "ADF.GMap.Views.ContextMenu.isShowed"
+    if @openCB
+      @openCB()
     
   calculatePosition: () ->
     mW = @map.getMapElement().width()
@@ -81,3 +84,7 @@ class ADF.GMap.Views.ContextMenu extends ADF.MVC.Views.Base
     $(@el).find(".menu_element").last().bind "click", () =>
       callback(@latLng)
     @
+    
+  bind: (title, callback) =>
+     if title == "open"
+       @openCB = callback
