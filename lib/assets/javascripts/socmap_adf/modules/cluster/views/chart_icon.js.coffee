@@ -1,6 +1,6 @@
 class ADF.Cluster.Views.ChartIcon extends google.maps.OverlayView
 
-  constructor : (cluster, styles, opt_padding) ->
+  constructor : (cluster, styles, opt_padding, fillColors) ->
     @styles_ = styles
     @padding_ = opt_padding or 0
     @cluster_ = cluster
@@ -10,6 +10,7 @@ class ADF.Cluster.Views.ChartIcon extends google.maps.OverlayView
     @sums_ = null
     @visible_ = false
     @setMap @map_
+    @fillColors = fillColors
 
   triggerClusterClick : ->
     @clickHandler(@cluster_) if @clickHandler
@@ -22,7 +23,7 @@ class ADF.Cluster.Views.ChartIcon extends google.maps.OverlayView
     
   onAdd : ->
     return unless @isNeedToCluster()
-    @chartView = new ADF.Cluster.Views.Chart({ data: @sumData(), sum: @sums_ })
+    @chartView = new ADF.Cluster.Views.Chart({ fillColors: @fillColors, data: @sumData(), sum: @sums_ })
 
     if @visible_
       pos = @getPosFromLatLng_(@center_)

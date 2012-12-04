@@ -15,7 +15,7 @@ class ADF.FileUploader.Views.Main extends ADF.MVC.Views.Base
     _.bindAll(this, 'render')
     @documents = []
     @onComplete = @options.onComplete if @options.onComplete
-    @onCancel = @options.onCancel if @options.onComplete
+    @onCancel = @options.onCancel if @options.onCancel
     @onProgressCallback = @options.onProgress if @options.onProgress
     @documents = @options.documents if @options.documents
     @allowedExtensions = @options.allowedExtensions if @options.allowedExtensions?
@@ -34,12 +34,6 @@ class ADF.FileUploader.Views.Main extends ADF.MVC.Views.Base
       onSubmit: @onSubmit
       template: @template()
       sizeLimit: @sizeLimit
-      messages:
-        typeError: "Failam {file} ir nepareizs formāts. Tikai {extensions} formāti ir atļauti."
-        sizeError: "Fails {file} ir pārāk liels. Faila maksimālais lielums {sizeLimit}."
-        minSizeError: "Faila {file} izmērs ir par mazu, minimums {minSizeLimit}."
-        emptyError: "Fails {file} ir tukšs."
-        onLeave: "Fails nav pabeidzis augšuplādi. Vai tiešām vēlaties pamest aplikāciju?"
       
     if !@uploader
       @uploader = new qq.FileUploader options
@@ -58,6 +52,8 @@ class ADF.FileUploader.Views.Main extends ADF.MVC.Views.Base
 
   onProgress: () =>
     @onProgressCallback() if @onProgressCallback
+    
+  onCancel: () =>
 
   onSubmit: (id, fileName) =>
     obj = {id: id, name: fileName}
@@ -73,4 +69,5 @@ class ADF.FileUploader.Views.Main extends ADF.MVC.Views.Base
       if parseInt(document.id) == parseInt(id)
         document.remove = true
         @$("#file-uploaded-file-#{id}").remove()
+        @onCancel()
     return false

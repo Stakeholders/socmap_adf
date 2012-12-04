@@ -2,6 +2,7 @@ class ADF.Cluster.Views.MarkerClusterer extends google.maps.OverlayView
 
   MARKER_CLUSTER_IMAGE_PATH_ : "http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/" + "images/m"
   MARKER_CLUSTER_IMAGE_EXTENSION_ : "png"
+  FILL_COLORS : ["#ff6700", "#0094ff", "#529900"]
   
   constructor: (map, opt_markers, opt_options) ->
     @map_ = map
@@ -26,6 +27,8 @@ class ADF.Cluster.Views.MarkerClusterer extends google.maps.OverlayView
 
     @maxZoom_ = options["maxZoom"] or null
     @styles_ = options["styles"] or []
+    
+    @fillColors = opt_options.fillColors or @FILL_COLORS
 
     @imagePath_ = options["imagePath"] or @MARKER_CLUSTER_IMAGE_PATH_
 
@@ -99,6 +102,12 @@ class ADF.Cluster.Views.MarkerClusterer extends google.maps.OverlayView
 
   getClusterShowType: () ->
     @clusterShowType_
+    
+  getFillColors: () ->
+    @fillColors
+    
+  setFillColors: (fillColors) ->
+    @fillColors = fillColors
 
   setStyles: (styles) ->
     @styles_ = styles

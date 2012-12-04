@@ -71,7 +71,7 @@ class ADF.GMap.Views.Polygon extends ADF.MVC.Views.Base
     
   setLabel: ( label) ->
     return unless @labelView
-    @label = label
+    @label = if label then label else ""
     @labelView.setLabel @label
 
   setLabelPosition: () ->

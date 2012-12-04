@@ -3,8 +3,8 @@
     <span class="qq-upload-file"></span>
     <span class="qq-upload-spinner">Loading...</span>
     <span class="qq-upload-size"></span>
-    <strong class="qq-upload-failed-text" style="display: none;">Neizdevās pievienot</strong> 
+    <strong class="qq-upload-failed-text" style="display: none;">Error in uploading</strong> 
     <span class="qq-upload-cancel"></span>
-    <span>(<a href="#" style="display:inline;">dzēst</a>)</span>
+    <span>(<a href="#" style="display:inline;">remove</a>)</span>
   </span>
 </li>

@@ -48,6 +48,7 @@ class ADF.Form.Models.Validator
     !reg.test @model.get(@attribute).toString()
   
   checkNumber: () ->
+    return false if not @model.get(@attribute)? || @model.get(@attribute).toString().length == 0
     if !isNaN(parseFloat(@model.get(@attribute))) && isFinite(@model.get(@attribute)) then false else true
     
   checkAlpha: () ->
@@ -56,6 +57,7 @@ class ADF.Form.Models.Validator
     reg.test @model.get(@attribute).toString()
 
   checkRegexp:() ->  
+    return false if not @model.get(@attribute)? || @model.get(@attribute).toString().length == 0
     if @settings.regexp.test @model.get(@attribute).toString() then false else true
   
   isValid: () ->
