@@ -1,6 +1,8 @@
-class ADF.Map.Views.Tooltip extends ADF.MVC.Views.Base
+ADF.Map.Views.Tooltip ||= {}
+
+class ADF.Map.Views.Tooltip.Text extends ADF.MVC.Views.Base
   
-  template: JST['socmap_adf/modules/map/templates/tooltip']
+  template: JST['socmap_adf/modules/map/templates/tooltip/text']
   
   offset_left: 5
   offset_top: 0

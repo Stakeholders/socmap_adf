@@ -1,1 +1,0 @@
-class google.maps.CustomMap extends google.maps.Map

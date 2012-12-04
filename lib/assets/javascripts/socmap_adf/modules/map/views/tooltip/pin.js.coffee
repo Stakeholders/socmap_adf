@@ -1,6 +1,8 @@
-class ADF.Map.Views.MovingPin extends ADF.MVC.Views.Base
+ADF.Map.Views.Tooltip ||= {}
 
-  template: JST['socmap_adf/modules/map/templates/moving_pin']
+class ADF.Map.Views.Tooltip.Pin extends ADF.MVC.Views.Base
+
+  template: JST['socmap_adf/modules/map/templates/tooltip/pin']
   offset_left: 0
   offset_top: -91
   
