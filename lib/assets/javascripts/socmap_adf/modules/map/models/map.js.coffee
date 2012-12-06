@@ -63,8 +63,8 @@ class ADF.Map.Models.Map extends Backbone.Model
 
   clearMap: () ->
     for overlay in @overlays
-      overlay.marker.setMap(null) if overlay.marker?
       overlay.setMap(null)
+      overlay.marker.setMap(null) if overlay.marker?
       @markerClusterer.removeMarker(overlay) if @markerClusterer && overlay.isClustering()
     @overlays = []
     @markerClusterer.clearMarkers()

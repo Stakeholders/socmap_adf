@@ -48,7 +48,7 @@ class ADF.Minimap.Models.Minimap extends Backbone.Model
   fitBounds: (bounds) ->
     @map.fitBounds(bounds)
 
-  clearMap: () ->
+  clearMap: () ->    
     for overlay in @overlays
       overlay.setMap(null)
     @overlays = []

@@ -44,7 +44,15 @@ class ADF.Map.Views.Overlay.Marker.Main extends google.maps.Marker
     @getMap().panBy(x, y)
     
   on: (event, callback, type=null) ->
-    @events[event] = callback
+    if @events[event]
+      @events[event].push(callback)
+    else
+      @events[event] = [callback]
+      
+  fire: (event) ->
+    if @events[event]
+      for callback in @events[event]
+        callback()
     
   addListener: (event, callback) ->
     @gEvents.push(google.maps.event.addListener @, event, callback)
@@ -55,8 +63,9 @@ class ADF.Map.Views.Overlay.Marker.Main extends google.maps.Marker
   setMap: (map) ->
     super(map)
     if map
-      @events.isOnMap() if @events.isOnMap
+      @fire("isOnMap")
     else
+      @fire("removedFromMap")
       for event in @gEvents
         google.maps.event.removeListener event
       @gEvents = []
