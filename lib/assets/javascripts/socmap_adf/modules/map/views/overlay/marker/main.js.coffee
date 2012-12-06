@@ -22,7 +22,7 @@ class ADF.Map.Views.Overlay.Marker.Main extends google.maps.Marker
     @options = options
     @eventBus = window.eventBus
     
-    @initialize() if @initialize
+    @beforeInitialize() if @beforeInitialize
     
     @options.icon = @_createMarkerImage(@customMarkerOptions.icon) if @customMarkerOptions.icon
     @options.shadow = @_createMarkerImage(@customMarkerOptions.shadow) if @customMarkerOptions.shadow
@@ -36,6 +36,8 @@ class ADF.Map.Views.Overlay.Marker.Main extends google.maps.Marker
     
     super(@options)
     @_setAddingMode() unless @getPosition()
+    
+    @initialize() if @initialize    
   
   canterPan: (x = 0, y = 0) ->
     @getMap().panTo(@getPosition())
