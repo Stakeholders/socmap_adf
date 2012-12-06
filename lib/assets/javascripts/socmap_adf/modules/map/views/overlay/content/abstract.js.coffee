@@ -3,7 +3,6 @@ ADF.Map.Views.Overlay.Content ||= {}
 
 class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
   
-  padding: 30
   zindex: 1
 
   constructor: (options) ->
@@ -12,10 +11,18 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
     @bindMarkerEvents()
     @bindMapEvents()
     @draw()
-
-  bindMarkerEvents: () ->
     
+  bindMarkerEvents: () ->
+    @markerDragstartEvent = google.maps.event.addListener @options.marker, 'dragstart', (e) =>
+      @hide()
+
+    @markerDragendEvent = google.maps.event.addListener @options.marker, 'dragend', (e) =>
+      @draw()
+      @show()
+
   unbindMarkerEvents: () =>
+    google.maps.event.removeListener(@markerDragstartEvent)
+    google.maps.event.removeListener(@markerDragendEvent)         
 
   bindMapEvents: () ->
     @dragstartEvent = google.maps.event.addListener @getMap(), 'dragstart', () =>
@@ -49,21 +56,34 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
       @div = @options.view.render().el
       $(@options.marker.mapModel.getMapElement()).append(@div)
 
-  draw: () ->
+  draw: () =>
     overlayProjection = @getProjection()
     if (overlayProjection != null && overlayProjection != undefined && @options.marker.getPosition() && @div)
+      $(@div).css({position: "absolute", left: 0, top: 0, "z-index" : @zindex})
       @divPixel = overlayProjection.fromLatLngToContainerPixel(@options.marker.getPosition())
       markerSize = @options.marker.options.icon.size
       markerWidth = markerSize.width
       markerHeight = markerSize.height
       overlayWidth = $(@div).width()
       overlayHeight = $(@div).height()
+      leftOffset = @options.leftOffset || 0
+      topOffset = @options.topOffset || 0
       
-      @left = @divPixel.x - overlayWidth - @padding
-      @top = @divPixel.y - markerHeight
+      if @options.position == "left"
+        @left = @divPixel.x - overlayWidth - (markerWidth/2) + leftOffset
+        @top = @divPixel.y - markerHeight + topOffset
+      else if @options.position == "right"
+        @left = @divPixel.x + (markerWidth/2) + leftOffset
+        @top = @divPixel.y - markerHeight + topOffset
+      else if @options.position == "top"
+        @left = @divPixel.x - (overlayWidth/2) + leftOffset
+        @top = @divPixel.y - markerHeight - overlayHeight + topOffset
+      else
+        @left = @divPixel.x - (overlayWidth/2) + leftOffset
+        @top = @divPixel.y + topOffset
         
     if (@div)
-      $(@div).css({position: "absolute", left: @left, top: @top, "z-index" : @zindex})
+      $(@div).css({left: @left, top: @top})
 
   redraw: (event) ->
     @draw()
