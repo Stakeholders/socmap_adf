@@ -3,8 +3,6 @@ ADF.Map.Views.Overlay.Marker ||= {}
 
 class ADF.Map.Views.Overlay.Marker.Main extends google.maps.Marker
   
-  events: {}
-  gEvents: []
   customMarkerOptions:
     icon:
       url: "/assets/socmap_adf/modules/map/grey.png"
@@ -21,6 +19,8 @@ class ADF.Map.Views.Overlay.Marker.Main extends google.maps.Marker
   constructor: (options) ->
     @options = options
     @eventBus = window.eventBus
+    @events = {}
+    @gEvents = []
     
     @beforeInitialize() if @beforeInitialize
     
@@ -80,3 +80,4 @@ class ADF.Map.Views.Overlay.Marker.Main extends google.maps.Marker
   _onMapClicked: (e) =>
     @setPosition(e.latLng)
     google.maps.event.removeListener @clickEvent if @clickEvent
+    @fire("onAdded")
