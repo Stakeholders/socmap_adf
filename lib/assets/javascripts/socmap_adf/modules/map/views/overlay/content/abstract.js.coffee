@@ -62,7 +62,7 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
     if (overlayProjection != null && overlayProjection != undefined && @options.marker.getPosition() && @div)
       $(@div).css({position: "absolute", left: 0, top: 0})
       @divPixel = overlayProjection.fromLatLngToContainerPixel(@options.marker.getPosition())
-      markerSize = @options.marker.options.icon.size
+      markerSize = if @options.marker.options.icon then @options.marker.options.icon.size else {width: 0, height: 0}
       markerWidth = markerSize.width
       markerHeight = markerSize.height
       overlayWidth = $(@div).width()

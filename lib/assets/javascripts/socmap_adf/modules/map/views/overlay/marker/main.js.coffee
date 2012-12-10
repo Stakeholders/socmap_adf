@@ -3,7 +3,7 @@ ADF.Map.Views.Overlay.Marker ||= {}
 
 class ADF.Map.Views.Overlay.Marker.Main extends google.maps.Marker
   
-  customMarkerOptions:
+  customOptions:
     icon:
       url: "/assets/socmap_adf/modules/map/grey.png"
       size: new google.maps.Size(49,71)
@@ -24,22 +24,23 @@ class ADF.Map.Views.Overlay.Marker.Main extends google.maps.Marker
     
     @beforeInitialize() if @beforeInitialize
     
-    @options.icon = @_createMarkerImage(@customMarkerOptions.icon) if @customMarkerOptions.icon
-    @options.shadow = @_createMarkerImage(@customMarkerOptions.shadow) if @customMarkerOptions.shadow
+    @options.icon = @_createMarkerImage(@customOptions.icon) if @customOptions.icon
+    @options.shadow = @_createMarkerImage(@customOptions.shadow) if @customOptions.shadow
     
     @options.shape = {
-      coord: @customMarkerOptions.shapeCoord
+      coord: @customOptions.shapeCoord
       type: 'poly'
     }
     
     @options.mapModel.addOverlay(@)
     
     super(@options)
-    @_setAddingMode() unless @getPosition()
+    # @_setAddingMode() unless @getPosition()
+    @_setDrawingMode() unless @getPosition()
     
     @initialize() if @initialize    
   
-  canterPan: (x = 0, y = 0) ->
+  centerPan: (x = 0, y = 0) ->
     @getMap().panTo(@getPosition())
     @getMap().panBy(x, y)
     
@@ -73,11 +74,23 @@ class ADF.Map.Views.Overlay.Marker.Main extends google.maps.Marker
 
   _createMarkerImage: (options) ->
     new google.maps.MarkerImage(options.url, options.size, options.origin, options.anchor)
-  
-  _setAddingMode: () ->
-    @clickEvent = google.maps.event.addListener @getMap(), 'click', @_onMapClicked unless @clickEvent?
+
+  _setDrawingMode: () ->
+    @drawingManager = new google.maps.drawing.DrawingManager
+      drawingMode: google.maps.drawing.OverlayType.MARKER
+      markerOptions: @options
+      map: @map
+      drawingControl: false
+
+    @fire("drawingStarted")
+    google.maps.event.addListener @drawingManager, 'markercomplete', @_drawingCompleted
+
+  stopDrawing: ->
+    @drawingManager.setDrawingMode null if @drawingManager
     
-  _onMapClicked: (e) =>
-    @setPosition(e.latLng)
-    google.maps.event.removeListener @clickEvent if @clickEvent
+  _drawingCompleted: ( newMarker ) =>
+    @stopDrawing()
+    @setPosition(newMarker.getPosition())
+    newMarker.setMap(null)
+    @fire("drawingDone")
     @fire("onAdded")
