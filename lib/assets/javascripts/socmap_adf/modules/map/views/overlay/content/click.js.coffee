@@ -7,14 +7,14 @@ class ADF.Map.Views.Overlay.Content.Click extends ADF.Map.Views.Overlay.Content.
   openable: true
 
   bindMarkerEvents: () ->
-    @markerDragstartEvent = google.maps.event.addListener @options.marker, 'dragstart', (e) =>
+    @markerDragstartEvent = google.maps.event.addListener @options.overlay, 'dragstart', (e) =>
       @hide()
 
-    @markerDragendEvent = google.maps.event.addListener @options.marker, 'dragend', (e) =>
+    @markerDragendEvent = google.maps.event.addListener @options.overlay, 'dragend', (e) =>
       @draw()
       @show() if @opened
 
-    @markerClickEvent = google.maps.event.addDomListener @options.marker, 'click', (e) =>
+    @markerClickEvent = google.maps.event.addDomListener @options.overlay, 'click', (e) =>
       # return if e.Ka.ctrlKey
       @open()
 

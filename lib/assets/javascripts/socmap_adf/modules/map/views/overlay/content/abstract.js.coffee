@@ -7,17 +7,17 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
 
   constructor: (options) ->
     @options = options
-    @setMap(@options.marker.getMap())
+    @setMap(@options.overlay.getMap())
     @bindMarkerEvents()
     @bindMapEvents()
-    @options.marker.on "removedFromMap", @_onMarkerRemoved
+    @options.overlay.on "removedFromMap", @_onMarkerRemoved
     @draw()
     
   bindMarkerEvents: () ->
-    @markerDragstartEvent = google.maps.event.addListener @options.marker, 'dragstart', (e) =>
+    @markerDragstartEvent = google.maps.event.addListener @options.overlay, 'dragstart', (e) =>
       @hide()
 
-    @markerDragendEvent = google.maps.event.addListener @options.marker, 'dragend', (e) =>
+    @markerDragendEvent = google.maps.event.addListener @options.overlay, 'dragend', (e) =>
       @draw()
       @show()
 
@@ -55,14 +55,14 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
   onAdd: ->
     if @options.view
       @div = @options.view.render().el
-      $(@options.marker.mapModel.getMapElement()).append(@div)
+      $(@options.overlay.mapModel.getMapElement()).append(@div)
 
   draw: () =>
     overlayProjection = @getProjection()
-    if (overlayProjection != null && overlayProjection != undefined && @options.marker.getPosition() && @div)
+    if (overlayProjection != null && overlayProjection != undefined && @options.overlay.getPosition() && @div)
       $(@div).css({position: "absolute", left: 0, top: 0})
-      @divPixel = overlayProjection.fromLatLngToContainerPixel(@options.marker.getPosition())
-      markerSize = if @options.marker.options.icon then @options.marker.options.icon.size else {width: 0, height: 0}
+      @divPixel = overlayProjection.fromLatLngToContainerPixel(@options.overlay.getPosition())
+      markerSize = if @options.overlay.options.icon then @options.overlay.options.icon.size else {width: 0, height: 0}
       markerWidth = markerSize.width
       markerHeight = markerSize.height
       overlayWidth = $(@div).width()

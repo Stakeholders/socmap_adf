@@ -65,6 +65,7 @@ class ADF.Map.Views.Overlay.Polygon.Main extends google.maps.Polygon
       @events = {}
   
   _setDrawingMode: () ->
+    @options.editable = true
     @drawingManager = new google.maps.drawing.DrawingManager
       drawingMode: google.maps.drawing.OverlayType.POLYGON
       polygonOptions: @options
@@ -81,6 +82,7 @@ class ADF.Map.Views.Overlay.Polygon.Main extends google.maps.Polygon
     @setEditable(true)
     @_fireWhenPathChanged()
     @fire("drawingDone")
+    @fire("onAdded")
     @fire("pathChanged")
     
   _fireWhenPathChanged: () =>
