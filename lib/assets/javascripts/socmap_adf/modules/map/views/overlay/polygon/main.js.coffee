@@ -4,9 +4,7 @@ ADF.Map.Views.Overlay.Polygon ||= {}
 class ADF.Map.Views.Overlay.Polygon.Main extends google.maps.Polygon
       
   constructor: (options) ->
-    @customOptions = {} unless @customOptions
-    $.extend @customOptions, options
-    @options = @customOptions
+    @options = options
     @eventBus = window.eventBus
     @events = {}
     @gEvents = []
@@ -69,7 +67,7 @@ class ADF.Map.Views.Overlay.Polygon.Main extends google.maps.Polygon
   _setDrawingMode: () ->
     @drawingManager = new google.maps.drawing.DrawingManager
       drawingMode: google.maps.drawing.OverlayType.POLYGON
-      polygonOptions: @customOptions.defaults
+      polygonOptions: @options
       map: @map
       drawingControl: false
 
