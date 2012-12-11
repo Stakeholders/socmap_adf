@@ -2,45 +2,22 @@ ADF.Map.Views.Overlay ||= {}
 ADF.Map.Views.Overlay.Polygon ||= {}
 
 class ADF.Map.Views.Overlay.Polygon.Main extends google.maps.Polygon
-  
-  customOptions:
-    defaults:
-      strokeColor: "#f600ff"
-      strokeOpacity: 0.8
-      strokeWeight: 3
-      fillColor: "#fb98ff"
-      fillOpacity: 0.30
-      editable: true
-    readonly:
-      strokeColor: "#FFFFFF"
-      strokeOpacity: 1
-      strokeWeight: 3
-      fillColor: "#FFFFFF"
-      fillOpacity: 0
-      editable: false
-      clickable: false
-       
+      
   constructor: (options) ->
-    @options = options
+    @customOptions = {} unless @customOptions
+    $.extend @customOptions, options
+    @options = @customOptions
     @eventBus = window.eventBus
     @events = {}
     @gEvents = []
     
     @beforeInitialize() if @beforeInitialize
-    
-    @options.shape = {
-      coord: @customOptions.shapeCoord
-      type: 'poly'
-    }
-    
     @options.mapModel.addOverlay(@)
-    
     super(@options)
     if @getPath().length > 0
       @_fireWhenPathChanged()
     else
       @_setDrawingMode()
-    
     @initialize() if @initialize
     
   on: (event, callback, type=null) ->
@@ -56,6 +33,24 @@ class ADF.Map.Views.Overlay.Polygon.Main extends google.maps.Polygon
     
   addListener: (event, callback) ->
     @gEvents.push(google.maps.event.addListener @, event, callback)
+    
+  getCoordinates: ->
+    @getPath().getArray()
+
+  getCenter: () ->
+    bounds = new google.maps.LatLngBounds()
+    bounds.extend(p) for p in @getPath().getArray()
+    bounds.getCenter()
+
+  getPosition: () ->
+    @getCenter()
+
+  centerPan: (x = 0, y = 0) ->
+    @getMap().panTo(@getPosition())
+    @getMap().panBy(x, y) 
+
+  stopDrawing: ->
+    @drawingManager.setDrawingMode null if @drawingManager   
     
   # private
   
@@ -80,24 +75,6 @@ class ADF.Map.Views.Overlay.Polygon.Main extends google.maps.Polygon
 
     @fire("drawingStarted")
     google.maps.event.addListener @drawingManager, 'polygoncomplete', @_drawingCompleted
-
-  stopDrawing: ->
-    @drawingManager.setDrawingMode null if @drawingManager
-    
-  getCoordinates: ->
-    @getPath().getArray()
-    
-  getCenter: () ->
-    bounds = new google.maps.LatLngBounds()
-    bounds.extend(p) for p in @getPath().getArray()
-    bounds.getCenter()
-    
-  getPosition: () ->
-    @getCenter()
-    
-  centerPan: (x = 0, y = 0) ->
-    @getMap().panTo(@getPosition())
-    @getMap().panBy(x, y)
 
   _drawingCompleted: ( newShape ) =>
     @stopDrawing()
