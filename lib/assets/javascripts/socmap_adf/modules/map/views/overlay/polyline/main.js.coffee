@@ -41,7 +41,10 @@ class ADF.Map.Views.Overlay.Polyline.Main extends google.maps.Polyline
     bounds.getCenter()
 
   getPosition: () ->
-    @getCenter()
+    if @getPath().getLength() > 2
+      return @getPath().getAt(Math.round(@getPath().getLength()/2) - 1)
+    else
+      return @getPath().getAt(0)
 
   centerPan: (x = 0, y = 0) ->
     @getMap().panTo(@getPosition())
@@ -49,6 +52,9 @@ class ADF.Map.Views.Overlay.Polyline.Main extends google.maps.Polyline
 
   stopDrawing: ->
     @drawingManager.setDrawingMode null if @drawingManager
+    
+  completeDrawing: ->
+    google.maps.event.trigger(@drawingManager, 'polylinecomplete') if @drawingManager
 
   # private
   
@@ -76,11 +82,9 @@ class ADF.Map.Views.Overlay.Polyline.Main extends google.maps.Polyline
     google.maps.event.addListener @drawingManager, 'polylinecomplete', @_drawingCompleted
 
   _drawingCompleted: ( newShape ) =>
-    console.log "Drawing Done"
     @stopDrawing()
     @setPath(newShape.getPath())
     newShape.setMap(null)
-    # @setEditable(true)
     @_fireWhenPathChanged()
     @fire("drawingDone")
     @fire("onAdded")
