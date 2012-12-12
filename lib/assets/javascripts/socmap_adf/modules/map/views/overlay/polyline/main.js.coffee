@@ -84,8 +84,9 @@ class ADF.Map.Views.Overlay.Polyline.Main extends google.maps.Polyline
 
   _drawingCompleted: ( newShape ) =>
     @stopDrawing()
-    @setPath(newShape.getPath())
-    newShape.setMap(null)
+    if newShape
+      @setPath(newShape.getPath()) 
+      newShape.setMap(null)
     @_fireWhenPathChanged()
     @fire("drawingDone")
     @fire("onAdded")
