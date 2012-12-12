@@ -35,7 +35,6 @@ class ADF.Map.Views.Overlay.Marker.Main extends google.maps.Marker
     @options.mapModel.addOverlay(@)
     
     super(@options)
-    # @_setAddingMode() unless @getPosition()
     @_setDrawingMode() unless @getPosition()
     
     @initialize() if @initialize    

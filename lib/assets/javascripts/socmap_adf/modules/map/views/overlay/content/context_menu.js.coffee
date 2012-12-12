@@ -65,12 +65,15 @@ class ADF.Map.Views.Overlay.Content.ContextMenu extends ADF.MVC.Views.Base
     @eventBus.trigger "ADF.GMap.Views.ContextMenu.isHidden"
 
   onRightClicked: (e) =>
+    @open()
+    
+  open: () ->
     @eventBus.trigger "ADF.GMap.Views.ContextMenu.hide"
     @hide()
     point = @calculateOverlay.getProjection().fromLatLngToContainerPixel(e.latLng)
     @position = point
     @latLng = e.latLng
-    @show()
+    @show() 
     
   onBodyClicked: (e) =>
     return if e.ctrlKey

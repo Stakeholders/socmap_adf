@@ -3,21 +3,36 @@ ADF.Map.Views.Overlay.Content ||= {}
 
 class ADF.Map.Views.Overlay.Content.Flash extends ADF.Map.Views.Overlay.Content.Abstract
   
-  constructor: (options) ->
-    super(options)
+  mouseout: true
+  hideAfter: 500
+  opened: false
+  
+  bindMarkerEvents: () ->
+    @markerDragstartEvent = google.maps.event.addListener @options.overlay, 'dragstart', (e) =>
+      @hide()
+      
+    @markerDragendEvent = google.maps.event.addListener @options.overlay, 'dragend', (e) =>
+      @draw()
+      @show()
 
-  onMarkerMouseOver: () =>
-    @show()
+    @markerMouseoutEvent = google.maps.event.addListener @options.overlay, 'mouseout', (e) =>
+      @onMarkerMouseOut()
+
+    @markerMouseoverEvent = google.maps.event.addDomListener @options.overlay, 'mouseover', (e) =>
+      @openOverlayOnHover()
+
+  unbindMarkerEvents: () =>
+    google.maps.event.removeListener(@markerDragstartEvent)
+    google.maps.event.removeListener(@markerDragendEvent)
+    google.maps.event.removeListener(@markerMouseoutEvent)         
+    google.maps.event.removeListener(@markerMouseoverEvent)
 
   onMarkerMouseOut: () =>
     @hideOverlayAfterTime() if @mouseout
 
   openOverlayOnHover: () =>
-    if !@idleOn
-      @map.hideAllOverlays()
-      @opened = true
-      @calculatePosition()
-      @show()
+    @opened = true
+    @show()
 
   hideOverlayIfNeeded: () =>
     @hide() if !@opened
@@ -26,24 +41,7 @@ class ADF.Map.Views.Overlay.Content.Flash extends ADF.Map.Views.Overlay.Content.
     @opened = false
     setTimeout(@hideOverlayIfNeeded, @hideAfter)
 
-  onRenderCompleted: () =>
-    if @hoverable && @mouseout
-      $(@el).hover(@openOverlayOnHover, @hideOverlayAfterTime)
-
-  onMarkerDrag: () ->
-    @map.hideAllOverlays()
-
-  calculatePosition: () ->
-    arr = @getPositionArray()
-    @setPosition(arr[0], arr[1])
-
-  setUnHoverable: () =>
-    @hoverable = false
+  draw: () ->
+    super()
+    $(@div).hover(@openOverlayOnHover, @hideOverlayAfterTime) if @div
     @hide()
-
-  hideAndSetIdleOn: () =>
-    @hide()
-    @setIdleOn()
-
-  setHoverable: () =>
-    @hoverable = true

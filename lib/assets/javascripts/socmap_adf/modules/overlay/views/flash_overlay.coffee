@@ -20,11 +20,10 @@ class ADF.Overlay.Views.FlashOverlay extends ADF.GMap.Views.OverlayView
     @hideOverlayAfterTime() if @mouseout
 
   openOverlayOnHover: () =>
-    if !@idleOn
-      @map.hideAllOverlays()
-      @opened = true
-      @calculatePosition()
-      @show()
+    @map.hideAllOverlays()
+    @opened = true
+    @calculatePosition()
+    @show()
     
   hideOverlayIfNeeded: () =>
     @hide() if !@opened
