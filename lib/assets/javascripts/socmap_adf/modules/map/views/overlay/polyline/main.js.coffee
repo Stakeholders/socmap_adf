@@ -2,7 +2,7 @@ ADF.Map.Views.Overlay ||= {}
 ADF.Map.Views.Overlay.Polyline ||= {}
 
 class ADF.Map.Views.Overlay.Polyline.Main extends google.maps.Polyline
-      
+  
   constructor: (options) ->
     @options = options
     @eventBus = window.eventBus
@@ -10,6 +10,7 @@ class ADF.Map.Views.Overlay.Polyline.Main extends google.maps.Polyline
     @gEvents = []
     
     @beforeInitialize() if @beforeInitialize
+    @_initDashedAndArrowedOptions()
     @options.mapModel.addOverlay(@)
     super(@options)
     if @getPath().length > 0
@@ -89,7 +90,7 @@ class ADF.Map.Views.Overlay.Polyline.Main extends google.maps.Polyline
     @fire("drawingDone")
     @fire("onAdded")
     @fire("pathChanged")
-    
+
   _fireWhenPathChanged: () =>
     google.maps.event.addListener @getPath(), 'set_at', @_pathChanged
     google.maps.event.addListener @getPath(), 'insert_at', @_pathChanged
@@ -97,3 +98,19 @@ class ADF.Map.Views.Overlay.Polyline.Main extends google.maps.Polyline
     
   _pathChanged: () =>
     @fire("pathChanged")
+    
+  _initDashedAndArrowedOptions: () ->
+    dash = {path: 'M 0,-1 0,1', strokeOpacity: 1, scale: 2, strokeWeight: @options.strokeWeight}
+    arrow = {path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, strokeOpacity: 1}
+    if @options.dashed && @options.arrowed
+      @options.strokeOpacity = 0
+      @options.icons = [{icon: dash, offset: '0', repeat: '20px'}, {icon: arrow, offset: '100%'}]
+    else if @options.dashed
+      @options.strokeOpacity = 0
+      @options.icons = [{icon: dash, offset: '0', repeat: '20px'}]
+    else if @options.arrowed
+      @options.icons = [{icon: arrow, offset: '100%'}]
+    
+  _initArrowLineOptions: () ->
+    lineSymbol = 
+    @options.icons = [{icon: lineSymbol, offset: '100%'}]
