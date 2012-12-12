@@ -37,12 +37,15 @@ class ADF.Map.Views.Overlay.Content.ContextMenu extends ADF.MVC.Views.Base
     @remove()
     
   show: () =>
-    $("body").bind "click", @onBodyClicked
     @calculatePosition()
     $(@el).show()
     @eventBus.trigger "ADF.GMap.Views.ContextMenu.isShowed"
     if @openCB
       @openCB()
+    setTimeout @bindBodyClick, 100
+    
+  bindBodyClick: () =>
+    $("body").bind "click", @onBodyClicked
     
   calculatePosition: () ->
     mW = @map.getMapElement().width()
@@ -65,15 +68,15 @@ class ADF.Map.Views.Overlay.Content.ContextMenu extends ADF.MVC.Views.Base
     @eventBus.trigger "ADF.GMap.Views.ContextMenu.isHidden"
 
   onRightClicked: (e) =>
-    @open()
+    @open(e)
     
-  open: () ->
+  open: (e) ->
     @eventBus.trigger "ADF.GMap.Views.ContextMenu.hide"
     @hide()
     point = @calculateOverlay.getProjection().fromLatLngToContainerPixel(e.latLng)
     @position = point
     @latLng = e.latLng
-    @show() 
+    @show()
     
   onBodyClicked: (e) =>
     return if e.ctrlKey

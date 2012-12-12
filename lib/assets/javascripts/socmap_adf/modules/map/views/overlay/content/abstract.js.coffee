@@ -2,11 +2,11 @@ ADF.Map.Views.Overlay ||= {}
 ADF.Map.Views.Overlay.Content ||= {}
 
 class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
-  
-  zindex: 1
 
   constructor: (options) ->
     @options = options
+    @zindex = 1
+    @_events = []
     @setMap(@options.overlay.getMap())
     @bindMarkerEvents()
     @bindMapEvents()
@@ -92,6 +92,7 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
   onRemove: () =>
     @unbindMapEvents()
     @unbindMarkerEvents()
+    google.maps.event.removeListener(event) for event in @_events
     $(@div).remove() if @div
     @div = null if @div
     
@@ -105,3 +106,9 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
   setBack: () ->
     @zindex = @zindex - 1
     @draw()
+    
+  addListener: (event, callback) ->
+    @_events.push(google.maps.event.addListener @, event, callback)
+
+  addDomListener: (event, callback) ->
+    @_events.push(google.maps.event.addDomListener @div, event, callback)

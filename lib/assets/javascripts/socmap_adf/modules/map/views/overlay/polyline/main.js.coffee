@@ -79,7 +79,7 @@ class ADF.Map.Views.Overlay.Polyline.Main extends google.maps.Polyline
       map: @map
       drawingControl: false
 
-    @fire("drawingStarted")
+    @fire("drawingStarted")    
     google.maps.event.addListener @drawingManager, 'polylinecomplete', @_drawingCompleted
 
   _drawingCompleted: ( newShape ) =>
