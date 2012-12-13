@@ -39,6 +39,9 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
 
     @centerChangedEvent = google.maps.event.addListener @getMap(), 'center_changed', () =>
       @draw()
+      
+  getPosition: () ->
+    @options.overlay.getPosition()
 
   unbindMapEvents: () =>
     google.maps.event.removeListener(@dragstartEvent)

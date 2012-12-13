@@ -65,6 +65,7 @@ class ADF.Map.Views.Overlay.Content.ContextMenu extends ADF.MVC.Views.Base
     
   hide: () =>
     $(@el).hide()
+    $("body").unbind "click", @onBodyClicked
     @eventBus.trigger "ADF.GMap.Views.ContextMenu.isHidden"
 
   onRightClicked: (e) =>
