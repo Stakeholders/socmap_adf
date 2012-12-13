@@ -52,6 +52,7 @@ class ADF.Map.Views.Overlay.Polyline.Main extends google.maps.Polyline
     @getMap().panBy(x, y) 
 
   stopDrawing: ->
+    @setMap(null)
     @drawingManager.setDrawingMode null if @drawingManager
     
   completeDrawing: ->
@@ -83,14 +84,15 @@ class ADF.Map.Views.Overlay.Polyline.Main extends google.maps.Polyline
     google.maps.event.addListener @drawingManager, 'polylinecomplete', @_drawingCompleted
 
   _drawingCompleted: ( newShape ) =>
-    @stopDrawing()
+    @drawingManager.setDrawingMode null if @drawingManager
     if newShape
-      @setPath(newShape.getPath()) 
+      @setPath(newShape.getPath())
       newShape.setMap(null)
-    @_fireWhenPathChanged()
-    @fire("drawingDone")
-    @fire("onAdded")
-    @fire("pathChanged")
+    if @getMap()
+      @_fireWhenPathChanged()
+      @fire("drawingDone")
+      @fire("onAdded")
+      @fire("pathChanged")
 
   _fireWhenPathChanged: () =>
     google.maps.event.addListener @getPath(), 'set_at', @_pathChanged
