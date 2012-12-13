@@ -86,9 +86,9 @@ class ADF.Map.Views.Overlay.Polygon.Main extends google.maps.Polygon
     @fire("pathChanged")
     
   _fireWhenPathChanged: () =>
-    google.maps.event.addListener @getPath(), 'set_at', @_pathChanged
-    google.maps.event.addListener @getPath(), 'insert_at', @_pathChanged
-    google.maps.event.addListener @getPath(), 'remove_at', @_pathChanged
+    google.maps.event.addListener @getPath(), 'set_at', @_pathMVCArrayChanged
+    google.maps.event.addListener @getPath(), 'insert_at', @_pathMVCArrayChanged
+    google.maps.event.addListener @getPath(), 'remove_at', @_pathMVCArrayChanged
     
-  _pathChanged: () =>
+  _pathMVCArrayChanged: () =>
     @fire("pathChanged")

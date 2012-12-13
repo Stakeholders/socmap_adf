@@ -95,11 +95,12 @@ class ADF.Map.Views.Overlay.Polyline.Main extends google.maps.Polyline
       @fire("pathChanged")
 
   _fireWhenPathChanged: () =>
-    google.maps.event.addListener @getPath(), 'set_at', @_pathChanged
-    google.maps.event.addListener @getPath(), 'insert_at', @_pathChanged
-    google.maps.event.addListener @getPath(), 'remove_at', @_pathChanged
+    google.maps.event.addListener @getPath(), 'set_at', @_pathMVCArrayChanged
+    google.maps.event.addListener @getPath(), 'insert_at', @_pathMVCArrayChanged
+    google.maps.event.addListener @getPath(), 'remove_at', @_pathMVCArrayChanged
     
-  _pathChanged: () =>
+  _pathMVCArrayChanged: () =>
+    console.log "Path changed polylie"
     @fire("pathChanged")
     
   _initDashedAndArrowedOptions: () ->

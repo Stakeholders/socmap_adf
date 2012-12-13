@@ -9,6 +9,7 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
     @_events = []
     @setMap(@options.overlay.getMap())
     @bindMarkerEvents()
+    @bindExtraEvents()
     @bindMapEvents()
     @options.overlay.on "removedFromMap", @_onMarkerRemoved
     @draw()
@@ -20,6 +21,10 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
     @markerDragendEvent = google.maps.event.addListener @options.overlay, 'dragend', (e) =>
       @draw()
       @show()
+
+  bindExtraEvents: () ->
+    @options.overlay.on "pathChanged", () =>
+      @draw()
 
   unbindMarkerEvents: () =>
     google.maps.event.removeListener(@markerDragstartEvent)
