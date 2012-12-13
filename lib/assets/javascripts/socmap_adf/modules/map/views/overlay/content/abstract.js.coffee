@@ -41,7 +41,11 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
       @draw()
       
   getPosition: () ->
-    @options.overlay.getPosition()
+    overlayProjection = @getProjection()
+    if (overlayProjection != null && overlayProjection != undefined && @left && @top)
+      return overlayProjection.fromDivPixelToLatLng({y: @top, x: @left})
+    else
+      return @options.overlay.getPosition()
 
   unbindMapEvents: () =>
     google.maps.event.removeListener(@dragstartEvent)

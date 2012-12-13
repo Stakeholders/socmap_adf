@@ -48,7 +48,7 @@ class ADF.Map.Views.Overlay.Polygon.Main extends google.maps.Polygon
     @getMap().panBy(x, y) 
 
   stopDrawing: ->
-    @drawingManager.setDrawingMode null if @drawingManager   
+    @drawingManager.setDrawingMode null if @drawingManager
     
   # private
   
