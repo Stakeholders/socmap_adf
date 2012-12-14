@@ -43,7 +43,6 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
   getPosition: () ->
     overlayProjection = @getProjection()
     if (overlayProjection != null && overlayProjection != undefined && @left && @top)
-      console.log "#{@left} - #{@top}"
       return overlayProjection.fromContainerPixelToLatLng({y: @top, x: @left})
     else
       return @options.overlay.getPosition()
