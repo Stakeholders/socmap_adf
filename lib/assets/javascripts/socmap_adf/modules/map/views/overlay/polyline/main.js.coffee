@@ -104,15 +104,20 @@ class ADF.Map.Views.Overlay.Polyline.Main extends google.maps.Polyline
     
   _initDashedAndArrowedOptions: () ->
     dash = {path: 'M 0,-1 0,1', strokeOpacity: 1, scale: 2, strokeWeight: @options.strokeWeight}
+    notDashed = {path: 'M 0,-1 0,1', strokeOpacity: 1, scale: 1, strokeWeight: @options.strokeWeight}
     arrow = {path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, strokeOpacity: 1}
     if @options.dashed && @options.arrowed
       @options.strokeOpacity = 0
       @options.icons = [{icon: dash, offset: '0', repeat: '20px'}, {icon: arrow, offset: '100%'}]
+    else if @options.arrowed
+      @options.strokeOpacity = 0
+      @options.icons = [{icon: notDashed, offset: '0', repeat: '1px'}, {icon: arrow, offset: '100%'}]
     else if @options.dashed
       @options.strokeOpacity = 0
       @options.icons = [{icon: dash, offset: '0', repeat: '20px'}]
-    else if @options.arrowed
-      @options.icons = [{icon: arrow, offset: '100%'}]
+    else
+      @options.strokeOpacity = 0
+      @options.icons = [{icon: notDashed, offset: '0', repeat: '1px'}]
     
   _initArrowLineOptions: () ->
     lineSymbol = 
