@@ -47,7 +47,7 @@ class ADF.Map.Models.Map extends Backbone.Model
 
   addOverlay: (overlay, clustering = false) ->
     @overlays.push(overlay)
-    @clusterOverlay(overlay) if clustering || overlay.isClustering()
+    @clusterOverlay(overlay) if clustering || (overlay.isClustering && overlay.isClustering())
 
   setCenter: (latLng) ->
     @map.setCenter(latLng)
@@ -65,7 +65,7 @@ class ADF.Map.Models.Map extends Backbone.Model
     for overlay in @overlays
       overlay.setMap(null)
       overlay.marker.setMap(null) if overlay.marker?
-      @markerClusterer.removeMarker(overlay) if @markerClusterer && overlay.isClustering()
+      @markerClusterer.removeMarker(overlay) if @markerClusterer && overlay.isClustering && overlay.isClustering()
     @overlays = []
     @markerClusterer.clearMarkers()
 

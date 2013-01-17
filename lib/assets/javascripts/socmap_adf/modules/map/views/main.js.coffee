@@ -21,7 +21,7 @@ class ADF.Map.Views.Main extends ADF.MVC.Views.Base
   renderMap: ->
     @bindResizeEvents()
     @model.initGMap(@map_id)
-    @tooltip = new ADF.Map.Views.Tooltip({map: @getMap(), containerArea: @containerArea })
+    @tooltip = new ADF.Map.Views.Tooltip.Text({map: @getMap(), containerArea: @containerArea })
     @resize()
     @initTooltip()
     @onRenderCompleted()

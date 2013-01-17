@@ -1,0 +1,1 @@
+class ADF.Map.Views.Map extends google.maps.Map
