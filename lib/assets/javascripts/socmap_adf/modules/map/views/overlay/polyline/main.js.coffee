@@ -11,7 +11,7 @@ class ADF.Map.Views.Overlay.Polyline.Main extends google.maps.Polyline
     
     @beforeInitialize() if @beforeInitialize
     @_initDashedAndArrowedOptions()
-    @options.mapModel.addOverlay(@)
+    @options.mapModel.addOverlay(@) if @options.mapModel
     super(@options)
     if @getPath().length > 0
       @_fireWhenPathChanged()
@@ -67,6 +67,7 @@ class ADF.Map.Views.Overlay.Polyline.Main extends google.maps.Polyline
       @fire("isOnMap")
     else
       @fire("removedFromMap")
+      @drawingManager.setDrawingMode null if @drawingManager
       for event in @gEvents
         google.maps.event.removeListener event
       @gEvents = []

@@ -34,7 +34,7 @@ class ADF.Map.Views.Overlay.Marker.Main extends google.maps.Marker
       type: 'poly'
     }
     
-    @options.mapModel.addOverlay(@)
+    @options.mapModel.addOverlay(@) if @options.mapModel
     
     super(@options)
     @_setDrawingMode() unless @getPosition()
@@ -68,6 +68,7 @@ class ADF.Map.Views.Overlay.Marker.Main extends google.maps.Marker
       @fire("isOnMap")
     else
       @fire("removedFromMap")
+      @drawingManager.setDrawingMode null if @drawingManager
       for event in @gEvents
         google.maps.event.removeListener event
       @gEvents = []

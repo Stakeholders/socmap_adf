@@ -10,7 +10,7 @@ class ADF.Map.Views.Overlay.Polygon.Main extends google.maps.Polygon
     @gEvents = []
     
     @beforeInitialize() if @beforeInitialize
-    @options.mapModel.addOverlay(@)
+    @options.mapModel.addOverlay(@) if @options.mapModel
     super(@options)
     if @getPath().length > 0
       @_fireWhenPathChanged()
@@ -59,6 +59,7 @@ class ADF.Map.Views.Overlay.Polygon.Main extends google.maps.Polygon
       @fire("isOnMap")
     else
       @fire("removedFromMap")
+      @drawingManager.setDrawingMode null if @drawingManager
       for event in @gEvents
         google.maps.event.removeListener event
       @gEvents = []
