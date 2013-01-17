@@ -24,11 +24,19 @@ class ADF.Map.Models.Location extends ADF.MVC.Models.Base
   getGMLatLng: ->
     @_getGMPathFromSocmapPoints()[0]
 
-  setGMLatLng: (point) ->
-    @set("socmap_points", [{lat: point.lat(), lng: point.lng()}])
+  setGMLatLng: (latLng) ->
+    @set("socmap_points", [{lat: latLng.lat(), lng: latLng.lng()}])
+    
+  saveGMPath: (GMPath, attributes, options) ->
+    @setGMPath(GMPath)
+    @save(attributes, options)
+    
+  saveGMLatLng: (latLng, attributes, options) ->
+    @setGMLatLng(latLng)
+    @save(attributes, options)
 
   _getGMPathFromSocmapPoints: ->
     _path = []
     if @get("socmap_points")
       _path.push new google.maps.LatLng( socmap_point.lat, socmap_point.lng ) for socmap_point in @get("socmap_points")
-    _path  
+    _path

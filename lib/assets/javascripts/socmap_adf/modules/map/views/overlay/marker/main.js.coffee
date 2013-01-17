@@ -22,6 +22,8 @@ class ADF.Map.Views.Overlay.Marker.Main extends google.maps.Marker
     @events = {}
     @gEvents = []
     
+    @customOptions = @options.customOptions if @options.customOptions
+    
     @beforeInitialize() if @beforeInitialize
     
     @options.icon = @_createMarkerImage(@customOptions.icon) if @customOptions.icon
