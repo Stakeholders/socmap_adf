@@ -75,12 +75,14 @@ class ADF.Popup.Views.Basic extends ADF.MVC.Views.Base
     $(@el).css({top: top, left: left})
   
   # View event methods
-  onRenderCompleted: () ->
-  
   closeClicked: ( event ) =>
     event.preventDefault()
     @destroy()
   
   destroy: () ->
+    @beforeDestroy()
     $(@el).fadeOut( 200, -> $(@).remove() )
     $(@backgroundElement).fadeOut(400) if @hasBackground == true
+    
+  beforeDestroy: () ->
+  onRenderCompleted: () -> 

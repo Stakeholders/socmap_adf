@@ -91,8 +91,10 @@ class ADF.Popup.Views.Base extends ADF.MVC.Views.Base
     $("." + @popupBacgroundClass).hide() if @hasBacground
 
   destroy: () ->
+    @beforeDestroy()
     $(@el).remove()
     $(@bacground).remove() if @hasBacground
 
   onBind: () ->
   onRenderCompleted: () ->
+  beforeDestroy: () ->
