@@ -1,1 +1,1 @@
-<div class="btn_input grey"><input type="button" name="next_step" value="Nākamais solis" disabled="disabled"/></div>
+<div class="btn_input grey"><input type="button" class="adf_field_set_button" name="next_step" value="Nākamais solis" disabled="disabled"/></div>

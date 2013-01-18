@@ -12,14 +12,14 @@ class ADF.Form.Views.FieldSetWithButton extends ADF.Form.Views.FieldSet
     @$(".tab_set_content").append(@fieldSetButton)
     @$(".field_wrap_all").hide() 
     @$(".tab_title").text(@title)
-    @$(".btn_input input").val(@buttonTitle) if @buttonTitle?
+    @$(".adf_field_set_button").val(@buttonTitle) if @buttonTitle?
     @bindFieldTab()
     @bindButton()
     @onBind()
     @
 
   bindButton: () ->
-    @$(".btn_input input").bind "mousedown", @onInputClicked
+    @$(".adf_field_set_button").bind "mousedown", @onInputClicked
 
   onDataValid: () ->
     @$(".btn_input").removeClass("grey")
