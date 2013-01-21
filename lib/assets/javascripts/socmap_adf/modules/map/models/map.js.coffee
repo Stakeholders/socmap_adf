@@ -40,7 +40,7 @@ class ADF.Map.Models.Map extends Backbone.Model
     @map.setMapTypeId(mapTypeId)
 
   getGMap: () ->
-    return @map
+    @map
     
   getMapElement: () ->
     return $("##{@mapElement}")
