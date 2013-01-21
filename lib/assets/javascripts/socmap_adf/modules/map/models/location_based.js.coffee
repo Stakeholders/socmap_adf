@@ -8,9 +8,10 @@ class ADF.Map.Models.LocationBased extends ADF.MVC.Models.Base
     @attributes = attributes
     
   parse: (response) =>
-    attributes = super(response)
-    attributes = @_initSocmapObjectInAttributes(attributes)
-    attributes
+    if response
+      attributes = super(response)
+      attributes = @_initSocmapObjectInAttributes(attributes)
+      attributes
     
   _initSocmapObjectInAttributes: (attributes) ->
     if attributes && attributes.socmap_object
