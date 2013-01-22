@@ -34,9 +34,12 @@ class ADF.Map.Views.Overlay.Marker.Main extends google.maps.Marker
       type: 'poly'
     }
     
-    @options.mapModel.addOverlay(@) if @options.mapModel
     
     super(@options)
+    
+    @options.mapModel.addOverlay(@) if @options.mapModel
+    
+    
     @_setDrawingMode() unless @getPosition()
     
     @initialize() if @initialize    

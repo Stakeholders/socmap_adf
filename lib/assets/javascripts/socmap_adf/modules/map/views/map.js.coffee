@@ -10,13 +10,13 @@ class ADF.Map.Views.Map extends google.maps.Map
   clusterDefaults:
     "maxZoom": 21
     "maxZoomOnClick": 21
-    "clusterShowType": "chart"
+    "clusterShowType": "default"
 
   constructor: (element, options) ->
     super(element, options)
     @clusterOptions = $.extend(@clusterDefaults, options.clusterOptions)
     @mapElementId = options.mapElementId
-    @markerClusterer = new ADF.Cluster.Views.MarkerClusterer(@, null, @clusterOptions)
+    @markerClusterer = new ADF.Map.Views.Cluster.MarkerClusterer(@, null, @clusterOptions)
     @
 
   setMapTypeId: (mapTypeId) =>

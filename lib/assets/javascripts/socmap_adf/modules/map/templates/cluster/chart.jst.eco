@@ -1,0 +1,6 @@
+<div class="chart_wrap">
+  <div class="chart"></div>
+  <% if @reports_count: %>
+  <div class="label"><strong><%= @reports_count.text %></strong><br/><%= @objectName %></div>
+  <% end %>
+</div>
