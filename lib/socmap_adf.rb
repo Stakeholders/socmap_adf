@@ -5,7 +5,7 @@ module SocmapAdf
   mattr_accessor :app_root
   
   mattr_accessor :assets
-  @@assets = ["mvc", "map", "minimap", "gmap", "overlay", "overlay_push", "marker", "zone", "sidebar", "form", "popup", "image_uploader", "cluster", "file_uploader"]
+  @@assets = ["mvc", "map", "minimap", "gmap", "overlay", "overlay_push", "marker", "zone", "sidebar", "form", "popup", "image_uploader", "file_uploader"]
   
   def self.setup
     yield self
