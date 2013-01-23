@@ -10,6 +10,7 @@ class ADF.Map.Views.Cluster.ClusterIcon extends google.maps.OverlayView
     @center_ = null
     @map_ = @cluster_.getMap()
     @div_ = null
+    @sums_ = null
     @visible_ = false
     @initialize() if @initialize
     @setMap @map_
@@ -24,13 +25,12 @@ class ADF.Map.Views.Cluster.ClusterIcon extends google.maps.OverlayView
     # Zoom into the cluster.
     @map_.fitBounds @cluster_.getBounds()  if @markerClusterer_.isZoomOnClick()
 
-
   ###
   Adding the cluster icon to the dom.
   @ignore
   ###
   onAdd : ->
-    @div_ = document.createElement("DIV")
+    @div_ = document.createElement("DIV") unless @div_
     if @visible_
       pos = @getPosFromLatLng_(@center_)
     panes = @getPanes()
@@ -48,10 +48,9 @@ class ADF.Map.Views.Cluster.ClusterIcon extends google.maps.OverlayView
   ###
   getPosFromLatLng_ : (latlng) ->
     pos = @getProjection().fromLatLngToDivPixel(latlng)
-    pos.x -= parseInt(@width_ / 2, 10)
-    pos.y -= parseInt(@height_ / 2, 10)
+    pos.x -= parseInt($(@div_).width() / 2, 10)
+    pos.y -= parseInt($(@div_).height() / 2, 10)
     pos
-
 
   ###
   Draw the icon.
@@ -67,7 +66,7 @@ class ADF.Map.Views.Cluster.ClusterIcon extends google.maps.OverlayView
   Hide the icon.
   ###
   hide : ->
-    @div_.style.display = "none"  if @div_
+    @div_.style.display = "none" if @div_
     @visible_ = false
 
   ###
@@ -75,11 +74,8 @@ class ADF.Map.Views.Cluster.ClusterIcon extends google.maps.OverlayView
   ###
   show : ->
     if @div_
-      pos = @getPosFromLatLng_(@center_)
-      @div_.style.cssText = @createCss(pos)
       @div_.style.display = ""
     @visible_ = true
-
 
   ###
   Remove the icon from the map

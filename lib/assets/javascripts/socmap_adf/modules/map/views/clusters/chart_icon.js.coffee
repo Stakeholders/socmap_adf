@@ -3,7 +3,6 @@ ADF.Map.Views.Cluster ||= {}
 class ADF.Map.Views.Cluster.ChartIcon extends ADF.Map.Views.Cluster.ClusterIcon
 
   initialize: () ->
-    @sums_ = null
     @fillColors = @markerClusterer_.getFillColors()
 
   triggerClusterClick : ->

@@ -1,10 +1,7 @@
 ADF.Map.Views.Cluster ||= {}
 
 class ADF.Map.Views.Cluster.DefaultIcon extends ADF.Map.Views.Cluster.ClusterIcon
-
-  initialize: () ->
-    @sums_ = null
-
+  
   ###
   Adding the cluster icon to the dom.
   @ignore
@@ -34,7 +31,29 @@ class ADF.Map.Views.Cluster.DefaultIcon extends ADF.Map.Views.Cluster.ClusterIco
     @div_.innerHTML = sums.text  if @div_
     @useStyle()
 
+  ###
+  Position and show the icon.
+  ###
+  show : ->
+    if @div_
+      pos = @getPosFromLatLng_(@center_)
+      @div_.style.cssText = @createCss(pos)
+      @div_.style.display = ""
+    @visible_ = true
 
+  ### 
+  Returns the position to place the div dending on the latlng.
+
+  @param {google.maps.LatLng} latlng The position in latlng.
+  @return {google.maps.Point} The position in pixels.
+  @private
+  ###
+  getPosFromLatLng_ : (latlng) ->
+    pos = @getProjection().fromLatLngToDivPixel(latlng)
+    pos.x -= parseInt(@width_ / 2, 10)
+    pos.y -= parseInt(@height_ / 2, 10)
+    pos
+       
   ###
   Sets the icon to the the styles.
   ###
