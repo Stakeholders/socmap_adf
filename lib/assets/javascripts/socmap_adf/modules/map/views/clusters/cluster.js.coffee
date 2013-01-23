@@ -11,10 +11,12 @@ class ADF.Map.Views.Cluster.Cluster
     @center_ = null
     @markers_ = []
     @bounds_ = null
-    if @markerClusterer_.getClusterShowType() == "chart"
-      @clusterIcon_ = new ADF.Map.Views.Cluster.ChartIcon(this, markerClusterer.getStyles(), markerClusterer.getGridSize(), markerClusterer.getFillColors())
-    else
-      @clusterIcon_ = new ADF.Map.Views.Cluster.DefaultIcon(this, markerClusterer.getStyles(), markerClusterer.getGridSize())
+    ClusterIconClass = markerClusterer.getClusterIconClass()
+    @clusterIcon_ = new ClusterIconClass({cluster: @, markerClusterer: @markerClusterer_})
+    #if @markerClusterer_.getClusterShowType() == "chart"
+    #  @clusterIcon_ = new ADF.Map.Views.Cluster.ChartIcon(this, markerClusterer.getStyles(), markerClusterer.getGridSize(), markerClusterer.getFillColors())
+    #else
+    #  @clusterIcon_ = new ADF.Map.Views.Cluster.DefaultIcon(this, markerClusterer.getStyles(), markerClusterer.getGridSize())
 
   isMarkerAlreadyAdded : (marker) ->
     if @markers_.indexOf

@@ -1,18 +1,10 @@
 ADF.Map.Views.Cluster ||= {}
 
-class ADF.Map.Views.Cluster.ChartIcon extends google.maps.OverlayView
+class ADF.Map.Views.Cluster.ChartIcon extends ADF.Map.Views.Cluster.ClusterIcon
 
-  constructor : (cluster, styles, opt_padding, fillColors) ->
-    @styles_ = styles
-    @padding_ = opt_padding or 0
-    @cluster_ = cluster
-    @center_ = null
-    @map_ = cluster.getMap()
-    @chartView = null
+  initialize: () ->
     @sums_ = null
-    @visible_ = false
-    @setMap @map_
-    @fillColors = fillColors
+    @fillColors = @markerClusterer_.getFillColors()
 
   triggerClusterClick : ->
     @clickHandler(@cluster_) if @clickHandler
@@ -57,31 +49,21 @@ class ADF.Map.Views.Cluster.ChartIcon extends google.maps.OverlayView
       marker.setMap @map_
       marker.setMap @map_ if marker
     @visible_ = true
-
-  showOrShowMarker : ->
               
   sumData : ->
     dataHash = { 1 : 0, 2 : 0, 3 : 0 }
     markers = @cluster_.getMarkers()
     for marker in markers
-      dataHash[ marker.getData() ] = if dataHash[ marker.getData() ]? then dataHash[ marker.getData() ] + 1 else 1
+      if marker.getData
+        dataHash[ marker.getData() ] = if dataHash[ marker.getData() ]? then dataHash[ marker.getData() ] + 1 else 1
     @result = []
     $.each dataHash, (data, i) =>
       @result.push i
     @result
-    
-  getPosFromLatLng_ : (latlng) ->
-    pos = @getProjection().fromLatLngToDivPixel(latlng)
-    pos.x -= parseInt(@width_ / 2, 10) if pos
-    pos.y -= parseInt(@height_ / 2, 10) if pos
-    pos
 
   isNeedToCluster: () ->
     markers = @cluster_.getMarkers()
     if markers.length > 1 then true else false
-    
-  remove : ->
-    @setMap null
 
   onRemove : ->
     if @chartView and @chartView.$el.parent()
@@ -101,9 +83,6 @@ class ADF.Map.Views.Cluster.ChartIcon extends google.maps.OverlayView
     style = @styles_[index]
     @height_ = style["height"]
     @width_ = style["width"] 
-
-  setCenter : (center) ->
-    @center_ = center
 
   addClickHandler: (handler) ->
     @clickHandler = handler
