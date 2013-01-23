@@ -60,8 +60,10 @@ class ADF.Map.Views.Overlay.Marker.Main extends google.maps.Marker
         callback()
     
   addListener: (event, callback) ->
-    @gEvents.push(google.maps.event.addListener @, event, callback)
-    
+    listener = google.maps.event.addListener @, event, callback
+    @gEvents.push( listener )
+    listener
+  
   # private
   
   # Overide
