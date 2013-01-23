@@ -13,8 +13,8 @@ class ADF.Map.Views.Cluster.MarkerClusterer extends google.maps.OverlayView
     @markers_ = []
 
     @clusters_ = []
-    # @sizes = [53, 56, 66, 78, 90]
-    @sizes = [1, 1, 1, 1, 1]
+    @sizes = [53, 56, 66, 78, 90]
+    # @sizes = [1, 1, 1, 1, 1]
 
     @styles_ = []
 
