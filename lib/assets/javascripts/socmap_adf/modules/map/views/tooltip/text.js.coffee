@@ -14,7 +14,7 @@ class ADF.Map.Views.Tooltip.Text extends ADF.MVC.Views.Base
     @containerArea = @options.containerArea
   
   render: () ->
-    newElement = @make("div", {"class": "show_tip", "id" : "map_ballon", "style" : "display:none;position:absolute;"} )
+    newElement = $("<div>", {"class": "show_tip", "id" : "map_ballon", "style" : "display:none;position:absolute;"} )
     @setElement( newElement )
     @$el.html( @template )
     @

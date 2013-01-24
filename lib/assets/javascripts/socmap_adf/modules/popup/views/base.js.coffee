@@ -14,7 +14,7 @@ class ADF.Popup.Views.Base extends ADF.MVC.Views.Base
   autoHeight: false
   
   render: () ->
-    newElement = @make("div", {"class": @popupClass})
+    newElement = $("<div>", {"class": @popupClass})
     @.setElement(newElement)
     $(@el).html(@popupContainer)
     if @model
@@ -23,11 +23,11 @@ class ADF.Popup.Views.Base extends ADF.MVC.Views.Base
       @$(@popupContentClass).html(@template)
     @bindCloseButton()
 
-    $("body").append(@make("div", {"id": "popups"})) if !$("#popups").length
+    $("body").append($("<div>", {"id": "popups"})) if !$("#popups").length
 
     if @category
       if !$("#popups").find("#" + @category + "_popups").length
-        $("#popups").append(@make("div", {"id": @category + "_popups"}))
+        $("#popups").append($("<div>", {"id": @category + "_popups"}))
       $("#" + @category + "_popups").append(@el)
     else
       $("#popups").append(@el)
@@ -41,7 +41,7 @@ class ADF.Popup.Views.Base extends ADF.MVC.Views.Base
 
   addBacground: () ->
     if !@bacground
-      @bacground = @make("div", {"class": @popupBacgroundClass})
+      @bacground = $("<div>", {"class": @popupBacgroundClass})
     $("#popups").append(@bacground)
     $("." + @popupBacgroundClass).bind "click", @closeButtonClicked if @closable
     

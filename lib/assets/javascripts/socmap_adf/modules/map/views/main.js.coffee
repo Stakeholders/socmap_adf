@@ -24,7 +24,7 @@ class ADF.Map.Views.Main extends ADF.MVC.Views.Base
     @mapElementId = options.mapElementId if options.mapElementId
 
   render: () ->
-    @containerArea = @make("div", {"id" : @mapElementId} )
+    @containerArea = $("<div>", {"id" : @mapElementId} )
     @setElement( @containerArea )
     @
   

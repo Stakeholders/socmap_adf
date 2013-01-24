@@ -3,7 +3,7 @@ class ADF.Sidebar.Views.Tabcontent extends ADF.MVC.Views.Base
   initialize: ->
         
   render: ->
-    el = @make("div", {"class": "content"})
+    el = $("<div>", {"class": "content"})
     @setElement(el)
     $(@el).html(@template)
     @onRenderComplete()
@@ -14,7 +14,7 @@ class ADF.Sidebar.Views.Tabcontent extends ADF.MVC.Views.Base
     
   showLoading: ( waitLoading ) ->
     @waitLoading = waitLoading
-    @loading = @make("img", {"src":"/assets/small_loading_gray.gif", "class":"tab_loading"})
+    @loading = $("<img>", {"src":"/assets/small_loading_gray.gif", "class":"tab_loading"})
     @$el.prepend(@loading)
     
   hideLoading: ()->

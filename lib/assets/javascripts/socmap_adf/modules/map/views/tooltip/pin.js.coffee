@@ -15,7 +15,7 @@ class ADF.Map.Views.Tooltip.Pin extends ADF.MVC.Views.Base
     @setActive()
   
   render: () ->
-    @setElement( @make("div", {"class":"mapitem_block", "style" : "display:none;"}) )
+    @setElement( $("<div>", {"class":"mapitem_block", "style" : "display:none;"}) )
     @$el.html(@template({color: @color, label: @label, pin: @pin }))
     @
 

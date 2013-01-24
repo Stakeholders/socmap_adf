@@ -12,7 +12,7 @@ class ADF.Minimap.Views.Tooltip extends ADF.MVC.Views.Base
     @containerArea = @options.containerArea
   
   render: () ->
-    newElement = @make("div", {"class": "show_tip", "id" : "minimap_ballon", "style" : "display:none;position:absolute;"} )
+    newElement = $("<div>", {"class": "show_tip", "id" : "minimap_ballon", "style" : "display:none;position:absolute;"} )
     @setElement( newElement )
     @$el.html( @template )
     @

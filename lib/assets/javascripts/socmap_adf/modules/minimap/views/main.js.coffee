@@ -9,7 +9,7 @@ class ADF.Minimap.Views.Main extends ADF.MVC.Views.Base
     @map_id = options.map_id if options.map_id
     
   render: () ->
-    @containerArea = @make("div", {"id" : @map_id} )
+    @containerArea = $("<div>", {"id" : @map_id} )
     @setElement( @containerArea )
     @
     

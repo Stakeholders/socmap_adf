@@ -23,18 +23,18 @@ class ADF.Popup.Views.Basic extends ADF.MVC.Views.Base
     if @insidePosition == "center"
       $(@el).addClass( "center" )
     
-    $("body").append( @make( "div", {"id": "popups"} ) ) if !$("#popups").length
+    $("body").append( $("<div>", {"id": "popups"} ) ) if !$("#popups").length
     
     if @category
       if !$("#popups").find( "#" + @category + "_popups" ).length
-        $("#popups").append( @make( "div", { "id": @category + "_popups" } ) )
+        $("#popups").append( $("<div>", { "id": @category + "_popups" } ) )
       
       $("#" + @category + "_popups").append( @el )
     else
       $("#popups").append( @el )
     
     if !$("#popups ." + @backgroundClass).length
-      @backgroundElement = @make( "div", { "class": @backgroundClass } )
+      @backgroundElement = $("<div>", { "class": @backgroundClass } )
       $("#popups").append( @backgroundElement )
     
     @showBackground() if @hasBackground == true

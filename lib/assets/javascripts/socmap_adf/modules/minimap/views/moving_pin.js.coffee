@@ -18,7 +18,7 @@ class ADF.Minimap.Views.MovingPin extends ADF.MVC.Views.Base
     @offset_top = @options.offset_top if @options.offset_top?
     
   render: () ->
-    @setElement( @make("div", {"class":"minimapitem_block", "style" : "display:none;position:absolute;"}) )
+    @setElement( $("<div>", {"class":"minimapitem_block", "style" : "display:none;position:absolute;"}) )
     @$el.html(@template({color: @color, label: @label, pin: @pin }))
     @setActive()
     @

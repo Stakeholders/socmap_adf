@@ -42,7 +42,7 @@ class ADF.Sidebar.Views.Sidebar extends ADF.MVC.Views.Base
     @third_level.css({ "top" : @thirdLevelTop + "px", "height" : (height - @thirdLevelTop) + "px"})
 
   showFirstLevel: (view) ->
-    newElement = @make("div", {"class": @firstPanelClass })
+    newElement = $("<div>", {"class": @firstPanelClass })
     view.setElement(newElement)
     @first_level.html(view.render().el)
     @onFirstLevelShowed()
@@ -52,7 +52,7 @@ class ADF.Sidebar.Views.Sidebar extends ADF.MVC.Views.Base
     @secondView = view
     return if @secondView.rendered
     
-    newElement = @make("div", {"class": "panel_2"})
+    newElement = $("<div>", {"class": "panel_2"})
     @secondView.setElement(newElement)
     @setContent()
     @animateFirstEnterance() 
@@ -115,7 +115,7 @@ class ADF.Sidebar.Views.Sidebar extends ADF.MVC.Views.Base
       
   # THIRD LEVEL
   initThirdLevel: (view) ->
-    el = @make("div", {"class": "panel_3"})
+    el = $("<div>", {"class": "panel_3"})
     view.setElement(el)
     if not @third_level.is(":visible")
       @animateFirstEnteranceThirdLevel(view)
@@ -146,7 +146,7 @@ class ADF.Sidebar.Views.Sidebar extends ADF.MVC.Views.Base
     @$("#slices_content").html(@view.render().el)
 
   addCloseButton: ->
-    btn_close = @make("a", {"class": "btn_close", "style" : "z-index:7"})
+    btn_close = $("<a>", {"class": "btn_close", "style" : "z-index:7"})
     @third_level.find(".panel_3").prepend(btn_close)
     $(btn_close).click (e) =>
       e.preventDefault()

@@ -21,7 +21,7 @@ class ADF.Map.Views.Overlay.Content.ContextMenu extends ADF.MVC.Views.Base
     @calculateOverlay.setMap(@map.getGMap())
     
   render: () ->
-    newElement = @make("div", {"class": "map_context_menu", "style" : "display:none;position:absolute;z-index:10;"} )
+    newElement = $("<div>", {"class": "map_context_menu", "style" : "display:none;position:absolute;z-index:10;"} )
     @setElement( newElement )
     @$el.append('<div class="context_menu_background"></div>')
     @map.getMapElement().append($(@el))

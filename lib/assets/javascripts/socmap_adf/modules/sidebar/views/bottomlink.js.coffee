@@ -16,7 +16,7 @@ class ADF.Sidebar.Views.Bottomlink extends ADF.MVC.Views.Base
     @eventBus = @options.eventBus
     
   render: ->
-    el = @make("li")
+    el = $("<li>")
     @setElement(el)
     if @withaction then @renderWithAction() else @renderWithoutAction()
     @onRenderComplete()   
