@@ -95,6 +95,8 @@ class ADF.Map.Views.Cluster.MarkerClusterer extends google.maps.OverlayView
       i++
 
   fitMapToMarkers: ->
+    console.log "Fit in bounds"
+    
     markers = @getMarkers()
     bounds = new google.maps.LatLngBounds()
     i = 0

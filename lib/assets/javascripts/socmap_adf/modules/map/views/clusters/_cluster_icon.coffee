@@ -18,13 +18,18 @@ class ADF.Map.Views.Cluster.ClusterIcon extends google.maps.OverlayView
   ###
   Triggers the clusterclick event and zoom's if the option is set.
   ###
-  triggerClusterClick : ->    
-    # Trigger the clusterclick event.
+  triggerClusterClick : ->
     google.maps.event.trigger @markerClusterer_, "clusterclick", @cluster_
-    
-    # Zoom into the cluster.
-    @map_.fitBounds @cluster_.getBounds()  if @markerClusterer_.isZoomOnClick()
-
+    if @markerClusterer_.isZoomOnClick() and @markerClusterer_.getMaxZoomOnClick() > @map_.getZoom()
+      lastZoom = @map_.getZoom()
+      @map_.fitBounds @cluster_.getBounds()
+      if @map_.getZoom() > @markerClusterer_.getMaxZoomOnClick()
+        @map_.setZoom(@markerClusterer_.getMaxZoomOnClick())
+      else if @map_.getZoom() == lastZoom
+        listener = google.maps.event.addListener @map_, "idle", () =>
+          @map_.setZoom(lastZoom + 1)
+          google.maps.event.removeListener(listener)
+        
   ###
   Adding the cluster icon to the dom.
   @ignore
