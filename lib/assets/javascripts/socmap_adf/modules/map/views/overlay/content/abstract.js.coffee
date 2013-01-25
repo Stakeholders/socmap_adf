@@ -12,6 +12,7 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
     @bindExtraEvents()
     @bindMapEvents()
     @options.overlay.on "removedFromMap", @_onMarkerRemoved
+    @options.overlay.on "isOnMap", @_onOverlayIsOnMap
     @draw()
     
   bindMarkerEvents: () ->
@@ -110,6 +111,12 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
     
   _onMarkerRemoved: () =>
     @setMap(null)
+    
+  _onOverlayIsOnMap: () =>
+    @setMap(@options.overlay.getMap())
+    @bindMarkerEvents()
+    @bindExtraEvents()
+    @bindMapEvents()
 
   setInFront: () ->
     @zindex = @zindex + 1

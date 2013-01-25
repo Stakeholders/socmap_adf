@@ -74,10 +74,10 @@ class ADF.Map.Views.Overlay.Marker.Main extends google.maps.Marker
     else
       @fire("removedFromMap")
       @drawingManager.setDrawingMode null if @drawingManager
-      for event in @gEvents
-        google.maps.event.removeListener event
-      @gEvents = []
-      @events = {}
+      # for event in @gEvents
+      #  google.maps.event.removeListener event
+      # @gEvents = []
+      # @events = {}
 
   _createMarkerImage: (options) ->
     new google.maps.MarkerImage(options.url, options.size, options.origin, options.anchor)
