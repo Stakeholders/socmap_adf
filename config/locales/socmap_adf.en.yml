@@ -1,0 +1,17 @@
+lv:
+  socmap_adf:
+    login:
+      title: "Show on map"
+      subtitle_first_line: "You know something!"
+      subtitle_second_line: "Come in and show it to others!"
+      social_button_begining: "Login with"
+      or_seperator: "or"
+      email: "Enter your e-mail"
+      password: "Enter the password"
+      login_button: "Login"
+      login_error: "Email or password is incorrect."
+      first_name: "Your name"
+      last_name: "Your last name"
+      password_repeat: "Enter the password again"
+      register_button: "Register"
+      cannot_register_email: "Unable to login/register (email used in FB account)"

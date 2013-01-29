@@ -1,0 +1,17 @@
+lv:
+  socmap_adf:
+    login:
+      title: "Parādi kartē"
+      subtitle_first_line: "Tu kautko zini"
+      subtitle_second_line: "Ienāc un parādi to citiem!"
+      social_button_begining: "Ienākt ar"
+      or_seperator: "vai"
+      email: "Ievadi savu e-pastu"
+      password: "Ievadi paroli"
+      login_button: "Ienākt"
+      login_error: "E-pasts vai parole nav pareiza."
+      first_name: "Tavs vārds"
+      last_name: "Tavs uzvārds"
+      password_repeat: "Ievadi paroli vēlreiz"
+      register_button: "Reģistrēties"
+      cannot_register_email: "Nevar ielogoties/piereģistrēties (konts ir FB)"

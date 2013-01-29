@@ -1,0 +1,14 @@
+<div class="logo_wrap">
+  <!-- img src="" / -->
+</div>
+<p class="strong"><%= I18n.t("socmap_adf.login.title") %></p>
+<p><%= I18n.t("socmap_adf.login.subtitle_first_line") %><br /><%= I18n.t("socmap_adf.login.subtitle_second_line") %></p>
+<ul>
+  <li><a href="#" class="fb facebook"><%= I18n.t("socmap_adf.login.social_button_begining") %> Facebook.com<img src="/assets/fb_icon.png" /></a></li>
+</ul>
+<p class="divider_wrap">
+  <span class="divider_left">&nbsp;</span>
+  <span class="divider_text"><%= I18n.t("socmap_adf.login.or_seperator") %></span>
+  <span class="divider_right">&nbsp;</span>
+</p>
+<div class="email_login_wrap"></div>
