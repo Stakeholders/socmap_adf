@@ -24,7 +24,6 @@ class ADF.Login.Views.Partial.EmailForm extends ADF.MVC.Views.Base
     
     @model.bindValue("email", { success: @onEmailValidationSuccess, error: @onEmailValidationError} ).to(@$("input[name=email]"))
     @expandClickableArea()
-    @popupView.center()
     @
   
   onLoginClicked: () =>

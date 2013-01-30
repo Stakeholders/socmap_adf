@@ -25,7 +25,8 @@ class ADF.Login.Views.Popup.Main extends ADF.Popup.Views.Base
   
   onRenderCompleted: () =>
     @$(".email_login_wrap").html( @emailFormView.render().el )
-
+    @center()
+    
   loginFacebook: (e) =>
     e.preventDefault()
     window.open(@facebookLoginUrl, 'authorization_popup', 'toolbar=0,menubar=0,width=640,height=500,scrollbars=0')
