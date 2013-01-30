@@ -115,6 +115,7 @@ class ADF.Login.Views.Partial.EmailForm extends ADF.MVC.Views.Base
     @onEmailInvalid( @model ) unless @model.isValid()
     
   onEmailValid: ( email ) =>
+    @enableTabForInput( @$("input[name=email]") )
     if email.registred()
       @hideRegistrationForm()
       @showLoginForm()
@@ -127,9 +128,18 @@ class ADF.Login.Views.Partial.EmailForm extends ADF.MVC.Views.Base
       
     
   onEmailInvalid: () ->
+    @disableTabForInput( @$("input[name=email]") )
     @hideLoginForm()
     @hideRegistrationForm()
     @popupView.center()
+    
+  disableTabForInput: ( input ) ->
+    input.on 'keydown', ( e) =>
+      e.preventDefault() if e.keyCode == 9 || e.which == 9
+
+  enableTabForInput: ( input ) ->
+    input.off "keydown"
+    
     
   expandClickableArea: ( className = "") ->
     @$(".textarea_wrap" + className).find("input").defaultValue()

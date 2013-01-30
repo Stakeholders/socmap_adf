@@ -11,6 +11,7 @@ class ADF.Login.Views.Popup.Main extends ADF.Popup.Views.Base
   
   events:
     "click .facebook" : "loginFacebook"
+    "click .close" : "closeClicked"
   
   initialize: () ->
     @model = @options.instance
@@ -31,9 +32,18 @@ class ADF.Login.Views.Popup.Main extends ADF.Popup.Views.Base
     _gaq.push(['_trackEvent', 'Logošanās', 'Facebook', 'Sāk FB logošanos' ])
     return false
 
+  closeClicked: (e) =>
+    e.preventDefault()
+    @onLoginCancel()
+    @destroy()
+    
   onLoginClosed: () =>
     @close()
     @onLoginDone()
 
   onLoginDone: () =>
     _gaq.push(['_trackEvent', 'Logošanās', 'Facebook', 'Pabeidz FB logošanos' ])
+    
+  onLoginCancel: () =>
+    _gaq.push(['_trackEvent', 'Logošanās', 'Popup', 'Aizvēra ielogošanās logu' ])
+    

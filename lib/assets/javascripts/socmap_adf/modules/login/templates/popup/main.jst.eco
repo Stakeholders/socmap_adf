@@ -1,10 +1,11 @@
+<a href="#" class="close"><img src="/assets/socmap_adf/modules/login/close.png" /></a>
 <div class="logo_wrap">
   <!-- img src="" / -->
 </div>
 <p class="strong"><%= I18n.t("socmap_adf.login.title") %></p>
 <p><%= I18n.t("socmap_adf.login.subtitle_first_line") %><br /><%= I18n.t("socmap_adf.login.subtitle_second_line") %></p>
 <ul>
-  <li><a href="#" class="fb facebook"><%= I18n.t("socmap_adf.login.social_button_begining") %> Facebook.com<img src="/assets/fb_icon.png" /></a></li>
+  <li><a href="#" class="fb facebook"><%= I18n.t("socmap_adf.login.social_button_begining") %> Facebook.com<img src="/assets/socmap_adf/modules/login/fb_icon.png" /></a></li>
 </ul>
 <p class="divider_wrap">
   <span class="divider_left">&nbsp;</span>
