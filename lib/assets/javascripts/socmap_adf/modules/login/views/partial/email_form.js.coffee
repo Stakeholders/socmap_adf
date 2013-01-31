@@ -58,18 +58,16 @@ class ADF.Login.Views.Partial.EmailForm extends ADF.MVC.Views.Base
     _gaq.push(['_trackEvent', 'Logošanās', 'Email', 'Piereģistrējas'])
       
   onFaild: () =>
-    alert I18n.t("socmap_adf.login.login_error")
+    @$(".login_password").text(I18n.t("socmap_adf.login.login_error")).show()
     _gaq.push(['_trackEvent', 'Logošanās', 'Email', 'Nepareiza parole'])
     
   onFaildRegister: (data) =>
-    alert I18n.t("socmap_adf.login.cannot_register_email")
     _gaq.push(['_trackEvent', 'Logošanās', 'Email', 'Nevar ielogoties/piereģistrēties (konts ir FB)' ])
   
   showRegistrationForm: () ->
     $(".registration_form").show()
     @registrationForm.bindValue("email").to(@$("input[name=email]"))
     @registrationForm.bindValue("first_name").to(@$("input[name=first_name]"))
-    @registrationForm.bindValue("last_name").to(@$("input[name=last_name]"))
     @registrationForm.bindValue("password").to(@$("input[name=password_r]"))
     @registrationForm.bindValue("password_confirmation").to(@$("input[name=password_confirmation]"))
     @registrationForm.validateModel()
@@ -114,18 +112,22 @@ class ADF.Login.Views.Partial.EmailForm extends ADF.MVC.Views.Base
     @onEmailInvalid( @model ) unless @model.isValid()
     
   onEmailValid: ( email ) =>
-    @enableTabForInput( @$("input[name=email]") )
-    if email.registred()
-      @hideRegistrationForm()
-      @showLoginForm()
-      _gaq.push(['_trackEvent', 'Logošanās', 'Email', 'Sāk logoties'])
+    unless email.hasProvider()
+      @$(".login_email").text("")
+      @enableTabForInput( @$("input[name=email]") )
+      if email.registred()
+        @hideRegistrationForm()
+        @showLoginForm()
+        _gaq.push(['_trackEvent', 'Logošanās', 'Email', 'Sāk logoties'])
+      else
+        @hideLoginForm()
+        @showRegistrationForm()
+        _gaq.push(['_trackEvent', 'Logošanās', 'Email', 'Sāk reģistrēties'])
+      @popupView.center()
     else
-      @hideLoginForm()
-      @showRegistrationForm()
-      _gaq.push(['_trackEvent', 'Logošanās', 'Email', 'Sāk reģistrēties'])
-    @popupView.center()
+      @onEmailInvalid()
+      @$(".login_email").text( I18n.t("socmap_adf.login.cannot_register_email", {provider: email.get("provider")}) )
       
-    
   onEmailInvalid: () ->
     @disableTabForInput( @$("input[name=email]") )
     @hideLoginForm()

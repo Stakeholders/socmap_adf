@@ -14,6 +14,6 @@ class ADF.Login.Models.RegistrationForm extends ADF.MVC.Models.Base
   constructor: ( options ) ->
     super( options )
     @markChecks = true
-    @validates( "present", ["first_name", "last_name", "email", "password", "password_confirmation"], { message: I18n.t("adf.error.required") } )
-    @validates( "email", ["email"], { message: I18n.t("adf.error.email_not_valid") })
+    @validates( "present", ["first_name", "email", "password", "password_confirmation"], { message: "" } )
+    @validates( "email", ["email"], { message: "" })
     @validates( "confirm", ["password_confirmation"], {message: I18n.t("adf.error.not_equal"), confirm_field: "password"})
