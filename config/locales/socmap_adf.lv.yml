@@ -22,3 +22,6 @@ lv:
       password_reser_desc_success: "Tava parole ir atjaunota. Lūdzu pārbaudi savu e-pastu, lai ievadītu jaunu"
       password_reset_back_button: "atpakaļ"
       password_reset_home_button: "Uz sākumu"
+      signup_disclaimer_first_part: "Nospiežot Reģistrēties, Tu piekrīti"
+      signup_disclaimer_second_part: "un ka Tu esi izlasījis mūsu Datu Lietošans Politiku"
+      signup_disclaimer_terms_link: "mūsu Noteikumiem"
