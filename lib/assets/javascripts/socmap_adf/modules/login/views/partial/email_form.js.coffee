@@ -54,6 +54,10 @@ class ADF.Login.Views.Partial.EmailForm extends ADF.MVC.Views.Base
     })
     _gaq.push(['_trackEvent', 'Logošanās', 'Email', 'Mēģina reģistrēties' ])
     return false
+    
+  onTermsClicked: (e) =>
+    e.preventDefault()
+    window.open("/adf/terms/index", '', 'toolbar=0,menubar=0,width=640,height=500')
       
   onLoginSaved: () =>
     @eventBus.trigger "loginDone"
@@ -79,6 +83,7 @@ class ADF.Login.Views.Partial.EmailForm extends ADF.MVC.Views.Base
     @registrationForm.validateModel()
     
     @$("input[name=register]").unbind().click @onRegisterClicked
+    @$(".terms").unbind().click @onTermsClicked
     @expandClickableArea("login") unless @registrationFormShowed
     @registrationFormShowed = true
     
