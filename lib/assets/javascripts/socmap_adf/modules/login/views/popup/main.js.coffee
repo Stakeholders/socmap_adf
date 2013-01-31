@@ -6,11 +6,8 @@ class ADF.Login.Views.Popup.Main extends ADF.Popup.Views.Base
   popupClass: "login_popup_wrap"
   hasBacground: true
   closable: false
-  
-  facebookLoginUrl: "/authorizme/login/facebook"
-  
+
   events:
-    "click .facebook" : "loginFacebook"
     "click .close" : "closeClicked"
   
   initialize: () ->
@@ -18,21 +15,34 @@ class ADF.Login.Views.Popup.Main extends ADF.Popup.Views.Base
     @onLoginDone = @options.onLoginDone if typeof( @options.onLoginDone ) == "function"
     
     @eventBus.bind "loginDone", @onLoginClosed
-    
-    @emailFormView = new ADF.Login.Views.Partial.EmailForm
-      eventBus: @eventBus
-      popupView: @
+    @bootstrap()
   
+  bootstrap: () ->
+    @emailForm = new ADF.Login.Models.EmailForm({})
+    
+    @loginView = new ADF.Login.Views.Partial.Login
+      popupView: @
+      instance: @model
+      emailForm: @emailForm
+      
+    @resetPasswordView = new ADF.Login.Views.Partial.Reset
+      popupView: @
+      instance: @model
+      emailForm: @emailForm
+     
   onRenderCompleted: () =>
-    @$(".email_login_wrap").html( @emailFormView.render().el )
+    @renderLoginView()
+  
+  renderLoginView: () =>
+    @setContent @loginView 
+    
+  renderPasswordResetView: () =>
+    @setContent @resetPasswordView 
+   
+  setContent: (view) =>
+    @$(".login_content_wrap").html( view.render().el )
     @center()
     
-  loginFacebook: (e) =>
-    e.preventDefault()
-    window.open(@facebookLoginUrl, 'authorization_popup', 'toolbar=0,menubar=0,width=640,height=500,scrollbars=0')
-    _gaq.push(['_trackEvent', 'Logošanās', 'Facebook', 'Sāk FB logošanos' ])
-    return false
-
   closeClicked: (e) =>
     e.preventDefault()
     @onLoginCancel()

@@ -1,6 +1,6 @@
 <div class="textarea_wrap gray">
   <p class="success_message login_email"></p>
-  <input type="text" name="email" placeholder="<%= I18n.t("socmap_adf.login.email") %>" autocomplete="off" />
+  <input type="text" name="email" placeholder="<%= I18n.t("socmap_adf.login.email") %>" autocomplete="off" value="<%= @email %>" />
 </div>
 
 <div class="login_form" style="display:none;">
@@ -8,6 +8,7 @@
     <p class="error_message login_password"></p>
     <input type="password" name="password_l" placeholder="<%= I18n.t("socmap_adf.login.password") %>" />
   </div>
+  <a href="#" class="forgot_password">Forgot your password?</a>
   <div class="btn_input grey"><input type="button" name="login" value="<%= I18n.t("socmap_adf.login.login_button") %>" disabled=disabled /></div>
 </div>
 

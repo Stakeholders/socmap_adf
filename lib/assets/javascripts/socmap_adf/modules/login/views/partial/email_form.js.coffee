@@ -7,11 +7,11 @@ class ADF.Login.Views.Partial.EmailForm extends ADF.MVC.Views.Base
   loginFormShowed: false
   
   initialize: () ->
-    @popupView = @options.popupView
+    @popupView = @options.popupView  
     @onEmailValid = @options.onEmailValid if typeof( @options.onEmailValid ) == "function"
     @onEmailInvalid = @options.onEmailInvalid if typeof( @options.onEmailInvalid ) == "function"
 
-    @model = new ADF.Login.Models.EmailForm({})
+    @model = @options.emailForm
     @loginForm = new ADF.Login.Models.LoginForm({})
     @registrationForm = new ADF.Login.Models.RegistrationForm({})
 
@@ -20,10 +20,12 @@ class ADF.Login.Views.Partial.EmailForm extends ADF.MVC.Views.Base
     @registrationForm.setView(@)
     
   render: () ->
-    $(@el).html(@template())
+    $(@el).html(@template( @model.toJSON() ))
     
     @model.bindValue("email", { success: @onEmailValidationSuccess, error: @onEmailValidationError} ).to(@$("input[name=email]"))
     @expandClickableArea()
+    setTimeout ( => @$("input[name=email]").focus() ), 1
+    
     @
   
   onLoginClicked: () =>
@@ -35,7 +37,11 @@ class ADF.Login.Views.Partial.EmailForm extends ADF.MVC.Views.Base
     })
     _gaq.push(['_trackEvent', 'Logošanās', 'Email', 'Mēģina logoties'])
     return false
-
+  
+  onPasswordResetClicked: (e) =>
+    e.preventDefault()
+    @popupView.renderPasswordResetView()
+    
   onRegisterClicked: () =>
     @registrationForm.set( "first_name", @$("input[name=first_name]").val())
     @registrationForm.set( "last_name", @$("input[name=last_name]").val())
@@ -86,6 +92,7 @@ class ADF.Login.Views.Partial.EmailForm extends ADF.MVC.Views.Base
     @loginForm.validateModel()
     
     @$("input[name=login]").unbind().click @onLoginClicked
+    @$(".forgot_password").unbind().click @onPasswordResetClicked
     @expandClickableArea("registration")  unless @loginFormShowed
     @loginFormShowed = true
     

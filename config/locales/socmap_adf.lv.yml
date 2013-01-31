@@ -15,3 +15,6 @@ lv:
       password_repeat: "Ievadi paroli vēlreiz"
       register_button: "Reģistrēties"
       cannot_register_email: "Tu esi reģistrējies ar {{provider}}. Ienāc ar {{provider}} pasi"
+      password_reset: "Paroles atjaunošana"
+      reset_button: "Atjaunot paroli"
+      unexisted_email_error: "E-pasta adrese, ko Tu ievadīji nav pareiza"

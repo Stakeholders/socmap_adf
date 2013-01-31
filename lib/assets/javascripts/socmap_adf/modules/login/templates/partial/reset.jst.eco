@@ -1,0 +1,9 @@
+<p class="strong"><%= I18n.t("socmap_adf.login.password_reset") %></p>
+
+<p class="description">We will send a link to your email, to reset your password</p>
+<div class="textarea_wrap gray">
+  <p class="success_message login_email"></p>
+  <input type="text" name="email" placeholder="<%= I18n.t("socmap_adf.login.email") %>" autocomplete="off" value="<%= @email %>" />
+</div>
+<div class="btn_input grey"><input type="button" name="reset" value="<%= I18n.t("socmap_adf.login.reset_button") %>" disabled=disabled /></div>
+<a href="#" class="back">Back</a>
