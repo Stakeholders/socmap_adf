@@ -14,4 +14,4 @@ lv:
       last_name: "Tavs uzvārds"
       password_repeat: "Ievadi paroli vēlreiz"
       register_button: "Reģistrēties"
-      cannot_register_email: "Nevar ielogoties/piereģistrēties (konts ir FB)"
+      cannot_register_email: "Tu esi reģistrējies ar {{provider}}. Ienāc ar {{provider}} pasi"

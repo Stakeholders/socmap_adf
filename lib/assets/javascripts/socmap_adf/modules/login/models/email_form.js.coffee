@@ -10,7 +10,7 @@ class ADF.Login.Models.EmailForm extends ADF.MVC.Models.Base
   constructor: (options) ->
     super(options)
     @markChecks = true
-    @validates("email", ["email"], {message : I18n.t("adf.error.email_not_valid")})
+    @validates("email", ["email"], {message : ""})
     
     
   checkEmailRegistred: ( callback ) ->
@@ -18,3 +18,6 @@ class ADF.Login.Models.EmailForm extends ADF.MVC.Models.Base
 
   registred: () ->
     if @get("registred") == true then true else false
+    
+  hasProvider: () ->
+    if @get("provider") then true else false

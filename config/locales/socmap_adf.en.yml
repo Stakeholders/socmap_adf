@@ -14,4 +14,4 @@ lv:
       last_name: "Your last name"
       password_repeat: "Enter the password again"
       register_button: "Register"
-      cannot_register_email: "Unable to login/register (email used in FB account)"
+      cannot_register_email: "You've been signed up with {{provider}}. Use login with {{provider}}"
