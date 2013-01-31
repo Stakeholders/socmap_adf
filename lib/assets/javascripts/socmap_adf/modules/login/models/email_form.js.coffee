@@ -4,8 +4,10 @@ class ADF.Login.Models.EmailForm extends ADF.MVC.Models.Base
     email: null
     registred: null
   
-  url: -> 
+  checkEmailUrl: -> 
     "/api/users/find_registred_email.json?email=#{@get("email")}"
+    
+  resetPasswordUrl: "/authorizme/password_resets"
     
   constructor: (options) ->
     super(options)
@@ -14,7 +16,11 @@ class ADF.Login.Models.EmailForm extends ADF.MVC.Models.Base
     
     
   checkEmailRegistred: ( callback ) ->
-    @fetch({ url: @url(), success: callback })
+    @fetch({ url: @checkEmailUrl(), success: callback })
+    
+  resetEmail: (callback) ->
+    @url = @resetPasswordUrl
+    @save(null, { success: callback })
 
   registred: () ->
     if @get("registred") == true then true else false

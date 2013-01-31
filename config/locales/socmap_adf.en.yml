@@ -1,4 +1,4 @@
-lv:
+en:
   socmap_adf:
     login:
       title: "Show on map"
@@ -15,3 +15,6 @@ lv:
       password_repeat: "Enter the password again"
       register_button: "Register"
       cannot_register_email: "You've been signed up with {{provider}}. Use login with {{provider}}"
+      password_reset: "Password reset"
+      reset_button: "Reset my password"
+      unexisted_email_error: "The email address you entered is wrong"
