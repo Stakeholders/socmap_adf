@@ -1,0 +1,8 @@
+lv:
+  errors: &errors
+    format: ! '%{message}'
+    messages:
+      accepted: ir jāpiekrīt
+      blank: ir jābūt aizpildītam
+      confirmation: nesakrīt ar apstiprinājumu
+      empty: laukiem ir jābūt aizpildītam

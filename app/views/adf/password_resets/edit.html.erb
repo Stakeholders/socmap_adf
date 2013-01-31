@@ -1,0 +1,29 @@
+<%= form_for @user, :url => "/adf/password_resets/#{params[:id]}" do |f| %>
+  <% if @user.errors.any? && @user.errors.get(:password) %>
+  <div class="error_messages">
+    <ul>
+	  <% @user.errors.get(:password).each do |error| %>
+		<li><%= error %></li>
+	  <% end %> 
+ 	</ul>
+  </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+  <% if @user.errors.any? && @user.errors.get(:password_confirmation) %>
+  <div class="error_messages">
+    <ul>
+	  <% @user.errors.get(:password_confirmation).each do |error| %>
+		<li><%= error %></li>
+	  <% end %> 
+ 	</ul>
+  </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="actions"><%= f.submit "Update Password" %></div>
+<% end %>
