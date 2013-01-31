@@ -18,3 +18,7 @@ lv:
       password_reset: "Paroles atjaunošana"
       reset_button: "Atjaunot paroli"
       unexisted_email_error: "E-pasta adrese, ko Tu ievadīji nav pareiza"
+      password_reset_desc: "Mēs nosūtīsim saiti uz Tavu e-pastu, kur Tu varēsi uzstādīt savu jauno paroli"
+      password_reser_desc_success: "Tava parole ir atjaunota. Lūdzu pārbaudi savu e-pastu, lai ievadītu jaunu"
+      password_reset_back_button: "atpakaļ"
+      password_reset_home_button: "Uz sākumu"

@@ -18,3 +18,7 @@ en:
       password_reset: "Password reset"
       reset_button: "Reset my password"
       unexisted_email_error: "The email address you entered is wrong"
+      password_reset_desc: "We will send a link to your email, to reset your password"
+      password_reser_desc_success: "Your password has been reset. Please check your email, to enter a new one"
+      password_reset_back_button: "back"
+      password_reset_home_button: "Return home"

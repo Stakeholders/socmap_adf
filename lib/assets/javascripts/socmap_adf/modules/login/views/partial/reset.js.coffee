@@ -21,8 +21,8 @@ class ADF.Login.Views.Partial.Reset extends ADF.MVC.Views.Base
   renderSuccess: () =>
     @$(".textarea_wrap").hide()
     @$(".btn_input").hide()
-    @$(".back").text("Return home")
-    @$(".description").text("Your password has been reset. Please check your email, to enter a new one")
+    @$(".back").text( I18n.t("socmap_adf.login.password_reset_home_button") )
+    @$(".description").text( I18n.t("socmap_adf.login.password_reser_desc_success") )
     @popupView.center()
     
   onBackClicked: (e) =>
