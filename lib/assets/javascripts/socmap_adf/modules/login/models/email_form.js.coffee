@@ -7,7 +7,7 @@ class ADF.Login.Models.EmailForm extends ADF.MVC.Models.Base
   checkEmailUrl: -> 
     "/api/users/find_registred_email.json?email=#{@get("email")}"
     
-  resetPasswordUrl: "/authorizme/password_resets"
+  resetPasswordUrl: "/api/password_resets"
     
   constructor: (options) ->
     super(options)
