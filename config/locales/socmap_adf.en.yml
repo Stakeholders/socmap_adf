@@ -1,9 +1,7 @@
 en:
   socmap_adf:
     login:
-      title: "Show on map"
-      subtitle_first_line: "You know something!"
-      subtitle_second_line: "Come in and show it to others!"
+      title: "Log in or Sign Up"
       social_button_begining: "Login with"
       or_seperator: "or"
       email: "Enter your e-mail"

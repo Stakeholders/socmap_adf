@@ -1,9 +1,7 @@
 lv:
   socmap_adf:
     login:
-      title: "Parādi kartē"
-      subtitle_first_line: "Tu kautko zini"
-      subtitle_second_line: "Ienāc un parādi to citiem!"
+      title: "Ienāc vai Reģistrējies"
       social_button_begining: "Ienākt ar"
       or_seperator: "vai"
       email: "Ievadi savu e-pastu"

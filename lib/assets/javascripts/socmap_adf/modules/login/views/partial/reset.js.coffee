@@ -15,7 +15,10 @@ class ADF.Login.Views.Partial.Reset extends ADF.MVC.Views.Base
     @$el.html( @template( @emailForm.toJSON() ) )
     @delegateEvents()
     @emailForm.bindValue("email", { success: @onEmailValidationSuccess, error: @onEmailValidationError} ).to(@$("input[name=email]"))
-    setTimeout ( => @$("input[name=email]").focus() ), 1
+    if @emailForm.id
+      @renderSuccess()
+    else
+      setTimeout ( => @$("input[name=email]").focus() ), 1
     @
     
   renderSuccess: () =>

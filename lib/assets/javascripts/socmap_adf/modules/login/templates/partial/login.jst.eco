@@ -1,5 +1,4 @@
 <p class="strong"><%= I18n.t("socmap_adf.login.title") %></p>
-<p><%= I18n.t("socmap_adf.login.subtitle_first_line") %><br /><%= I18n.t("socmap_adf.login.subtitle_second_line") %></p>
 <ul>
   <li><a href="#" class="fb facebook"><%= I18n.t("socmap_adf.login.social_button_begining") %> Facebook.com<img src="/assets/socmap_adf/modules/login/fb_icon.png" /></a></li>
 </ul>
