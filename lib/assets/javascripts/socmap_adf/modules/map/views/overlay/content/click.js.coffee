@@ -26,19 +26,13 @@ class ADF.Map.Views.Overlay.Content.Click extends ADF.Map.Views.Overlay.Content.
   open: () ->
     if @openable
       @opened = true
+	  @setMap(@options.overlay.getMap())
       @draw()
-      @show()
 
   close: () ->
     @opened = false
-    @hide()
+    @setMap(null)
 
   draw: () ->
     super()
-    @hide() unless @opened 
-    
-  hide: () ->
-    @setMap(null)
-    
-  show: () ->
-    @setMap(@options.overlay.getMap())
+    @setMap(null) unless @opened
