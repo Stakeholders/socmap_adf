@@ -6,7 +6,8 @@ class ADF.Map.Views.Overlay.Content.Click extends ADF.Map.Views.Overlay.Content.
   opened: false
   openable: true
 
-  bindMarkerEvents: () ->
+  bindMarkerEvents: () =>
+    @unbindMarkerEvents()
     @markerDragstartEvent = google.maps.event.addListener @options.overlay, 'dragstart', (e) =>
       @hide()
 
@@ -25,9 +26,10 @@ class ADF.Map.Views.Overlay.Content.Click extends ADF.Map.Views.Overlay.Content.
 
   open: () ->
     if @openable
+      @setMap(@options.overlay.getMap())
       @opened = true
-	  @setMap(@options.overlay.getMap())
       @draw()
+      
 
   close: () ->
     @opened = false

@@ -32,6 +32,7 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
     google.maps.event.removeListener(@markerDragendEvent)         
 
   bindMapEvents: () ->
+    @unbindMapEvents()
     @dragstartEvent = google.maps.event.addListener @getMap(), 'dragstart', () =>
       @draw()
 
@@ -103,8 +104,8 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
     @draw()
   
   onRemove: () =>
-    @unbindMapEvents()
-    @unbindMarkerEvents()
+    #@unbindMapEvents()
+    #@unbindMarkerEvents()
     google.maps.event.removeListener(event) for event in @_events
     $(@div).remove() if @div
     @div = null if @div
