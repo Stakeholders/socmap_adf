@@ -104,8 +104,8 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
     @draw()
   
   onRemove: () =>
-    #@unbindMapEvents()
-    #@unbindMarkerEvents()
+    # @unbindMapEvents()
+    # @unbindMarkerEvents()
     google.maps.event.removeListener(event) for event in @_events
     $(@div).remove() if @div
     @div = null if @div

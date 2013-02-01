@@ -1,0 +1,6 @@
+/*
+ *= require_self
+*/
+<% SocmapAdf::assets.each do |asset| %>
+<%= Rails.application.assets.find_asset "socmap_adf/modules/#{asset}/main.css" %>
+<% end %>
