@@ -34,8 +34,9 @@ class ADF.Login.Views.Partial.Reset extends ADF.MVC.Views.Base
     
   onResetPasswordClicked: (e) =>
     e.preventDefault()
-    @emailForm.resetEmail( @onEmailResat )
+    #@emailForm.resetEmail( @onEmailResat )
     @onDataInvalid()
+    @$(".btn_input").addClass("loading")
     
   onEmailResat: () =>
     @renderSuccess()
