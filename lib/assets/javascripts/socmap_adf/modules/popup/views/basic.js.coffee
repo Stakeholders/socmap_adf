@@ -1,3 +1,5 @@
+# THIS IS DEPRICATED, still used in app [ NEW POPUP ir MAiN ]
+
 class ADF.Popup.Views.Basic extends ADF.MVC.Views.Base
 
   # Assign view options
