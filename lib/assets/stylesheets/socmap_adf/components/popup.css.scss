@@ -764,3 +764,29 @@ h1 {
     }
   }
 }
+
+a.back
+{
+  color: #ababab;
+  text-align: center;
+  font-size: 11px;
+  display: block;
+}
+
+a.forgot_password
+{
+  color: #ababab;
+  text-align: right;
+  font-size: 11px;
+  margin-right: 10px;
+  display: block;
+  position: relative;
+  top: -5px;
+}
+
+p.terms_p
+{
+  font-size: 10px;
+  color: #464646;
+  text-align: center;
+}
