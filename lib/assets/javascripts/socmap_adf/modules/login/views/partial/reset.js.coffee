@@ -24,8 +24,8 @@ class ADF.Login.Views.Partial.Reset extends ADF.MVC.Views.Base
   renderSuccess: () =>
     @$(".textarea_wrap").hide()
     @$(".btn_input").hide()
-    @$(".back").text( I18n.t("socmap_adf.login.password_reset_home_button") )
-    @$(".description").text( I18n.t("socmap_adf.login.password_reser_desc_success") )
+    @$(".back").text( I18n.t("socmap_adf.login.password_reset.home_button") )
+    @$(".description").text( I18n.t("socmap_adf.login.password_reset.desc_success") )
     @popupView.center()
     
   onBackClicked: (e) =>
@@ -49,7 +49,7 @@ class ADF.Login.Views.Partial.Reset extends ADF.MVC.Views.Base
       @$(".login_email").text( "" )
       @onDataValid()
     else
-      @$(".login_email").text( I18n.t("socmap_adf.login.unexisted_email_error") )
+      @$(".login_email").text( I18n.t("socmap_adf.login.error.unexisted_email") )
       @onDataInvalid()
     
   onEmailValidationError: () =>
