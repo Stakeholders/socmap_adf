@@ -6,27 +6,27 @@
 <div class="login_form" style="display:none;">
   <div class="textarea_wrap gray login label">
     <p class="error_message login_password"></p>
-    <input type="password" name="password_l" placeholder="<%= I18n.t("socmap_adf.login.password") %>" />
+    <input type="password" name="password_l" placeholder="<%= I18n.t("socmap_adf.login.authorization.password") %>" />
   </div>
-  <a href="#" class="forgot_password">Forgot your password?</a>
-  <div class="btn_input grey"><input type="button" name="login" value="<%= I18n.t("socmap_adf.login.login_button") %>" disabled=disabled /></div>
+  <a href="#" class="forgot_password"><%= I18n.t("socmap_adf.login.authorization.forgot_password") %></a>
+  <div class="btn_input grey"><input type="button" name="login" value="<%= I18n.t("socmap_adf.login.authorization.button") %>" disabled=disabled /></div>
 </div>
 
 <div class="registration_form" style="display:none;">
 
   <div class="textarea_wrap gray registration">
-    <input type="text" name="first_name" placeholder="<%= I18n.t("socmap_adf.login.first_name") %>" />
+    <input type="text" name="first_name" placeholder="<%= I18n.t("socmap_adf.login.signup.name") %>" />
   </div>
 
   <div class="textarea_wrap gray registration">
-    <input type="password" name="password_r" placeholder="<%= I18n.t("socmap_adf.login.password") %>" />
+    <input type="password" name="password_r" placeholder="<%= I18n.t("socmap_adf.login.signup.password") %>" />
   </div>
 
   <div class="textarea_wrap gray registration">
-    <input type="password" name="password_confirmation" placeholder="<%= I18n.t("socmap_adf.login.password_repeat") %>" />
+    <input type="password" name="password_confirmation" placeholder="<%= I18n.t("socmap_adf.login.signup.password_repeat") %>" />
   </div>
   
-  <p><%= I18n.t("socmap_adf.login.signup_disclaimer_first_part") %> <a href="#" class="terms"><%= I18n.t("socmap_adf.login.signup_disclaimer_terms_link") %></a> <%= I18n.t("socmap_adf.login.signup_disclaimer_second_part") %></p>
+  <p><%= I18n.t("socmap_adf.login.signup.disclaimer_first_part") %> <a href="#" class="terms"><%= I18n.t("socmap_adf.login.signup.disclaimer_terms_link") %></a> <%= I18n.t("socmap_adf.login.signup.disclaimer_second_part") %></p>
   
-  <div class="btn_input grey"><input type="button" name="register" value="<%= I18n.t("socmap_adf.login.register_button") %>" disabled=disabled /></div>
+  <div class="btn_input grey"><input type="button" name="register" value="<%= I18n.t("socmap_adf.login.signup.button") %>" disabled=disabled /></div>
 </div>
