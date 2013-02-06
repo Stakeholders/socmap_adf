@@ -30,7 +30,7 @@ class ADF.Form.Views.FieldSets extends ADF.MVC.Views.Base
 
   addFieldSet: (fieldSet) ->
     fieldSet.setFieldSetsObject(@)
-    fieldSet.setElement(@make("li"))
+    fieldSet.setElement($("<li></li>"))
     fieldSet.setIndex(@count)
     @fieldSets.push(fieldSet)
     @$(".form_tabs").append(fieldSet.render().el)
