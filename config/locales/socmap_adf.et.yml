@@ -1,0 +1,31 @@
+et:
+  socmap_adf:
+    login:
+      title: "Log in or Sign Up"
+      social_button_begining: "Login with"
+      or_seperator: "or"
+      email: "Enter your e-mail"
+      authorization:
+        password: "Enter the password"
+        button: "Login"
+        forgot_password: "Forgot your password?"
+      signup:
+        name: "Your name"
+        password: "Enter the password"
+        password_repeat: "Enter the password again"
+        button: "Sign up"
+        disclaimer_first_part: "By clicking Sign up, You agree to"
+        disclaimer_second_part: "and that you have read our Data Use Policy"
+        disclaimer_terms_link: "our Terms"
+      password_reset:
+        title: "Password reset"
+        email: "Enter your e-mail"
+        button: "Reset my password"
+        desc: "We will send a link to your email, to reset your password"
+        desc_success: "Your password has been reset. Please check your email, to enter a new one"
+        back_button: "back"
+        home_button: "Return home"
+      error:
+        authorization: "Email or password is incorrect."
+        cannot_register_email: "You've been signed up with {{provider}}. Use login with {{provider}}"
+        unexisted_email: "The email address you entered is wrong"
