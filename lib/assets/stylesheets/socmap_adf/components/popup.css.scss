@@ -197,11 +197,21 @@ h1 {
         width:100%;
       }
       
+      p.disclaimer
+      {
+        font-size: 11px;
+      }
+
       .btn_input {
         float: none;
         width: 40%;
         margin: 3px auto;
         height: 25px;
+
+        &.reset_button
+        {
+          width: 70%;
+        }
         
         &.loading {
           padding-right:20px;

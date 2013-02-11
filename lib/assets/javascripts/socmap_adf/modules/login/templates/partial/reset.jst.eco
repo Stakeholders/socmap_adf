@@ -5,5 +5,5 @@
   <p class="success_message login_email"></p>
   <input type="text" name="email" placeholder="<%= I18n.t("socmap_adf.login.password_reset.email") %>" autocomplete="off" value="<%= @email %>" />
 </div>
-<div class="btn_input grey"><input type="button" name="reset" value="<%= I18n.t("socmap_adf.login.password_reset.button") %>" disabled=disabled /></div>
+<div class="btn_input grey reset_button"><input type="button" name="reset" value="<%= I18n.t("socmap_adf.login.password_reset.button") %>" disabled=disabled /></div>
 <a href="#" class="back"><%= I18n.t("socmap_adf.login.password_reset.back_button") %></a>

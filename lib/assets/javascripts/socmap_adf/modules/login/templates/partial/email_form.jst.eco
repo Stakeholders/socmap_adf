@@ -26,7 +26,7 @@
     <input type="password" name="password_confirmation" placeholder="<%= I18n.t("socmap_adf.login.signup.password_repeat") %>" />
   </div>
   
-  <p><%= I18n.t("socmap_adf.login.signup.disclaimer_first_part") %> <a href="#" class="terms"><%= I18n.t("socmap_adf.login.signup.disclaimer_terms_link") %></a> <%= I18n.t("socmap_adf.login.signup.disclaimer_second_part") %></p>
+  <p class="disclaimer"><%= I18n.t("socmap_adf.login.signup.disclaimer_first_part") %> <a href="#" class="terms"><%= I18n.t("socmap_adf.login.signup.disclaimer_terms_link") %></a> <%= I18n.t("socmap_adf.login.signup.disclaimer_second_part") %></p>
   
   <div class="btn_input grey"><input type="button" name="register" value="<%= I18n.t("socmap_adf.login.signup.button") %>" disabled=disabled /></div>
 </div>
