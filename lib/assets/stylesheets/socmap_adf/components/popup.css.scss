@@ -240,16 +240,44 @@ h1 {
         color:#BFBFBF;
         margin-right:17px;
       }
-      
+    
+
       .error_message, .success_message {
         position: absolute;
         font-size: 11px;
-        width: 270px;
+        display: block;
+        width: 208px;
+        font-family: Arial, sans-serif;
         text-align: center;
-        top: -17px;
-        left: -28px;
-        background-color: transparent;
-        color: red;
+        bottom: 100%;
+        margin-bottom: -5px;
+        left: 0px;
+        background-color: #af0002;
+        color: #FFF;
+        background: rgba(175,0,2,0.7);
+        line-height: 16px;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        text-shadow: 0 1px 0 #6a0000;
+        
+        // &:after {
+        //   top: 100%;
+        //   border: solid transparent;
+        //   content: " ";
+        //   height: 0;
+        //   width: 0;
+        //   position: absolute;
+        //   pointer-events: none;
+        // }
+
+        // &:after {
+        //   border-color: rgba(106, 0, 0, 0);
+        //   border-top-color: #6a0000;
+        //   border-width: 8px;
+        //   left: 50%;
+        //   margin-left: -8px;
+        // }
+
       }
       
       label {
