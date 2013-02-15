@@ -94,9 +94,7 @@ class ADF.Map.Views.Cluster.MarkerClusterer extends google.maps.OverlayView
 
       i++
 
-  fitMapToMarkers: ->
-    console.log "Fit in bounds"
-    
+  fitMapToMarkers: ->    
     markers = @getMarkers()
     bounds = new google.maps.LatLngBounds()
     i = 0
@@ -205,7 +203,6 @@ class ADF.Map.Views.Cluster.MarkerClusterer extends google.maps.OverlayView
     
     # Marker is not in our list of markers.
     return false  if index is -1
-    marker.setMap null if marker
     marker.setMap null
     @markers_.splice index, 1
     true
@@ -304,7 +301,6 @@ class ADF.Map.Views.Cluster.MarkerClusterer extends google.maps.OverlayView
 
     while marker = @markers_[i]
       marker.isAdded = false
-      marker.setMap null if opt_hide and marker
       marker.setMap null if opt_hide
       i++
     @clusters_ = []

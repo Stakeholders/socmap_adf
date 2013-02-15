@@ -44,7 +44,6 @@ class ADF.Map.Views.Cluster.Cluster
     
     # Min cluster size not reached so show the marker.
     marker.setMap @map_  if len < @minClusterSize_ and marker.getMap() isnt @map_
-    marker.setMap @map_  if len < @minClusterSize_ and marker and marker.getMap() isnt @map_
     if len is @minClusterSize_
       
       # Hide the markers that were showing.
