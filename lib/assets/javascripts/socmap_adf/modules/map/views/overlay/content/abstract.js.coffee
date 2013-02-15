@@ -69,11 +69,12 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
   onAdd: ->
     if @options.view
       @div = @options.view.render().el
+      # @getPanes().overlayMouseTarget.appendChild @div
       $(@options.overlay.mapModel.getMapElement()).append(@div)
 
   draw: () =>
     overlayProjection = @getProjection()
-    if (overlayProjection != null && overlayProjection != undefined && @options.overlay.getPosition() && @div)
+    if (@getMap() && overlayProjection != null && overlayProjection != undefined && @options.overlay.getPosition() && @div)
       $(@div).css({position: "absolute", left: 0, top: 0})
       @divPixel = overlayProjection.fromLatLngToContainerPixel(@options.overlay.getPosition())
       markerSize = if @options.overlay.options.icon then @options.overlay.options.icon.size else {width: 0, height: 0}
