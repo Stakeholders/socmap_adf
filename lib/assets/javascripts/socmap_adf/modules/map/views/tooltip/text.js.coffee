@@ -28,7 +28,7 @@ class ADF.Map.Views.Tooltip.Text extends ADF.MVC.Views.Base
     
   show: (e) =>
     @move(e)
-    @$el.show()
+    @$el.show() unless @$el.is(":visible")
 
   hide: (e) =>
     @$el.hide()
@@ -43,6 +43,6 @@ class ADF.Map.Views.Tooltip.Text extends ADF.MVC.Views.Base
       @active = true
       $(@containerArea).bind "mouseover", @show
       $(@containerArea).bind "mouseleave", @hide
-      $(@containerArea).bind "mousemove", @move
+      $(@containerArea).bind "mousemove", @show
     
     @$("span").html(text)

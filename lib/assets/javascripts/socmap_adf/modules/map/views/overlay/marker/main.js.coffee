@@ -38,8 +38,6 @@ class ADF.Map.Views.Overlay.Marker.Main extends google.maps.Marker
     super(@options)
     
     @options.mapModel.addOverlay(@) if @options.mapModel
-    
-    
     @_setDrawingMode() unless @getPosition()
     
     @initialize() if @initialize    

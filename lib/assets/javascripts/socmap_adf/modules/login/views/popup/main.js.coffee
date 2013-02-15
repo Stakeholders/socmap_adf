@@ -53,8 +53,10 @@ class ADF.Login.Views.Popup.Main extends ADF.Popup.Views.Base
     @onLoginDone()
 
   onLoginDone: () =>
+    @eventBus.trigger "ADF.Login.Views.Main.DoneFacebookLogin"
     _gaq.push(['_trackEvent', 'Logošanās', 'Facebook', 'Pabeidz FB logošanos' ])
     
   onLoginCancel: () =>
+    @eventBus.trigger "ADF.Login.Views.Main.CancelLoginWindow"
     _gaq.push(['_trackEvent', 'Logošanās', 'Popup', 'Aizvēra ielogošanās logu' ])
     

@@ -3,7 +3,6 @@ class ADF.Login.Models.RegistrationForm extends ADF.MVC.Models.Base
   # Assign model defaults
   defaults:
     first_name: null
-    last_name: null
     email: null
     password: null
     password_confirmation: null

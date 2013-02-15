@@ -1,4 +1,4 @@
-en:
+et:
   socmap_adf:
     login:
       title: "Log in or Sign Up"
@@ -27,5 +27,5 @@ en:
         home_button: "Return home"
       error:
         authorization: "Email or password is incorrect."
-        cannot_register_email: "You've been signed up with {{provider}}. Login with {{provider}}"
+        cannot_register_email: "You've been signed up with {{provider}}. Use login with {{provider}}"
         unexisted_email: "The email address you entered is wrong"

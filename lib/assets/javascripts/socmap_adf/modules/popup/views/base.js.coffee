@@ -1,3 +1,5 @@
+# DEPRICATED
+
 class ADF.Popup.Views.Base extends ADF.MVC.Views.Base
  
   popupContainer: JST['socmap_adf/modules/popup/templates/basic']

@@ -27,5 +27,5 @@ class ADF.Login.Views.Partial.Login extends ADF.MVC.Views.Base
   loginFacebook: (e) =>
     e.preventDefault()
     window.open(@facebookLoginUrl, 'authorization_popup', 'toolbar=0,menubar=0,width=640,height=500,scrollbars=0')
-    _gaq.push(['_trackEvent', 'Logošanās', 'Facebook', 'Sāk FB logošanos' ])
+    @eventBus.trigger "ADF.Login.Views.Partial.Login.StartFacebookLogin"
     return false

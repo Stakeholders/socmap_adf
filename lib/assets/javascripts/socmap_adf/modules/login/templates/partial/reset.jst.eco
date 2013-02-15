@@ -1,9 +1,9 @@
-<p class="strong"><%= I18n.t("socmap_adf.login.password_reset") %></p>
+<p class="strong"><%= I18n.t("socmap_adf.login.password_reset.title") %></p>
 
-<p class="description"><%= I18n.t("socmap_adf.login.password_reset_desc") %></p>
+<p class="description"><%= I18n.t("socmap_adf.login.password_reset.desc") %></p>
 <div class="textarea_wrap gray">
   <p class="success_message login_email"></p>
-  <input type="text" name="email" placeholder="<%= I18n.t("socmap_adf.login.email") %>" autocomplete="off" value="<%= @email %>" />
+  <input type="text" name="email" placeholder="<%= I18n.t("socmap_adf.login.password_reset.email") %>" autocomplete="off" value="<%= @email %>" />
 </div>
-<div class="btn_input grey"><input type="button" name="reset" value="<%= I18n.t("socmap_adf.login.reset_button") %>" disabled=disabled /></div>
-<a href="#" class="back"><%= I18n.t("socmap_adf.login.password_reset_back_button") %></a>
+<div class="btn_input grey reset_button"><input type="button" name="reset" value="<%= I18n.t("socmap_adf.login.password_reset.button") %>" disabled=disabled /></div>
+<a href="#" class="back"><%= I18n.t("socmap_adf.login.password_reset.back_button") %></a>

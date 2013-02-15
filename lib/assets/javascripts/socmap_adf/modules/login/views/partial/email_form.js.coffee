@@ -35,7 +35,7 @@ class ADF.Login.Views.Partial.EmailForm extends ADF.MVC.Views.Base
       success : @onLoginSaved
       error: @onFaild
     })
-    _gaq.push(['_trackEvent', 'Logošanās', 'Email', 'Mēģina logoties'])
+    @eventBus.trigger "ADF.Login.Views.EmailForm.TryLogin"
     return false
   
   onPasswordResetClicked: (e) =>
@@ -44,7 +44,6 @@ class ADF.Login.Views.Partial.EmailForm extends ADF.MVC.Views.Base
     
   onRegisterClicked: () =>
     @registrationForm.set( "first_name", @$("input[name=first_name]").val())
-    @registrationForm.set( "last_name", @$("input[name=last_name]").val())
     @registrationForm.set( "email", @$("input[name=email]").val())
     @registrationForm.set( "password", @$("input[name=password_r]").val())
     @registrationForm.set( "password_confirmation", @$("input[name=password_confirmation]").val())
@@ -52,7 +51,7 @@ class ADF.Login.Views.Partial.EmailForm extends ADF.MVC.Views.Base
       success : @onRegistrationSaved
       error: @onFaildRegister
     })
-    _gaq.push(['_trackEvent', 'Logošanās', 'Email', 'Mēģina reģistrēties' ])
+    @eventBus.trigger "ADF.Login.Views.EmailForm.TrySignup"
     return false
     
   onTermsClicked: (e) =>
@@ -61,18 +60,18 @@ class ADF.Login.Views.Partial.EmailForm extends ADF.MVC.Views.Base
       
   onLoginSaved: () =>
     @eventBus.trigger "loginDone"
-    _gaq.push(['_trackEvent', 'Logošanās', 'Email', 'Ielogojas' ])
+    @eventBus.trigger "ADF.Login.Views.EmailForm.LoginDone"
 
   onRegistrationSaved: () =>
     @eventBus.trigger "loginDone"
-    _gaq.push(['_trackEvent', 'Logošanās', 'Email', 'Piereģistrējas'])
+    @eventBus.trigger "ADF.Login.Views.EmailForm.RegisterDone"
       
   onFaild: () =>
-    @$(".login_password").text(I18n.t("socmap_adf.login.login_error")).show()
-    _gaq.push(['_trackEvent', 'Logošanās', 'Email', 'Nepareiza parole'])
+    @$(".login_password").text(I18n.t("socmap_adf.login.error.authorization")).show()
+    @eventBus.trigger "ADF.Login.Views.EmailForm.WrongPassword"
     
   onFaildRegister: (data) =>
-    _gaq.push(['_trackEvent', 'Logošanās', 'Email', 'Nevar ielogoties/piereģistrēties (konts ir FB)' ])
+    @eventBus.trigger "ADF.Login.Views.EmailForm.RegistrationFailed"
   
   showRegistrationForm: () ->
     $(".registration_form").show()
@@ -130,15 +129,15 @@ class ADF.Login.Views.Partial.EmailForm extends ADF.MVC.Views.Base
       if email.registred()
         @hideRegistrationForm()
         @showLoginForm()
-        _gaq.push(['_trackEvent', 'Logošanās', 'Email', 'Sāk logoties'])
+        @eventBus.trigger "ADF.Login.Views.EmailForm.StartLoging"
       else
         @hideLoginForm()
         @showRegistrationForm()
-        _gaq.push(['_trackEvent', 'Logošanās', 'Email', 'Sāk reģistrēties'])
+        @eventBus.trigger "ADF.Login.Views.EmailForm.StartSignup"
       @popupView.center()
     else
       @onEmailInvalid()
-      @$(".login_email").text( I18n.t("socmap_adf.login.cannot_register_email", {provider: email.get("provider")}) )
+      @$(".login_email").text( I18n.t("socmap_adf.login.error.cannot_register_email", {provider: email.get("provider")}) )
       
   onEmailInvalid: () ->
     @disableTabForInput( @$("input[name=email]") )
