@@ -6,13 +6,14 @@ class ADF.Login.Views.Popup.Main extends ADF.Popup.Views.Base
   popupClass: "login_popup_wrap"
   hasBacground: true
   closable: false
+  hasNameField: true
 
   events:
     "click .close" : "closeClicked"
   
   initialize: () ->
-    @model = @options.instance
     @onLoginDone = @options.onLoginDone if typeof( @options.onLoginDone ) == "function"
+    @hasNameField = @options.hasNameField if @options.hasNameField?
     
     @eventBus.bind "loginDone", @onLoginClosed
     @bootstrap()
@@ -22,12 +23,11 @@ class ADF.Login.Views.Popup.Main extends ADF.Popup.Views.Base
     
     @loginView = new ADF.Login.Views.Partial.Login
       popupView: @
-      instance: @model
       emailForm: @emailForm
+      hasNameField: @hasNameField
       
     @resetPasswordView = new ADF.Login.Views.Partial.Reset
       popupView: @
-      instance: @model
       emailForm: @emailForm
      
   onRenderCompleted: () =>
@@ -54,9 +54,7 @@ class ADF.Login.Views.Popup.Main extends ADF.Popup.Views.Base
 
   onLoginDone: () =>
     @eventBus.trigger "ADF.Login.Views.Main.DoneFacebookLogin"
-    _gaq.push(['_trackEvent', 'Logošanās', 'Facebook', 'Pabeidz FB logošanos' ])
     
   onLoginCancel: () =>
     @eventBus.trigger "ADF.Login.Views.Main.CancelLoginWindow"
-    _gaq.push(['_trackEvent', 'Logošanās', 'Popup', 'Aizvēra ielogošanās logu' ])
     

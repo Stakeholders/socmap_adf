@@ -1,6 +1,6 @@
 <div class="textarea_wrap gray">
   <p class="success_message login_email"></p>
-  <input type="text" name="email" placeholder="<%= I18n.t("socmap_adf.login.email") %>" autocomplete="off" value="<%= @email %>" />
+  <input type="text" name="email" placeholder="<%= I18n.t("socmap_adf.login.email") %>" autocomplete="off" value="<%= @model.email %>" />
 </div>
 
 <div class="login_form" style="display:none;">
@@ -13,10 +13,12 @@
 </div>
 
 <div class="registration_form" style="display:none;">
-
+  
+  <% if @hasNameField: %>
   <div class="textarea_wrap gray registration">
     <input type="text" name="first_name" placeholder="<%= I18n.t("socmap_adf.login.signup.name") %>" />
   </div>
+  <% end %>
 
   <div class="textarea_wrap gray registration">
     <input type="password" name="password_r" placeholder="<%= I18n.t("socmap_adf.login.signup.password") %>" />

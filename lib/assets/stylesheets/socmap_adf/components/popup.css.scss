@@ -141,7 +141,7 @@ h1 {
     margin: 0px;
     
     .divider_left {
-      background-image: url("/assets/divide_line_left.png");
+      background-image: url("/assets/socmap_adf/modules/login/divide_line_left.png");
       background-repeat: no-repeat;
       background-position: center;
       width:41px;
@@ -149,7 +149,7 @@ h1 {
     }
     
     .divider_right {
-      background-image: url("/assets/divide_line_right.png");
+      background-image: url("/assets/socmap_adf/modules/login/divide_line_right.png");
       background-repeat: no-repeat;
       background-position: center;
       width:41px;
@@ -374,42 +374,6 @@ h1 {
     div { &.icon_wrap { &.check { .icon { left: 50%; margin-left: -50px; } } } }
   }
   
-  h1
-  {
-    span
-    {
-      
-      &:before
-      {
-        display: inline-block;
-        vertical-align: middle;
-        line-height: normal;
-        margin: 0 2px;
-      }
-      
-      &.trash:before {content: url("/assets/categories/admin/trash.png");}
-      &.lightning:before {content: url("/assets/categories/admin/lightning.png");}
-      &.graffiti:before {content: url("/assets/categories/admin/graffiti.png");}
-      &.flowers:before { content: url("/assets/categories/admin/flowers.png");}
-      &.street:before { content: url("/assets/categories/admin/street.png");}
-      &.bench:before { content: url("/assets/categories/admin/bench.png");}
-      &.saw:before { content: url("/assets/categories/admin/saw.png");}
-      &.collect_garbage:before { content: url("/assets/categories/admin/collect_garbage.png");}
-      &.fix_street:before { content: url("/assets/categories/admin/fix_street.png");}
-      &.grass:before { content: url("/assets/categories/admin/grass.png");}
-      &.plate:before { content: url("/assets/categories/admin/plate.png");}
-      &.poster:before { content: url("/assets/categories/admin/poster.png");}
-      &.stop:before {content: url("/assets/categories/admin/stop.png"); }
-      &.tourist:before {content: url("/assets/categories/admin/tourist.png"); }
-      &.traffic:before { content: url("/assets/categories/admin/traffic.png"); } 
-      &.walkway:before {content: url("/assets/categories/admin/walkway.png"); }
-      &.clear_snow:before {content: url("/assets/categories/admin/clear_snow.png"); }
-      &.roof:before {content: url("/assets/categories/admin/roof.png"); }
-      &.scatter:before {content: url("/assets/categories/admin/scatter.png"); }
-      
-    }
-  }
-  
   div
   {
     &.city
@@ -436,7 +400,7 @@ h1 {
           height: 90px;
           position: relative;
           top: -35px;
-          background: url("/assets/popup/icon_check.png") no-repeat;
+          background: url("/assets/socmap_adf/modules/login/ok_checked.png") no-repeat;
           margin: 0px auto;          
         }
       }
