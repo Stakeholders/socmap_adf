@@ -10,16 +10,17 @@ class ADF.Login.Views.Partial.Login extends ADF.MVC.Views.Base
     "click .facebook" : "loginFacebook"
 
   initialize: () ->
-    @model = @options.instance
     @popupView = @options.popupView
     @emailForm = @options.emailForm
+    @hasNameField = @options.hasNameField
 
     @emailFormView = new ADF.Login.Views.Partial.EmailForm
       popupView: @popupView
       emailForm: @emailForm
+      hasNameField: @hasNameField
 
   render: () =>
-    @$el.html( @template( @model.toJSON() ) )
+    @$el.html( @template() )
     @$(".email_login_wrap").html( @emailFormView.render().el )
     @delegateEvents()
     @

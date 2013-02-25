@@ -10,17 +10,19 @@ class ADF.Login.Views.Partial.EmailForm extends ADF.MVC.Views.Base
     @popupView = @options.popupView  
     @onEmailValid = @options.onEmailValid if typeof( @options.onEmailValid ) == "function"
     @onEmailInvalid = @options.onEmailInvalid if typeof( @options.onEmailInvalid ) == "function"
+    @hasNameField = @options.hasNameField
 
     @model = @options.emailForm
     @loginForm = new ADF.Login.Models.LoginForm({})
     @registrationForm = new ADF.Login.Models.RegistrationForm({})
-
+    @registrationForm.setValidation({ hasNameField: @hasNameField })
+    
     @model.setView(@)
     @loginForm.setView(@)
     @registrationForm.setView(@)
     
   render: () ->
-    $(@el).html(@template( @model.toJSON() ))
+    $(@el).html(@template( {model: @model.toJSON(), hasNameField: @hasNameField } ))
     
     @model.bindValue("email", { success: @onEmailValidationSuccess, error: @onEmailValidationError} ).to(@$("input[name=email]"))
     @expandClickableArea()
