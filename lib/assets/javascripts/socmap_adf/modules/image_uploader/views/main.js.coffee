@@ -2,6 +2,7 @@ class ADF.ImageUploader.Views.Main extends ADF.MVC.Views.Base
 
   template: JST['socmap_adf/modules/image_uploader/templates/main']
   image: null
+  allowedExtensions: ['jpg', 'jpeg', 'png', 'gif']
   events:
     "click .btn_close" : "onCloseClicked"
 
@@ -11,6 +12,7 @@ class ADF.ImageUploader.Views.Main extends ADF.MVC.Views.Base
     @onCancel = @options.onCancel if @options.onCancel
     @image = @options.image if @options.image
     @template = @options.template if @options.template
+    @allowedExtensions = @options.allowedExtensions if @options.allowedExtensions?
 
   render: () ->
     options =
@@ -18,7 +20,7 @@ class ADF.ImageUploader.Views.Main extends ADF.MVC.Views.Base
       action: '/api/images'
       multiple: false
       debug: true
-      allowedExtensions: ['jpg', 'jpeg', 'png', 'gif']
+      allowedExtensions: @allowedExtensions
       onComplete: @onFileUploaded
       onProgress: @onProgress
       template: @template()
