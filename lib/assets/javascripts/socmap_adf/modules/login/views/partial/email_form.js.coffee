@@ -58,7 +58,8 @@ class ADF.Login.Views.Partial.EmailForm extends ADF.MVC.Views.Base
     
   onTermsClicked: (e) =>
     e.preventDefault()
-    window.open("/adf/terms/index", '', 'toolbar=0,menubar=0,width=640,height=500')
+    left = Math.round( ($(window).width() - 500) / 2 )
+    window.open("/adf/terms/index", '', "toolbar=0,menubar=0,width=640,height=500,scrollbars=1,titlebar=0,left=#{left}")
       
   onLoginSaved: () =>
     @eventBus.trigger "loginDone"
@@ -149,7 +150,7 @@ class ADF.Login.Views.Partial.EmailForm extends ADF.MVC.Views.Base
     
   disableTabForInput: ( input ) ->
     input.on 'keydown', ( e) =>
-      e.preventDefault() if e.keyCode == 9 || e.which == 9
+      e.preventDefault() if e.keyCode == 9 || e.which == 9 || e.keyCode == 13 || e.which == 13
 
   enableTabForInput: ( input ) ->
     input.off "keydown"
