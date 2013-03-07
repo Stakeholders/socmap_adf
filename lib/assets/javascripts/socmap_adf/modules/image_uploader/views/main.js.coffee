@@ -3,6 +3,7 @@ class ADF.ImageUploader.Views.Main extends ADF.MVC.Views.Base
   template: JST['socmap_adf/modules/image_uploader/templates/main']
   image: null
   allowedExtensions: ['jpg', 'jpeg', 'png', 'gif']
+  sizeLimit: 2024000
   events:
     "click .btn_close" : "onCloseClicked"
 
@@ -13,7 +14,8 @@ class ADF.ImageUploader.Views.Main extends ADF.MVC.Views.Base
     @image = @options.image if @options.image
     @template = @options.template if @options.template
     @allowedExtensions = @options.allowedExtensions if @options.allowedExtensions?
-
+    @sizeLimit = @options.sizeLimit if @options.sizeLimit?
+    
   render: () ->
     options =
       element: $(@el).get(0)
@@ -24,7 +26,7 @@ class ADF.ImageUploader.Views.Main extends ADF.MVC.Views.Base
       onComplete: @onFileUploaded
       onProgress: @onProgress
       template: @template()
-      sizeLimit: 2024000
+      sizeLimit: @sizeLimit
       messages_lv:
         typeError: "Failam {file} ir nepareizs formāts. Tikai {extensions} formāti ir atļauti."
         sizeError: "Fails {file} ir pārāk liels. Faila maksimālais lielums {sizeLimit}."
