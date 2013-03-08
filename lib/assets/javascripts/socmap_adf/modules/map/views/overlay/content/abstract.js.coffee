@@ -72,7 +72,7 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
       # @getPanes().overlayMouseTarget.appendChild @div
       $(@options.overlay.mapModel.getMapElement()).append(@div)
 
-  draw: () =>
+  draw: () ->
     overlayProjection = @getProjection()
     if (@getMap() && overlayProjection != null && overlayProjection != undefined && @options.overlay.getPosition() && @div)
       $(@div).css({position: "absolute", left: 0, top: 0})
