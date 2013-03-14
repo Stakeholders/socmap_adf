@@ -88,6 +88,8 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
       if @options.position == "left"
         @left = @divPixel.x - overlayWidth - (markerWidth/2) + leftOffset
         @top = @divPixel.y - markerHeight + topOffset
+        if (@div)
+          $(@div).css({left: @left, top: @top})
       else if @options.position == "right"
         @left = @divPixel.x + (markerWidth/2) + leftOffset
         @top = @divPixel.y - markerHeight + topOffset
@@ -99,7 +101,10 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
         @top = @divPixel.y + topOffset
         
     if (@div)
-      $(@div).css({left: @left, top: @top})
+      if @options.align == "bottom"
+        $(@div).css({left: @left, bottom: @top, top: "auto"})
+      else
+        $(@div).css({left: @left, top: @top})
 
   redraw: (event) ->
     @draw()
