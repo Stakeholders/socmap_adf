@@ -10,6 +10,7 @@ class ADF.FileUploader.Views.Main extends ADF.MVC.Views.Base
   allowedExtensions: ['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png', 'gif']
   sizeLimit: 2024000
   message: ""
+  action: '/api/documents'
 
   initialize: () ->
     _.bindAll(this, 'render')
@@ -21,11 +22,13 @@ class ADF.FileUploader.Views.Main extends ADF.MVC.Views.Base
     @allowedExtensions = @options.allowedExtensions if @options.allowedExtensions?
     @sizeLimit = @options.sizeLimit if @options.sizeLimit?
     @message = @options.message if @options.message?
-    
+    @template = @options.template if @options.template?
+    @action = @options.action if @options.action?
+
   render: () ->
     options =
       element: $(@el).get(0)
-      action: '/api/documents'
+      action: @action
       multiple: false
       debug: true
       allowedExtensions: @allowedExtensions
