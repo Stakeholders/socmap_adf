@@ -17,6 +17,7 @@ class ADF.FileUploader.Views.Main extends ADF.MVC.Views.Base
     @documents = []
     @onComplete = @options.onComplete if @options.onComplete
     @onCancel = @options.onCancel if @options.onCancel
+    @onError = @options.onError if @options.onError?
     @onProgressCallback = @options.onProgress if @options.onProgress
     @documents = @options.documents if @options.documents
     @allowedExtensions = @options.allowedExtensions if @options.allowedExtensions?
@@ -34,6 +35,7 @@ class ADF.FileUploader.Views.Main extends ADF.MVC.Views.Base
       allowedExtensions: @allowedExtensions
       onComplete: @onFileUploaded
       onProgress: @onProgress
+      onError: @onError
       onSubmit: @onSubmit
       template: @template()
       sizeLimit: @sizeLimit
@@ -57,7 +59,8 @@ class ADF.FileUploader.Views.Main extends ADF.MVC.Views.Base
     @onProgressCallback() if @onProgressCallback
     
   onCancel: () =>
-
+  onError: () =>
+    
   onSubmit: (id, fileName) =>
     obj = {id: id, name: fileName}
     @$(".file-list").append(@fileUploadingTemplate(obj))
