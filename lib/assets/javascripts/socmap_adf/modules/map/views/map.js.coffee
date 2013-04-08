@@ -45,7 +45,7 @@ class ADF.Map.Views.Map extends google.maps.Map
       overlay.marker.setMap(null) if overlay.marker?
       @markerClusterer.removeMarker(overlay) if @markerClusterer && overlay.isClustering && overlay.isClustering()
     @overlays = []
-    @markerClusterer.clearMarkers()
+    @markerClusterer.clearMarkers() if @markerClusterer
 
   getOverlays: () ->
     @overlays

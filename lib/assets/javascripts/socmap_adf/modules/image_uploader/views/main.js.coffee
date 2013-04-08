@@ -48,6 +48,7 @@ class ADF.ImageUploader.Views.Main extends ADF.MVC.Views.Base
   onProgress: () =>
     @$(".btn_close").hide()
     @$(".image_holder").hide()
+    @$(".uploaded_picture").hide()
     @$('.loading').show()
 
   onFileUploaded: (id, fileName, responseJSON) =>
