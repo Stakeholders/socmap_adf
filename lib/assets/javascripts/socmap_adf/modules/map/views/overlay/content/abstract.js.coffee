@@ -6,11 +6,11 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
   constructor: (options) ->
     @options = options
     @zindex = 1
+    @needCalculate = true
     @_events = []
     @setMap(@options.overlay.getMap())
     @bindMarkerEvents()
     @bindExtraEvents()
-    @bindMapEvents()
     @options.overlay.on "removedFromMap", @_onMarkerRemoved
     @options.overlay.on "isOnMap", @_onOverlayIsOnMap
     @draw()
@@ -29,18 +29,7 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
 
   unbindMarkerEvents: () =>
     google.maps.event.removeListener(@markerDragstartEvent)
-    google.maps.event.removeListener(@markerDragendEvent)         
-
-  bindMapEvents: () ->
-    @unbindMapEvents()
-    @dragstartEvent = google.maps.event.addListener @getMap(), 'dragstart', () =>
-      @draw()
-
-    @dragendEvent = google.maps.event.addListener @getMap(), 'dragend', () =>
-      @draw()
-
-    @centerChangedEvent = google.maps.event.addListener @getMap(), 'center_changed', () =>
-      @draw()
+    google.maps.event.removeListener(@markerDragendEvent)
       
   getPosition: () ->
     overlayProjection = @getProjection()
@@ -48,11 +37,6 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
       return overlayProjection.fromContainerPixelToLatLng({y: @top, x: @left})
     else
       return @options.overlay.getPosition()
-
-  unbindMapEvents: () =>
-    google.maps.event.removeListener(@dragstartEvent)
-    google.maps.event.removeListener(@dragendEvent)
-    google.maps.event.removeListener(@centerChangedEvent)   
 
   # = Show or Hide overlay
   show: ( animation = false ) ->
@@ -69,14 +53,13 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
   onAdd: ->
     if @options.view
       @div = @options.view.render().el
-      # @getPanes().overlayMouseTarget.appendChild @div
-      $(@options.overlay.mapModel.getMapElement()).append(@div)
-
+      @getPanes().floatPane.appendChild @div
+      
   draw: () ->
     overlayProjection = @getProjection()
     if (@getMap() && overlayProjection != null && overlayProjection != undefined && @options.overlay.getPosition() && @div)
       $(@div).css({position: "absolute", left: 0, top: 0})
-      @divPixel = overlayProjection.fromLatLngToContainerPixel(@options.overlay.getPosition())
+      @divPixel = overlayProjection.fromLatLngToDivPixel(@options.overlay.getPosition())
       markerSize = if @options.overlay.options.icon then @options.overlay.options.icon.size else {width: 0, height: 0}
       markerWidth = markerSize.width
       markerHeight = markerSize.height
@@ -97,10 +80,13 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
       else
         @left = @divPixel.x - (overlayWidth/2) + leftOffset
         @top = @divPixel.y + topOffset
-        
+
     if (@div)
+      @needCalculate = false
       if @options.align == "bottom"
-        $(@div).css({left: @left, bottom: ( -1 * @top + $( @getMap().getDiv() ).height() ), top: "auto"})
+        bottom = (-1 * @top) # @divPixel.y
+        # ( -1 * @top + $( @getMap().getDiv() ).height() )
+        $(@div).css({left: @left, bottom: bottom, top: "auto"})
       else
         $(@div).css({left: @left, top: @top})
 
@@ -108,8 +94,6 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
     @draw()
   
   onRemove: () =>
-    # @unbindMapEvents()
-    # @unbindMarkerEvents()
     google.maps.event.removeListener(event) for event in @_events
     $(@div).remove() if @div
     @div = null if @div
@@ -121,7 +105,6 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
     @setMap(@options.overlay.getMap())
     @bindMarkerEvents()
     @bindExtraEvents()
-    @bindMapEvents()
 
   setInFront: () ->
     @zindex = @zindex + 1

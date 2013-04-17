@@ -16,7 +16,6 @@ class ADF.Map.Views.Overlay.Content.Click extends ADF.Map.Views.Overlay.Content.
       @show() if @opened
 
     @markerClickEvent = google.maps.event.addDomListener @options.overlay, 'click', (e) =>
-      # return if e.Ka.ctrlKey
       @open()
 
   unbindMarkerEvents: () =>
@@ -35,5 +34,5 @@ class ADF.Map.Views.Overlay.Content.Click extends ADF.Map.Views.Overlay.Content.
     @setMap(null)
 
   draw: () ->
-    super()
     @setMap(null) unless @opened
+    super()
