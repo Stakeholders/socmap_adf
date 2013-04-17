@@ -6,7 +6,6 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
   constructor: (options) ->
     @options = options
     @zindex = 1
-    @needCalculate = true
     @_events = []
     @setMap(@options.overlay.getMap())
     @bindMarkerEvents()
@@ -82,7 +81,6 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
         @top = @divPixel.y + topOffset
 
     if (@div)
-      @needCalculate = false
       if @options.align == "bottom"
         bottom = (-1 * @top) # @divPixel.y
         # ( -1 * @top + $( @getMap().getDiv() ).height() )
