@@ -10,9 +10,11 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
     @setMap(@options.overlay.getMap())
     @bindMarkerEvents()
     @bindExtraEvents()
+    @bindMapEvents()
     @options.overlay.on "removedFromMap", @_onMarkerRemoved
     @options.overlay.on "isOnMap", @_onOverlayIsOnMap
     @draw()
+    @_idleMap = null
     
   bindMarkerEvents: () ->
     @markerDragstartEvent = google.maps.event.addListener @options.overlay, 'dragstart', (e) =>
@@ -21,6 +23,15 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
     @markerDragendEvent = google.maps.event.addListener @options.overlay, 'dragend', (e) =>
       @draw()
       @show()
+      
+  bindMapEvents: () ->
+    @mapZoomChangedEvent = google.maps.event.addListener @options.overlay.getMap(), "zoom_changed", (e) =>
+      @_idleMap = @getMap()
+      @setMap(null) if @_idleMap
+      
+    @mapIdleEvent = google.maps.event.addListener @options.overlay.getMap(), "idle", (e) =>
+      @setMap(@_idleMap) if @_idleMap
+      @_idleMap = null
 
   bindExtraEvents: () ->
     @options.overlay.on "pathChanged", () =>
