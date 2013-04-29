@@ -8,14 +8,19 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
     @zindex = 1
     @_events = []
     @setMap(@options.overlay.getMap())
-    @bindMarkerEvents()
-    @bindExtraEvents()
-    @bindMapEvents()
     @options.overlay.on "removedFromMap", @_onMarkerRemoved
     @options.overlay.on "isOnMap", @_onOverlayIsOnMap
     @draw()
     @_idleMap = null
-    
+    @domNative = @options.domNative || false
+    @bindAllEvents()
+  
+  bindAllEvents: () ->
+    @bindMarkerEvents()
+    @bindExtraEvents()
+    @bindMapEvents()
+    @bindEventsEventsForDomNative() if @domNative
+  
   bindMarkerEvents: () ->
     @markerDragstartEvent = google.maps.event.addListener @options.overlay, 'dragstart', (e) =>
       @hide()
@@ -32,6 +37,16 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
     @mapIdleEvent = google.maps.event.addListener @options.overlay.getMap(), "idle", (e) =>
       @setMap(@_idleMap) if @_idleMap
       @_idleMap = null
+      
+  bindEventsEventsForDomNative: () ->
+    @dragstartEvent = google.maps.event.addListener @options.overlay.getMap(), 'dragstart', () =>
+      @draw()
+
+    @dragendEvent = google.maps.event.addListener @options.overlay.getMap(), 'dragend', () =>
+      @draw()
+
+    @centerChangedEvent = google.maps.event.addListener @options.overlay.getMap(), 'center_changed', () =>
+      @draw()
 
   bindExtraEvents: () ->
     @options.overlay.on "pathChanged", () =>
@@ -63,13 +78,19 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
   onAdd: ->
     if @options.view
       @div = @options.view.render().el
-      @getPanes().floatPane.appendChild @div
-      
+      if @domNative
+        $(@options.overlay.mapModel.getMapElement()).append(@div)
+      else
+        @getPanes().floatPane.appendChild @div
+
   draw: () ->
     overlayProjection = @getProjection()
     if (@getMap() && overlayProjection != null && overlayProjection != undefined && @options.overlay.getPosition() && @div)
       $(@div).css({position: "absolute", left: 0, top: 0})
-      @divPixel = overlayProjection.fromLatLngToDivPixel(@options.overlay.getPosition())
+      if @domNative
+        @divPixel = overlayProjection.fromLatLngToContainerPixel(@options.overlay.getPosition())
+      else
+        @divPixel = overlayProjection.fromLatLngToDivPixel(@options.overlay.getPosition())
       markerSize = if @options.overlay.options.icon then @options.overlay.options.icon.size else {width: 0, height: 0}
       markerWidth = markerSize.width
       markerHeight = markerSize.height
@@ -93,8 +114,10 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
 
     if (@div)
       if @options.align == "bottom"
-        bottom = (-1 * @top) # @divPixel.y
-        # ( -1 * @top + $( @getMap().getDiv() ).height() )
+        if @domNative
+          bottom = ( -1 * @top + $( @getMap().getDiv() ).height() )
+        else
+          bottom = (-1 * @top) 
         $(@div).css({left: @left, bottom: bottom, top: "auto"})
       else
         $(@div).css({left: @left, top: @top})
@@ -112,8 +135,7 @@ class ADF.Map.Views.Overlay.Content.Abstract extends google.maps.OverlayView
     
   _onOverlayIsOnMap: () =>
     @setMap(@options.overlay.getMap())
-    @bindMarkerEvents()
-    @bindExtraEvents()
+    @bindAllEvents()
 
   setInFront: () ->
     @zindex = @zindex + 1
